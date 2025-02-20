@@ -1,8 +1,6 @@
 #include "DxLib.h"
 #include "SceneManager.h"
-#include "GameScene/InGameScene.h"
-#include "GameScene/TitleScene.h"
-
+#include "GameScene/SceneList.h"
 
 //静的メンバ変数定義
 SceneManager* SceneManager::instance = nullptr;
@@ -40,19 +38,20 @@ SceneManager::~SceneManager()
 
 void SceneManager::Initialize()
 {
-	//ChangeScene(eSceneType::eGameMain);
-	ChangeScene(eSceneType::eTitle);
+	// 最初に表示するシーンをタイトルシーンに設定
+	//ChangeScene(eSceneType::eGameMain);	//GameScene
+	ChangeScene(eSceneType::eTitle);		//TitlrScene
 }
 
 void SceneManager::Update()
 {
-
-	//デバッグ表示の更新
-	//DebugInfomation::Update();
+	//現在のシーンの更新処理を実行し、次のシーンの種類を取得
 	eSceneType next_scene_type = current_scene->Update();
 
+	//現在のシーンの描画処理を実行
 	current_scene->Draw();
 
+	//シーンが変更される場合は新しいシーンに切り替える
 	if (next_scene_type != current_scene->GetNowSceneType())
 	{
 		ChangeScene(next_scene_type);
@@ -61,6 +60,7 @@ void SceneManager::Update()
 
 void SceneManager::Finalize()
 {
+	//現在のシーンが存在すれば、終了処理を行い、メモリを解放する
 	if (current_scene != nullptr)
 	{
 		current_scene->Finalize();
@@ -69,17 +69,13 @@ void SceneManager::Finalize()
 	}
 }
 
-SceneBase* SceneManager::GetCurrentScene() const
-{
-	return current_scene;
-}
-
 void SceneManager::Draw() const
 {
 }
 
 void SceneManager::ChangeScene(eSceneType type)
 {
+	//新しいシーンのインスタンスを作成
 	SceneBase* new_scene = CreateScene(type);
 
 	//エラーチェック
@@ -88,7 +84,7 @@ void SceneManager::ChangeScene(eSceneType type)
 		throw("\n新しいシーンの生成が出来ませんでした\n");
 	}
 
-	//現在のシーンの終了処理
+	//現在のシーンの終了処理を実行し、メモリを解放する
 	if (current_scene != nullptr)
 	{
 		current_scene->Finalize();
@@ -102,14 +98,25 @@ void SceneManager::ChangeScene(eSceneType type)
 
 SceneBase* SceneManager::CreateScene(eSceneType type)
 {
-
 	switch (type)
 	{
-	case eSceneType::eGameMain:
-		return dynamic_cast<SceneBase*>(new InGameScene());
 	case eSceneType::eTitle:
+		//TitleScene生成
 		return dynamic_cast<SceneBase*>(new TitleScene());
+	case eSceneType::eGameMain:
+		//GameScene生成
+		return dynamic_cast<SceneBase*>(new InGameScene());
+	case eSceneType::eResult:
+		//ResultScene生成
+		return dynamic_cast<SceneBase*>(new ResultScene());
+	case eSceneType::eHelp:
+		//HelpScene生成
+		return dynamic_cast<SceneBase*>(new HelpScene());
+	case eSceneType::eRanking:
+		//HelpScene生成
+		return dynamic_cast<SceneBase*>(new RankingScene());
 	default:
+		//該当するシーンがない場合はnullptrを返す
 		return nullptr;
 	}
 }

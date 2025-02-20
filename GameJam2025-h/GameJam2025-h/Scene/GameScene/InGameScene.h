@@ -4,6 +4,8 @@
 class InGameScene :
 	public SceneBase
 {
+private:
+	//ゲームシーンに必要な変数を定義
 public:
 	InGameScene();
 	~InGameScene();
@@ -14,4 +16,6 @@ public:
 	void Finalize() override;		//終了時処理
 
 	eSceneType GetNowSceneType()const override;
+public:
+	//必要に応じて追加する関数をここに定義
 };

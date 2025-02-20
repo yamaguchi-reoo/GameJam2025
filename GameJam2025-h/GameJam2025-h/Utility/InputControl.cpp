@@ -145,7 +145,6 @@ float InputControl::RightStickTilt(short r_stick)
 	// 右スティックの傾き割合を返す
 	if (r_stick == STICK_X)
 	{
-
 		return static_cast<float>(input.ThumbRX) / STICK_TILT_MAX;
 	}
 	else if (r_stick == STICK_Y)

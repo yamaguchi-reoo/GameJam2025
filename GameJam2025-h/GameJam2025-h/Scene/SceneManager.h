@@ -12,7 +12,9 @@ private:
     int score = 0; // スコアを保存する変数
 
 public:
+    //コンストラクタ
     SceneManager();
+    //デストラクタ
     ~SceneManager();
 
     // コピー禁止
@@ -28,9 +30,9 @@ public:
     void Update();      //更新処理
     void Finalize();    //終了時処理
 
-    SceneBase* GetCurrentScene() const;
-
+    //スコアの設定
     void SetScore(int _score) { score = _score; }
+    //スコアの取得
     int GetScore() const { return score; }
 
 private:

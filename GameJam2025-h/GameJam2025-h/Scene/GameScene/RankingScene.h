@@ -1,13 +1,13 @@
 #pragma once
 #include "../SceneBase.h"
-class TitleScene :
+class RankingScene :
     public SceneBase
 {
 private:
-	//タイトルシーンに必要な変数を定義
+	//シーンに必要な変数を定義
 public:
-	TitleScene();
-	~TitleScene();
+	RankingScene();
+	~RankingScene();
 
 	void Initialize() override;		//初期化処理
 	eSceneType Update() override;	//更新処理

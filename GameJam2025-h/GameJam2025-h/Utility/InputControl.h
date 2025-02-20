@@ -66,6 +66,8 @@ public:
 public:
 	//キー入力の状態を更新
 	void Update();
+
+	//キーボードの入力処理
 	//押している間
 	bool GetKey(int key_code)const;
 	//押した瞬間
@@ -73,6 +75,7 @@ public:
 	//離した瞬間
 	bool GetKeyUp(int key_code)const;
 
+	//マウスの入力処理
 	//押している間
 	bool GetMouse(int mouse);
 	//押した瞬間
@@ -83,6 +86,7 @@ public:
 	//マウスカーソルの取得
 	Cursor GetMouseCursor();
 
+	//コントローラの入力処理
 	//押している間
 	bool GetButton(int button)const;
 	//押した瞬間

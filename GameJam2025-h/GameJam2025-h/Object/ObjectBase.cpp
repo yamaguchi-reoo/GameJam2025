@@ -16,6 +16,7 @@ void ObjectBase::Initialize(Vector2D _location, Vector2D _box_size)
 	//サイズを設定
 	box_size = _box_size;
 
+	//死亡フラグ
 	delete_flg = false;
 
 }
@@ -26,6 +27,7 @@ void ObjectBase::Update()
 
 void ObjectBase::Draw() const
 {
+	//デバッグ用
 	DrawBoxAA(location.x, location.y, location.x + box_size.x, location.y + box_size.y, GetColor(255, 0, 0), FALSE);
 }
 
