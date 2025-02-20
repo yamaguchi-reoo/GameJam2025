@@ -1,105 +1,112 @@
 #pragma once
-#include"DxLib.h"
+#include "DxLib.h"
 
-#define D_KEYCODE_MAX (256)		//キーコードの最大数
-#define MOUSE_MAX (256)
+#define D_KEYCODE_MAX (256)     //キーコードの最大数（256キー）
+#define MOUSE_MAX (256)         //マウスボタンの最大数
 
-#define BUTTON_MAX 16			//ボタンの最大数
-#define STICK_X 1				//スティックのX軸
-#define STICK_Y 2				//スティックのY軸
-#define STICK_TILT_MAX 32767.0f //スティックの最大傾き値
+#define BUTTON_MAX 16           //コントローラーボタンの最大数
+#define STICK_X 1               //スティックのX軸
+#define STICK_Y 2               //スティックのY軸
+#define STICK_TILT_MAX 32767.0f //スティックの最大傾き値（XInput仕様）
 
-//マウスカーソル
+//マウスカーソルの座標情報を持つ構造体
 struct Cursor
 {
-	int x;
-	int y;
+    int x; //マウスカーソルのX座標
+    int y; //マウスカーソルのY座標
 };
 
+//キーボード・マウス・コントローラの入力管理クラス（シングルトン）
 class InputControl
-
 {
 private:
-	//自クラスのポインタ（アドレスの先にインスタンスを生成する）
-	static InputControl* instance;
+    //クラスの唯一のインスタンス（シングルトンパターン）
+    static InputControl* instance;
 
-	//今回の入力キー
-	char now_key[D_KEYCODE_MAX];
-	//前回の入力キー
-	char old_key[D_KEYCODE_MAX];
+    //現在のキー入力状態
+    char now_key[D_KEYCODE_MAX];
+    //前回のキー入力状態
+    char old_key[D_KEYCODE_MAX];
 
-	//今回の入力
-	char now_mouse[MOUSE_MAX];
-	//前回の入力
-	char old_mouse[MOUSE_MAX];
+    //現在のマウス入力状態
+    char now_mouse[MOUSE_MAX];
+    //前回のマウス入力状態
+    char old_mouse[MOUSE_MAX];
 
-	//カーソル
-	Cursor cursor;
+    //マウスカーソルの座標
+    Cursor cursor;
 
-	//今回の入力キー
-	char now_button[BUTTON_MAX];
-	//前回の入力キー
-	char old_button[BUTTON_MAX];
-	// 入力デバイスの状態を保存する構造体
-	XINPUT_STATE input;
+    //現在のコントローラーボタン入力状態
+    char now_button[BUTTON_MAX];
+    //前回のコントローラーボタン入力状態
+    char old_button[BUTTON_MAX];
 
-private:
-	//コンストラクタをprivateにすることで
-	//自クラスのメンバ関数でしかインスタンスを生成できないようにする
-	InputControl() = default;
-
-	//コピーガード
-	//クラス外インスタンスを生成して渡すことができないようにする
-	InputControl(InputControl& v) = delete;
-	InputControl& operator = (const InputControl& v) = delete;
-	//~コピーガード
-
-public:
-	~InputControl() = default;
-
-public:
-	//インスタンス取得する処理
-	static InputControl* GetInstance();
-	//インスタンスの削除
-	static void DeleteInstance();
-
-public:
-	//キー入力の状態を更新
-	void Update();
-
-	//キーボードの入力処理
-	//押している間
-	bool GetKey(int key_code)const;
-	//押した瞬間
-	bool GetKeyDown(int key_code)const;
-	//離した瞬間
-	bool GetKeyUp(int key_code)const;
-
-	//マウスの入力処理
-	//押している間
-	bool GetMouse(int mouse);
-	//押した瞬間
-	bool GetMouseDown(int mouse);
-	//離した瞬間
-	bool GetMouseUp(int mouse);
-
-	//マウスカーソルの取得
-	Cursor GetMouseCursor();
-
-	//コントローラの入力処理
-	//押している間
-	bool GetButton(int button)const;
-	//押した瞬間
-	bool GetButtonDown(int button)const;
-	//離した瞬間
-	bool GetButtonUp(int button)const;
-
-	//左スティックの傾き（指定された軸）を取得する
-	float LeftStickTilt(short l_stick);
-	//右スティックの傾き（指定された軸）を取得する
-	float RightStickTilt(short r_stick);
+    //XInputデバイスの入力状態
+    XINPUT_STATE input;
 
 private:
-	//キーコードが有効な範囲にあるかを確認
-	static bool CheckKeyCodeRange(int key_code);
+    //コンストラクタ（privateにすることで外部からのインスタンス生成を防ぐ）
+    InputControl() = default;
+
+    //コピーガード（コピー禁止）
+    InputControl(InputControl& v) = delete;
+    InputControl& operator = (const InputControl& v) = delete;
+
+public:
+    /// @brief デストラクタ（シングルトンなのでデフォルト）
+    ~InputControl() = default;
+
+public:
+    //InputControl のインスタンス
+    static InputControl* GetInstance();
+
+    //インスタンスの削除（シングルトンの破棄処理）
+    static void DeleteInstance();
+
+public:
+    //入力状態を更新する
+    void Update();
+
+    //キーボード入力処理
+    //キーが押されている間
+    bool GetKey(int key_code) const;
+
+    //キーが押された瞬間
+    bool GetKeyDown(int key_code) const;
+
+    //キーが離された瞬間
+    bool GetKeyUp(int key_code) const;
+
+    // マウス入力処理
+    //マウスボタンが押されている間
+    bool GetMouse(int mouse);
+
+    //マウスボタンが押された瞬間
+    bool GetMouseDown(int mouse);
+
+    //マウスボタンが離された瞬間
+    bool GetMouseUp(int mouse);
+
+    //マウスカーソルの座標を取得
+    Cursor GetMouseCursor();
+
+    //コントローラ入力処理
+    //コントローラのボタンが押されている間
+    bool GetButton(int button) const;
+
+    //コントローラのボタンが押された瞬間
+    bool GetButtonDown(int button) const;
+
+    //コントローラのボタンが離された瞬間
+    bool GetButtonUp(int button) const;
+
+    //左スティックの傾きを取得
+    float LeftStickTilt(short l_stick);
+
+    //右スティックの傾きを取得
+    float RightStickTilt(short r_stick);
+
+private:
+    //キーコードが有効な範囲にあるかを確認
+    static bool CheckKeyCodeRange(int key_code);
 };

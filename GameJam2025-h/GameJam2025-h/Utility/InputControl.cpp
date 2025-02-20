@@ -54,9 +54,9 @@ void InputControl::Update()
 	GetMousePoint(&cursor.x, &cursor.y);
 
 
-	//前回のキーの更新
+	//前回のボタンの更新
 	memcpy(old_button, now_button, (sizeof(char) * BUTTON_MAX));
-	//現在のキー状態の更新
+	//現在のコントローラーのボタンの状態を取得
 	if (GetJoypadXInputState(DX_INPUT_KEY_PAD1, &input) == 0)
 	{
 		for (int i = 0; i < BUTTON_MAX; i++)
@@ -131,10 +131,12 @@ float InputControl::LeftStickTilt(short l_stick)
 	// 左スティックの傾き割合を返す
 	if (l_stick == STICK_X)
 	{
+		//X軸の傾きを取得
 		return static_cast<float>(input.ThumbLX) / STICK_TILT_MAX;
 	}
 	else if (l_stick == STICK_Y)
 	{
+		//Y軸の傾きを取得
 		return static_cast<float>(input.ThumbLY) / STICK_TILT_MAX;
 	}
 	return 0.0f;
@@ -145,10 +147,12 @@ float InputControl::RightStickTilt(short r_stick)
 	// 右スティックの傾き割合を返す
 	if (r_stick == STICK_X)
 	{
+		//X軸の傾きを取得
 		return static_cast<float>(input.ThumbRX) / STICK_TILT_MAX;
 	}
 	else if (r_stick == STICK_Y)
 	{
+		//Y軸の傾きを取得
 		return static_cast<float>(input.ThumbRY) / STICK_TILT_MAX;
 	}
 	return 0.0f;
