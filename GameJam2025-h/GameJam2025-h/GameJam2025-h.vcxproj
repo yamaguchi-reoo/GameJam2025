@@ -139,7 +139,27 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Object\ObjectBase.cpp" />
+    <ClCompile Include="Scene\GameScene\InGameScene.cpp" />
+    <ClCompile Include="Scene\SceneManager.cpp" />
+    <ClCompile Include="Scene\GameScene\TitleScene.cpp" />
+    <ClCompile Include="Utility\Fps.cpp" />
+    <ClCompile Include="Utility\InputControl.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Scene\SceneBase.cpp" />
+    <ClCompile Include="Utility\Vector2D.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="common.h" />
+    <ClInclude Include="Object\ObjectBase.h" />
+    <ClInclude Include="Scene\GameScene\InGameScene.h" />
+    <ClInclude Include="Scene\SceneManager.h" />
+    <ClInclude Include="Scene\GameScene\TitleScene.h" />
+    <ClInclude Include="Utility\Fps.h" />
+    <ClInclude Include="Utility\InputControl.h" />
+    <ClInclude Include="Scene\SceneBase.h" />
+    <ClInclude Include="Utility\UtiltyList.h" />
+    <ClInclude Include="Utility\Vector2D.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
