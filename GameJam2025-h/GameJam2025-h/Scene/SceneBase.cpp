@@ -1,7 +1,10 @@
 #include "SceneBase.h"
+#include "../Scene/GameScene/InGameScene.h"
 #include <DxLib.h>
+#include "SceneManager.h"
 
-SceneBase::SceneBase()
+SceneBase::SceneBase():
+	create_quantity()
 {
 }
 
@@ -49,6 +52,7 @@ eSceneType SceneBase::Update()
 		{
 			++it;
 		}
+		
 
 	}
 	return GetNowSceneType();
@@ -87,6 +91,11 @@ void SceneBase::DeleteObject(ObjectBase* obj)
 
 	auto it = std::find(objects.begin(), objects.end(), obj);
 
+	//削除するObjectがアイテムなら減らす
+	if ((*it)->GetObjectType() == eItem)
+	{
+		create_quantity--;
+	}
 	if (it != objects.end()) {
 		//見つかった場合、オブジェクトを削除
 		(*it)->Finalize(); //終了処理

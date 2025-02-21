@@ -65,6 +65,9 @@ public:
     //現在の速度
     Vector2D GetVelocity() const;
 
+    //Objectype取得
+    eObjectType GetObjectType() { return object_type; }
+
     //オブジェクト同士の衝突時に呼ばれる関数（オーバーライドして使用）
     //hit_object 衝突したオブジェクト
     virtual void OnHitCollision(ObjectBase* hit_object);
