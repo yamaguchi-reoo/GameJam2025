@@ -59,7 +59,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
             FPSC->Disp();
 #endif
             // ESCキーが押されたらループを抜ける（終了処理）
-            if (input->GetKeyUp(KEY_INPUT_ESCAPE))
+            if (input->GetKeyUp(KEY_INPUT_ESCAPE) || input->GetButtonDown(XINPUT_BUTTON_BACK))
             {
                 break;
             }
