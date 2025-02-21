@@ -23,6 +23,9 @@ public:
     virtual void Finalize()override;
 
     virtual void OnHitCollision(ObjectBase* hit_object)override;
+
+public:
+    void Movement();
 };
 
 
