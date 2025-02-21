@@ -3,6 +3,8 @@
 #include "../Utility/InputControl.h"
 #include "../Object/ObjectBase.h"
 
+#define OBJECT_MAX 10
+
 //シーンの種類を列挙型で定義
 enum class eSceneType
 {
@@ -18,6 +20,7 @@ class SceneBase
 {
 protected:
 	// 特定のメンバ変数が必要であれば、ここで定義する
+	int create_quantity = 0;
 
 	//オブジェクト管理変数
 	std::vector<ObjectBase*>objects;
@@ -56,6 +59,10 @@ protected:
 		new_object->Initialize(_location, _box_size);
 
 		objects.push_back(new_object);
+		if (new_object->GetObjectType() == eItem)
+		{
+			create_quantity++;
+		}
 
 		//生成したインスタンスを返す
 		return new_instance;
