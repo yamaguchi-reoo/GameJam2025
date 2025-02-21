@@ -1,6 +1,7 @@
 #include "Player.h"
 #include <DxLib.h>
 #include "../../Utility/InputControl.h"
+#include "../Item/ItemBase.h"
 
 #include <algorithm>
 #include <iostream>
@@ -24,6 +25,9 @@ void Player::Initialize(Vector2D _location, Vector2D _box_size)
 	move_count = 0;
 	is_attack = false;
 	attack_timer = 0;
+
+	player_pos = { 60.0f,500.0f };
+	player_box = { 130.0f,200.0f };
 }
 
 void Player::Update()
@@ -33,6 +37,7 @@ void Player::Update()
 	//移動処理
 	Movement();
 
+	//攻撃処理
 	Attack();
 
 }
@@ -42,11 +47,26 @@ void Player::Draw() const
 	__super::Draw();
 	//DrawFormatString(location.x, location.y + 12, GetColor(255, 255, 255), "%d", is_attack ? "false","true"));
 
+	//デバッグ表示
 	DrawFormatString(location.x, location.y + 12 , GetColor(255, 255, 255), !is_attack ? "false" : "true");
-	if (is_attack)
+	DrawFormatString(location.x, location.y + 24, GetColor(255, 255, 255), "%f", location.x);
+	DrawFormatString(location.x, location.y + 36, GetColor(255, 255, 255), "%f", location.y);
+
+	//プレイヤー描画	
+	DrawBoxAA(player_pos.x, player_pos.y, player_pos.x + player_box.x, player_pos.y + player_box.y, GetColor(255, 255, 255), FALSE);
+
+	//バットの攻撃範囲を描画
+	if (!is_attack) 
 	{
-		DrawBox(location.x + box_size.x, location.y + box_size.y, location.x + box_size.x + 98, location.y + box_size.y - 98, GetColor(255, 255, 255), FALSE);
+		DrawCircleAA(location.x + (box_size.x / 2), location.y + (box_size.y / 2), 65, 50, GetColor(255, 255, 255), FALSE);
+		DrawCircleAA(location.x + (box_size.x / 2), location.y + (box_size.y / 2), 60, 50, GetColor(255, 255, 255), FALSE);
 	}
+	else
+	{
+		DrawCircleAA(location.x + (box_size.x / 2), location.y + (box_size.y / 2), 65, 50, GetColor(0, 0, 255), FALSE);
+		DrawCircleAA(location.x + (box_size.x / 2), location.y + (box_size.y / 2), 60, 50, GetColor(0, 0, 255), FALSE);
+	}
+
 }
 
 void Player::Finalize()
@@ -55,6 +75,26 @@ void Player::Finalize()
 
 void Player::OnHitCollision(ObjectBase* hit_object)
 {
+	//アイテムと衝突し、攻撃中の場合
+	if (hit_object->GetObjectType() == eItem && is_attack)
+	{
+		//衝突範囲の設定
+		float left = location.x;
+		float right = location.x + box_size.x;
+		float top = location.y;
+		float bottom = location.y + box_size.y;
+
+		//dynamic_castでItemBase型に変更
+		ItemBase* item = dynamic_cast<ItemBase*>(hit_object);
+
+		//アイテムが範囲内にあるか判定
+		if (hit_object->GetLocation().x >= left && hit_object->GetLocation().x <= right &&
+			hit_object->GetLocation().y >= top && hit_object->GetLocation().y <= bottom)
+		{
+			// Itemを飛ばす処理
+			item->BlowAway({ 30.0f, -15.0f });
+		}
+	}
 }
 
 void Player::Movement()
@@ -83,7 +123,10 @@ void Player::Movement()
 			move_count = 0;
 		}
 	}
-	location.x = (120.0f * move_count) + 60.0f;
+
+	//移動位置の更新
+	location.x = (120.0f * move_count) + 190.0f;
+	player_pos.x = (120.0f * move_count) + 60.0f;
 
 }
 
@@ -91,12 +134,14 @@ void Player::Attack()
 {
 	InputControl* input = InputControl::GetInstance();
 
+	//攻撃ボタン（Bボタン）が押されたら攻撃開始
 	if (input->GetButtonDown(XINPUT_BUTTON_B))
 	{
 		is_attack = true;
 		attack_timer = 10;
 	}
 
+	//攻撃中ならタイマーを減少
 	if (is_attack)
 	{
 		attack_timer--;

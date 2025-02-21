@@ -31,6 +31,20 @@ void ItemBase::Update()
 
 	//落下
 	location.y += velocity.y;
+	location.x += velocity.x;
+
+	// 空気抵抗的な減速処理
+	if (is_blowing)
+	{
+		velocity.x *= 0.98f;
+		velocity.y += 0.5f; // 重力で落下
+	}
+
+	// 一定の速度以下になったら通常状態に戻す
+	if (fabs(velocity.x) < 0.5f && fabs(velocity.y) < 0.5f)
+	{
+		is_blowing = false;
+	}
 }
 
 void ItemBase::Draw() const
@@ -109,4 +123,5 @@ int ItemBase::ItemRand()
 void ItemBase::BlowAway(Vector2D _force)
 {
 	velocity = _force;
+	is_blowing = true;
 }

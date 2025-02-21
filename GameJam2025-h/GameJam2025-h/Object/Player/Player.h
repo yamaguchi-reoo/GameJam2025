@@ -7,6 +7,9 @@ private:
     int move_count;
     bool is_attack;
     int attack_timer;
+
+    Vector2D player_pos = {};
+    Vector2D player_box = {};
 public:
    
     Player();

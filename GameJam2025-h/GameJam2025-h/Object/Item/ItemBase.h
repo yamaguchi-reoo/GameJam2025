@@ -12,6 +12,8 @@ class ItemBase :
 {
 protected:
     eItemType item_type = {};
+
+    bool is_blowing = false;
 public:
     //コンストラクタ
     ItemBase();
@@ -40,6 +42,8 @@ public:
     //ItemTypeセット
     void SetItemType(eItemType _type) { item_type = _type; }
 
+    void BlowAway(Vector2D _force);
+
 private:
     //アイテム生成
     void ItemSpawn();
@@ -47,6 +51,6 @@ private:
     //アイテム抽選
     int ItemRand();
 
-    void BlowAway(Vector2D _force);
+
 };
 
