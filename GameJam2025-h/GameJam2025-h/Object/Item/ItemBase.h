@@ -1,5 +1,12 @@
 #pragma once
 #include "../ObjectBase.h"
+
+enum ItemKinds
+{
+    eApple,
+    eRock
+};
+
 class ItemBase :
     public ObjectBase
 {

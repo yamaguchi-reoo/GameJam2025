@@ -2,6 +2,13 @@
 #include "../Utility/Vector2D.h"
 #include <vector>
 
+enum eObjectType
+{
+    ePlayer,
+    eEnemy,
+    eItem,
+};
+
 //ゲーム内の全てのオブジェクトの基底クラス
 //位置・サイズ・速度・アニメーションデータ・描画情報などを管理
 class ObjectBase
@@ -10,6 +17,8 @@ protected:
     Vector2D location = { 0.0f };  //オブジェクトの位置
     Vector2D box_size = { 0.0f };  //オブジェクトのサイズ（当たり判定用）
     Vector2D velocity = { 0.0f };  //オブジェクトの移動速度
+
+    eObjectType object_type = {};
 
     std::vector<int> animation_data = {}; ///< アニメーションデータ（フレーム情報など）
 
