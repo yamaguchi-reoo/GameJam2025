@@ -1,6 +1,7 @@
 #include "InGameScene.h"
 #include <DxLib.h>
 #include "../../Object/Item/Apple.h"
+#include "../../Object/Item/ItemBase.h"
 #include "../../Object/Enemy/WeekEnemy.h"
 #include "../../common.h"
 
@@ -17,7 +18,9 @@ InGameScene::~InGameScene()
 void InGameScene::Initialize()
 {
 	//Ç±Ç±Ç≈ïœêîÇÃèâä˙âªÇµÇƒÅió·ÅFa = 0;Åj
-	CreateObject<Apple>(Vector2D(30.0f, 40.0f), Vector2D(64.0f));
+	CreateObject<ItemBase>(Vector2D(30.0f, 40.0f), Vector2D(64.0f));
+	CreateObject<ItemBase>(Vector2D(100.0f, 40.0f), Vector2D(64.0f));
+	CreateObject<ItemBase>(Vector2D(170.0f, 40.0f), Vector2D(64.0f));
 	CreateObject<WeekEnemy>(Vector2D(1000.0f, 640.0f), Vector2D(64.0f));
 
 	time_count = 0;
