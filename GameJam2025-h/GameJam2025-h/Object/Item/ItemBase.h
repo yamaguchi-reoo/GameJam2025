@@ -1,7 +1,7 @@
 #pragma once
 #include "../ObjectBase.h"
 
-enum ItemKinds
+enum eItemType
 {
     eApple,
     eRock
@@ -10,7 +10,8 @@ enum ItemKinds
 class ItemBase :
     public ObjectBase
 {
-private:
+protected:
+    eItemType item_type = {};
 public:
     //コンストラクタ
     ItemBase();
@@ -32,5 +33,18 @@ public:
     virtual void Finalize()override;
 
     virtual void OnHitCollision(ObjectBase* hit_object)override;
+
+    //ItemType取得
+    eItemType GetItemType() { return item_type; }
+
+    //ItemTypeセット
+    void SetItemType(eItemType _type) { item_type = _type; }
+
+private:
+    //アイテム生成
+    void ItemSpawn();
+
+    //アイテム抽選
+    int ItemRand();
 };
 
