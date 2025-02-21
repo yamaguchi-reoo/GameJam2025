@@ -5,7 +5,6 @@ class WeekEnemy :
 	public EnemyBase
 {
 private:
-    int Hp;
 public:
 	WeekEnemy();
 

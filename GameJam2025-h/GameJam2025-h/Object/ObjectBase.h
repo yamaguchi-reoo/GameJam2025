@@ -86,4 +86,6 @@ public:
     bool GetDeleteFlg() { return delete_flg; }
 
     void ApplyDamage(int _damage);
+
+    int GetDamage() { return damage; }
 };

@@ -40,9 +40,12 @@ void ItemBase::Draw() const
 	{
 	case eApple:
 		DrawFormatString(location.x, location.y + 12, GetColor(255, 255, 255), "apple");
+		DrawFormatString(location.x, location.y + 24, GetColor(255, 255, 255), "%d", damage);
 		break;
 	case eRock:
 		DrawFormatString(location.x, location.y + 12, GetColor(255, 255, 255), "rock");
+		DrawFormatString(location.x, location.y + 24, GetColor(255, 255, 255), "%d", damage);
+
 		break;
 	default:
 		break;
@@ -60,6 +63,7 @@ void ItemBase::OnHitCollision(ObjectBase* hit_object)
 		//Objectíœ
 		this->SetDeleteFlg();
 
+		//“–‚½‚Á‚½Object‚Éƒ_ƒ[ƒW‚ð—^‚¦‚é
 		hit_object->ApplyDamage(damage);
 	}
 }

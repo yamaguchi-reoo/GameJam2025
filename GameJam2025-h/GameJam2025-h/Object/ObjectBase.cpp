@@ -97,5 +97,5 @@ bool ObjectBase::CheckBoxCollision(ObjectBase* obj)
 
 void ObjectBase::ApplyDamage(int _damage)
 {
-	hp -= _damage;
+	this->hp -= _damage;
 }
