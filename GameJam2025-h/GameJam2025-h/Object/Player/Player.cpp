@@ -5,7 +5,8 @@
 #include <algorithm>
 #include <iostream>
 
-Player::Player()
+Player::Player():
+	move_count()
 {
 
 }
@@ -48,18 +49,24 @@ void Player::Movement()
 	//十字キー（右）で右移動
 	if (input->GetButtonDown(XINPUT_BUTTON_DPAD_RIGHT))
 	{
-		velocity.x = 300.0f;
-		location.x += velocity.x;
-
+		/*velocity.x = 300.0f;
+		location.x += velocity.x;*/
+		move_count++;
+		if (move_count > 4)
+		{
+			move_count = 4;
+		}
 	}
 	//十字キー（左）で左移動
 	else if (input->GetButtonDown(XINPUT_BUTTON_DPAD_LEFT))
 	{
-		velocity.x = 300.0f;
-		location.x -= velocity.x;
+		/*velocity.x = 300.0f;
+		location.x -= velocity.x;*/
+		move_count--;
+		if (move_count < 0)
+		{
+			move_count = 0;
+		}
 	}
-
-
-
-
+	location.x = (120.0f * move_count) + 60.0f;
 }

@@ -4,6 +4,7 @@ class Player :
     public ObjectBase
 {
 public:
+    int move_count;
     Player();
 
     ~Player();
