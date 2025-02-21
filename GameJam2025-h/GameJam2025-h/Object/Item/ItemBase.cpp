@@ -59,6 +59,8 @@ void ItemBase::OnHitCollision(ObjectBase* hit_object)
 	{
 		//Object削除
 		this->SetDeleteFlg();
+
+		hit_object->ApplyDamage(damage);
 	}
 }
 
@@ -67,10 +69,12 @@ void ItemBase::ItemSpawn()
 	switch (ItemRand())
 	{
 	case eApple:
-		velocity.y = 0.5f;
+		velocity.y = 1.0f;
+		damage = 1;
 		break;
 	case eRock:
-		velocity.y = 1.0f;
+		velocity.y = 2.0f;
+		damage = 2;
 		break;
 	default:
 		break;
@@ -79,6 +83,7 @@ void ItemBase::ItemSpawn()
 
 int ItemBase::ItemRand()
 {
+	//ランダムな値（0 ～ 9）を入れる
 	int rand = GetRand(9);
 
 	//りんご

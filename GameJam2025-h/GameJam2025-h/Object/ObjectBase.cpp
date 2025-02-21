@@ -94,3 +94,8 @@ bool ObjectBase::CheckBoxCollision(ObjectBase* obj)
 		fabsf(diff.y) <= my_size.y + sub_size.y);
 
 }
+
+void ObjectBase::ApplyDamage(int _damage)
+{
+	hp -= _damage;
+}

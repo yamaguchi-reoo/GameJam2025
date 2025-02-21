@@ -27,6 +27,8 @@ protected:
     bool flip_flg = false;     //画像を左右反転するフラグ
     bool delete_flg = false;   //削除フラグ（true の場合オブジェクトは削除される）
 
+    int hp = 0;
+    int damage = 0;
 public:
     //コンストラクタ
     ObjectBase();
@@ -82,4 +84,6 @@ public:
 
     //削除フラグを取得
     bool GetDeleteFlg() { return delete_flg; }
+
+    void ApplyDamage(int _damage);
 };
