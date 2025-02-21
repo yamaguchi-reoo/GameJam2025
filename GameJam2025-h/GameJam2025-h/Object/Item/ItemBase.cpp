@@ -105,3 +105,8 @@ int ItemBase::ItemRand()
 
 	return 0;
 }
+
+void ItemBase::BlowAway(Vector2D _force)
+{
+	velocity = _force;
+}

@@ -3,8 +3,12 @@
 class Player :
     public ObjectBase
 {
-public:
+private:
     int move_count;
+    bool is_attack;
+    int attack_timer;
+public:
+   
     Player();
 
     ~Player();
@@ -27,6 +31,8 @@ public:
 
 public:
     void Movement();
+
+    void Attack();
 };
 
 

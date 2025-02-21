@@ -6,7 +6,9 @@
 #include <iostream>
 
 Player::Player():
-	move_count()
+	move_count(),
+	is_attack(),
+	attack_timer()
 {
 
 }
@@ -18,6 +20,10 @@ Player::~Player()
 void Player::Initialize(Vector2D _location, Vector2D _box_size)
 {
 	__super::Initialize(_location, _box_size);
+
+	move_count = 0;
+	is_attack = false;
+	attack_timer = 0;
 }
 
 void Player::Update()
@@ -27,11 +33,20 @@ void Player::Update()
 	//ˆÚ“®ˆ—
 	Movement();
 
+	Attack();
+
 }
 
 void Player::Draw() const
 {
 	__super::Draw();
+	//DrawFormatString(location.x, location.y + 12, GetColor(255, 255, 255), "%d", is_attack ? "false","true"));
+
+	DrawFormatString(location.x, location.y + 12 , GetColor(255, 255, 255), !is_attack ? "false" : "true");
+	if (is_attack)
+	{
+		DrawBox(location.x + box_size.x, location.y + box_size.y, location.x + box_size.x + 98, location.y + box_size.y - 98, GetColor(255, 255, 255), FALSE);
+	}
 }
 
 void Player::Finalize()
@@ -69,4 +84,26 @@ void Player::Movement()
 		}
 	}
 	location.x = (120.0f * move_count) + 60.0f;
+
+}
+
+void Player::Attack()
+{
+	InputControl* input = InputControl::GetInstance();
+
+	if (input->GetButtonDown(XINPUT_BUTTON_B))
+	{
+		is_attack = true;
+		attack_timer = 10;
+	}
+
+	if (is_attack)
+	{
+		attack_timer--;
+		if (attack_timer <= 0)
+		{
+			is_attack = false;
+		}
+	}
+
 }

@@ -46,5 +46,7 @@ private:
 
     //アイテム抽選
     int ItemRand();
+
+    void BlowAway(Vector2D _force);
 };
 
