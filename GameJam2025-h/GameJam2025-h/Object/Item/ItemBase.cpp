@@ -22,6 +22,7 @@ void ItemBase::Update()
 	//‰æ–ÊŠO‚Éo‚½‚çíœ
 	if (location.y > SCREEN_HEIGHT + box_size.y)
 	{
+		//Objectíœ
 		this->SetDeleteFlg();
 	}
 }
@@ -35,11 +36,11 @@ void ItemBase::Draw() const
 		DrawFormatString(location.x, location.y + 12, GetColor(255, 255, 255), "apple");
 		break;
 	case eRock:
+		DrawFormatString(location.x, location.y + 12, GetColor(255, 255, 255), "rock");
 		break;
 	default:
 		break;
 	}
-
 }
 
 void ItemBase::Finalize()
@@ -52,15 +53,17 @@ void ItemBase::OnHitCollision(ObjectBase* hit_object)
 
 void ItemBase::ItemSpawn()
 {
-	/*switch (ItemRand())
+	switch (ItemRand())
 	{
 	case eApple:
+		velocity.y = 0.5f;
 		break;
 	case eRock:
+		velocity.y = 1.0f;
 		break;
 	default:
 		break;
-	}*/
+	}
 }
 
 int ItemBase::ItemRand()
