@@ -76,11 +76,13 @@ int ItemBase::ItemRand()
 {
 	int rand = GetRand(9);
 
+	//‚è‚ñ‚²
 	if (rand >= 0 && rand <= 5)
 	{
 		SetItemType(eApple);
 		return GetItemType();
 	}
+	//Šâ
 	else if (rand > 5 && rand <= 10)
 	{
 		SetItemType(eRock);
