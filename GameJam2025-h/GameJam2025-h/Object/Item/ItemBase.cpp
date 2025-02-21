@@ -55,6 +55,11 @@ void ItemBase::Finalize()
 
 void ItemBase::OnHitCollision(ObjectBase* hit_object)
 {
+	if (hit_object->GetObjectType() == eEnemy)
+	{
+		//Objectíœ
+		this->SetDeleteFlg();
+	}
 }
 
 void ItemBase::ItemSpawn()
