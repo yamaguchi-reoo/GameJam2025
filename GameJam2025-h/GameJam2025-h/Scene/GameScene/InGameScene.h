@@ -6,6 +6,8 @@ class InGameScene :
 {
 private:
 	//ゲームシーンに必要な変数を定義
+	int time_limit;  // 制限時間
+	int time_count;  // 制限時間を減らすためのカウント  60count = 1秒
 public:
 	InGameScene();
 	~InGameScene();
