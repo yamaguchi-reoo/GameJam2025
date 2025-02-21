@@ -29,6 +29,21 @@ void ObjectBase::Draw() const
 {
 	//デバッグ用
 	DrawBoxAA(location.x, location.y, location.x + box_size.x, location.y + box_size.y, GetColor(255, 0, 0), FALSE);
+
+	switch (object_type)
+	{
+	case ePlayer:
+		DrawFormatString(location.x, location.y, GetColor(255, 255, 255), "player");
+		break;
+	case eEnemy:
+		DrawFormatString(location.x, location.y, GetColor(255, 255, 255), "enemy");
+		break;
+	case eItem:
+		DrawFormatString(location.x, location.y, GetColor(255, 255, 255), "item");
+		break;
+	default:
+		break;
+	}
 }
 
 void ObjectBase::Finalize()

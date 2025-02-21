@@ -1,4 +1,5 @@
 #include "Apple.h"
+#include <DxLib.h>
 
 Apple::Apple()
 {
@@ -22,6 +23,7 @@ void Apple::Update()
 void Apple::Draw() const
 {
 	__super::Draw();
+	//DrawFormatString(location.x, location.y, GetColor(255, 255, 255), "%d", object_type);
 }
 
 void Apple::Finalize()
