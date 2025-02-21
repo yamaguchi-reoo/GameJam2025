@@ -51,7 +51,7 @@ eSceneType InGameScene::Update()
 	{
 		if (create_quantity < OBJECT_MAX)
 		{
-			CreateObject<ItemBase>(Vector2D(140 * (rand() % 5) + 300, 80), Vector2D(64.0f));
+			CreateObject<ItemBase>(Vector2D(140 * (rand() % 5) + 300, 80), Vector2D(95.0f));
 			create_time = 0;
 		}
 	}

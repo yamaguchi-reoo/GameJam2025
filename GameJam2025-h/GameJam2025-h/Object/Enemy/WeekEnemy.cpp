@@ -23,7 +23,7 @@ void WeekEnemy::Update()
 	__super::Update();
 
 	//hp‚ª0‚É‚È‚Á‚½‚ç
-	if (hp == 0)
+	if (hp <= 0)
 	{
 		//íœ
 		this->SetDeleteFlg();
