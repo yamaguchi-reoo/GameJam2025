@@ -11,8 +11,11 @@ ItemBase::~ItemBase()
 
 void ItemBase::Initialize(Vector2D _location, Vector2D _box_size)
 {
-	__super::Initialize(location, _box_size);
+	__super::Initialize(_location, _box_size);
 	object_type = eItem;
+
+	//アイテムをスポーン
+	ItemSpawn();
 }
 
 void ItemBase::Update()
@@ -25,6 +28,9 @@ void ItemBase::Update()
 		//Object削除
 		this->SetDeleteFlg();
 	}
+
+	//落下
+	location.y += velocity.y;
 }
 
 void ItemBase::Draw() const
@@ -70,11 +76,13 @@ int ItemBase::ItemRand()
 {
 	int rand = GetRand(9);
 
+	//りんご
 	if (rand >= 0 && rand <= 5)
 	{
 		SetItemType(eApple);
 		return GetItemType();
 	}
+	//岩
 	else if (rand > 5 && rand <= 10)
 	{
 		SetItemType(eRock);
