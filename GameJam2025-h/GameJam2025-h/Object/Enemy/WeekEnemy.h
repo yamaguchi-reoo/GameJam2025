@@ -1,20 +1,13 @@
 #pragma once
-#include "../ObjectBase.h"
+#include "EnemyBase.h"
 
-enum ItemKinds
-{
-    eWeekEnemy,
-    eBossEnemy
-};
-
-class EnemyBase :
-    public ObjectBase
+class WeekEnemy :
+	public EnemyBase
 {
 public:
-    //コンストラクタ
-    EnemyBase();
-    //デストラクタ
-    ~EnemyBase();
+	WeekEnemy();
+
+	~WeekEnemy();
 
     //初期化処理
     // _location 初期位置
@@ -32,4 +25,3 @@ public:
 
     virtual void OnHitCollision(ObjectBase* hit_object)override;
 };
-
