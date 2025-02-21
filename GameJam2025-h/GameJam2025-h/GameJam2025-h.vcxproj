@@ -142,6 +142,7 @@
     <ClCompile Include="Object\Enemy\EnemyBase.cpp" />
     <ClCompile Include="Object\Enemy\WeekEnemy.cpp" />
     <ClCompile Include="Object\Item\Apple.cpp" />
+    <ClCompile Include="Object\Item\Item.cpp" />
     <ClCompile Include="Object\Item\ItemBase.cpp" />
     <ClCompile Include="Scene\GameScene\RankingScene.cpp" />
     <ClCompile Include="Scene\GameScene\HelpScene.cpp" />
@@ -161,6 +162,7 @@
     <ClInclude Include="Object\Enemy\WeekEnemy.h" />
     <ClInclude Include="Object\Item\Apple.h" />
     <ClInclude Include="common.h" />
+    <ClInclude Include="Object\Item\Item.h" />
     <ClInclude Include="Object\Item\ItemBase.h" />
     <ClInclude Include="Scene\GameScene\RankingScene.h" />
     <ClInclude Include="Scene\GameScene\HelpScene.h" />
