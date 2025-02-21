@@ -1,7 +1,9 @@
 #include "InGameScene.h"
 #include <DxLib.h>
 #include "../../Object/Item/Apple.h"
+#include "../../Object/Item/ItemBase.h"
 #include "../../Object/Enemy/WeekEnemy.h"
+#include "../../Object/Player/Player.h"
 #include "../../common.h"
 
 InGameScene::InGameScene()//この関数の後ろに定義した変数を連ねて書く（例 : InGameScene() : a()）
@@ -17,7 +19,12 @@ InGameScene::~InGameScene()
 void InGameScene::Initialize()
 {
 	//ここで変数の初期化して（例：a = 0;）
-	CreateObject<Apple>(Vector2D(30.0f, 40.0f), Vector2D(64.0f));
+	CreateObject<ItemBase>(Vector2D(30.0f, 40.0f), Vector2D(64.0f));
+	CreateObject<ItemBase>(Vector2D(100.0f, 40.0f), Vector2D(64.0f));
+	CreateObject<ItemBase>(Vector2D(170.0f, 40.0f), Vector2D(64.0f));
+	
+	CreateObject<Player>(Vector2D(60.0f, 500.0f), Vector2D(130.0f,200.0f));
+
 	CreateObject<WeekEnemy>(Vector2D(1000.0f, 640.0f), Vector2D(64.0f));
 
 	time_count = 0;

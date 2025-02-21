@@ -144,6 +144,7 @@
     <ClCompile Include="Object\Item\Apple.cpp" />
     <ClCompile Include="Object\Item\Item.cpp" />
     <ClCompile Include="Object\Item\ItemBase.cpp" />
+    <ClCompile Include="Object\Player\Player.cpp" />
     <ClCompile Include="Scene\GameScene\RankingScene.cpp" />
     <ClCompile Include="Scene\GameScene\HelpScene.cpp" />
     <ClCompile Include="Object\ObjectBase.cpp" />
@@ -164,6 +165,7 @@
     <ClInclude Include="common.h" />
     <ClInclude Include="Object\Item\Item.h" />
     <ClInclude Include="Object\Item\ItemBase.h" />
+    <ClInclude Include="Object\Player\Player.h" />
     <ClInclude Include="Scene\GameScene\RankingScene.h" />
     <ClInclude Include="Scene\GameScene\HelpScene.h" />
     <ClInclude Include="Object\ObjectBase.h" />
