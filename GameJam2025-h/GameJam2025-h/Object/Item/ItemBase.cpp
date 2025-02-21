@@ -39,12 +39,12 @@ void ItemBase::Draw() const
 	switch (item_type)
 	{
 	case eApple:
-		DrawFormatString(location.x, location.y + 12, GetColor(255, 255, 255), "apple");
-		DrawFormatString(location.x, location.y + 24, GetColor(255, 255, 255), "%d", damage);
+		DrawFormatString(location.x, location.y + 12, GetColor(255, 255, 255), "type: apple");
+		DrawFormatString(location.x, location.y + 24, GetColor(255, 255, 255), "damage: %d", damage);
 		break;
 	case eRock:
-		DrawFormatString(location.x, location.y + 12, GetColor(255, 255, 255), "rock");
-		DrawFormatString(location.x, location.y + 24, GetColor(255, 255, 255), "%d", damage);
+		DrawFormatString(location.x, location.y + 12, GetColor(255, 255, 255), "type: rock");
+		DrawFormatString(location.x, location.y + 24, GetColor(255, 255, 255), "damage: %d", damage);
 
 		break;
 	default:
