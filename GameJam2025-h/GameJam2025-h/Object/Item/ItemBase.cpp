@@ -64,6 +64,8 @@ void ItemBase::Draw() const
 	default:
 		break;
 	}
+
+	//DrawCircleAA(location.x + (box_size.x / 2), location.y + (box_size.y / 2), 50.0f, 50, GetColor(0, 255, 0), TRUE);
 }
 
 void ItemBase::Finalize()

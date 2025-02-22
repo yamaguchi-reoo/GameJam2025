@@ -6,6 +6,8 @@
 #include <algorithm>
 #include <iostream>
 
+#define MOVEMENT 92.0f + 47.5f
+
 Player::Player():
 	move_count(),
 	is_attack(),
@@ -26,8 +28,11 @@ void Player::Initialize(Vector2D _location, Vector2D _box_size)
 	is_attack = false;
 	attack_timer = 0;
 
-	player_pos = { 60.0f,500.0f };
-	player_box = { 130.0f,200.0f };
+	/*player_pos = { 160.0f,500.0f };
+	player_box = { 130.0f,200.0f };*/
+
+	player_pos = { _location.x - 130.0f,_location.y - 20.0f };
+	player_box = { _box_size.x + 15.0f,_box_size.y + 85.0f};
 }
 
 void Player::Update()
@@ -53,20 +58,15 @@ void Player::Draw() const
 	DrawFormatString((int)location.x, (int)location.y + 36, GetColor(255, 255, 255), "%f", location.y);
 	DrawFormatString((int)location.x, (int)location.y + 48, GetColor(255, 255, 255), "%f", location.x + box_size.x);
 	DrawFormatString((int)location.x, (int)location.y + 60, GetColor(255, 255, 255), "%f", location.y + box_size.y);
+
 	//プレイヤー描画	
 	DrawBoxAA(player_pos.x, player_pos.y, player_pos.x + player_box.x, player_pos.y + player_box.y, GetColor(255, 255, 255), FALSE);
+	DrawFormatString(player_pos.x, player_pos.y, GetColor(255, 255, 255), "%f", player_pos.x);
 
 	//バットの攻撃範囲を描画
-	if (!is_attack) 
-	{
-		DrawCircleAA(location.x + (box_size.x / 2), location.y + (box_size.y / 2), 65, 50, GetColor(255, 255, 255), FALSE);
-		DrawCircleAA(location.x + (box_size.x / 2), location.y + (box_size.y / 2), 60, 50, GetColor(255, 255, 255), FALSE);
-	}
-	else
-	{
-		DrawCircleAA(location.x + (box_size.x / 2), location.y + (box_size.y / 2), 65, 50, GetColor(0, 0, 255), FALSE);
-		DrawCircleAA(location.x + (box_size.x / 2), location.y + (box_size.y / 2), 60, 50, GetColor(0, 0, 255), FALSE);
-	}
+
+	DrawCircleAA(location.x + (box_size.x / 2), location.y + (box_size.y / 2), 60, 50, GetColor(0, 0, 255), FALSE);
+	DrawCircleAA(location.x + (box_size.x / 2), location.y + (box_size.y / 2), 55, 50, GetColor(0, 0, 255), FALSE);
 
 	//衝突範囲の設定
 	float left = location.x;
@@ -87,6 +87,7 @@ void Player::OnHitCollision(ObjectBase* hit_object)
 	{
 		//dynamic_castでItemBase型に変更
 		ItemBase* item = dynamic_cast<ItemBase*>(hit_object);
+		if (!item) return;
 
 
 		//衝突範囲の設定
@@ -95,14 +96,14 @@ void Player::OnHitCollision(ObjectBase* hit_object)
 
 		//アイテムの範囲取得
 		Vector2D item_location = hit_object->GetLocation();
-		Vector2D item_size = hit_object->GetLocation()+ hit_object->GetBoxSize();
+		Vector2D item_size = hit_object->GetLocation() + hit_object->GetBoxSize();
 
 		//アイテムが範囲内にあるか判定
 		if (item_location.x >= my_location.x && item_size.x <= my_size.x &&
 			item_location.y >= my_location.y && item_size.y <= my_size.y)
 		{
 			// Itemを飛ばす処理
-			item->BlowAway({ 30.0f, -10.0f });
+			item->BlowAway({ 60.0f, -10.0f });
 		}
 	}
 }
@@ -114,29 +115,29 @@ void Player::Movement()
 	//十字キー（右）で右移動
 	if (input->GetButtonDown(XINPUT_BUTTON_DPAD_RIGHT))
 	{
-		/*velocity.x = 300.0f;
-		location.x += velocity.x;*/
 		move_count++;
 		if (move_count > 4)
 		{
 			move_count = 4;
+			//移動できないように移動量0.0fに
+			velocity = 0.0f;
 		}
+
 	}
 	//十字キー（左）で左移動
 	else if (input->GetButtonDown(XINPUT_BUTTON_DPAD_LEFT))
 	{
-		/*velocity.x = 300.0f;
-		location.x -= velocity.x;*/
 		move_count--;
 		if (move_count < 0)
 		{
 			move_count = 0;
+			//移動できないように移動量0.0fに
+			velocity = 0.0f;
 		}
 	}
 
-	//移動位置の更新
-	location.x = (120.0f * move_count) + 190.0f;
-	player_pos.x = (120.0f * move_count) + 60.0f;
+	location.x = (139.5f * move_count) + 290.0f;
+	player_pos.x = (139.5f * move_count) + 160.0f;
 
 }
 
@@ -148,7 +149,7 @@ void Player::Attack()
 	if (input->GetButtonDown(XINPUT_BUTTON_B))
 	{
 		is_attack = true;
-		attack_timer = 10;
+		attack_timer = 3;
 	}
 
 	//攻撃中ならタイマーを減少
