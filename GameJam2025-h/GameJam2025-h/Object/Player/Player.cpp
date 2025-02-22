@@ -44,14 +44,15 @@ void Player::Update()
 
 void Player::Draw() const
 {
-	__super::Draw();
+	//__super::Draw();
 	//DrawFormatString(location.x, location.y + 12, GetColor(255, 255, 255), "%d", is_attack ? "false","true"));
 
 	//デバッグ表示
-	DrawFormatString(location.x, location.y + 12 , GetColor(255, 255, 255), !is_attack ? "false" : "true");
-	DrawFormatString(location.x, location.y + 24, GetColor(255, 255, 255), "%f", location.x);
-	DrawFormatString(location.x, location.y + 36, GetColor(255, 255, 255), "%f", location.y);
-
+	DrawFormatString((int)location.x, (int)location.y + 12 , GetColor(255, 255, 255), !is_attack ? "false" : "true");
+	DrawFormatString((int)location.x, (int)location.y + 24, GetColor(255, 255, 255), "%f", location.x);
+	DrawFormatString((int)location.x, (int)location.y + 36, GetColor(255, 255, 255), "%f", location.y);
+	DrawFormatString((int)location.x, (int)location.y + 48, GetColor(255, 255, 255), "%f", location.x + box_size.x);
+	DrawFormatString((int)location.x, (int)location.y + 60, GetColor(255, 255, 255), "%f", location.y + box_size.y);
 	//プレイヤー描画	
 	DrawBoxAA(player_pos.x, player_pos.y, player_pos.x + player_box.x, player_pos.y + player_box.y, GetColor(255, 255, 255), FALSE);
 
@@ -67,6 +68,12 @@ void Player::Draw() const
 		DrawCircleAA(location.x + (box_size.x / 2), location.y + (box_size.y / 2), 60, 50, GetColor(0, 0, 255), FALSE);
 	}
 
+	//衝突範囲の設定
+	float left = location.x;
+	float right = location.x + box_size.x;
+	float top = location.y;
+	float bottom = location.y + box_size.y;
+	DrawBoxAA(left, top, right, bottom, GetColor(0, 255, 255), FALSE);
 }
 
 void Player::Finalize()
@@ -78,21 +85,24 @@ void Player::OnHitCollision(ObjectBase* hit_object)
 	//アイテムと衝突し、攻撃中の場合
 	if (hit_object->GetObjectType() == eItem && is_attack)
 	{
-		//衝突範囲の設定
-		float left = location.x;
-		float right = location.x + box_size.x;
-		float top = location.y;
-		float bottom = location.y + box_size.y;
-
 		//dynamic_castでItemBase型に変更
 		ItemBase* item = dynamic_cast<ItemBase*>(hit_object);
 
+
+		//衝突範囲の設定
+		Vector2D my_location = location;
+		Vector2D my_size = location + box_size;;
+
+		//アイテムの範囲取得
+		Vector2D item_location = hit_object->GetLocation();
+		Vector2D item_size = hit_object->GetLocation()+ hit_object->GetBoxSize();
+
 		//アイテムが範囲内にあるか判定
-		if (hit_object->GetLocation().x >= left && hit_object->GetLocation().x <= right &&
-			hit_object->GetLocation().y >= top && hit_object->GetLocation().y <= bottom)
+		if (item_location.x >= my_location.x && item_size.x <= my_size.x &&
+			item_location.y >= my_location.y && item_size.y <= my_size.y)
 		{
 			// Itemを飛ばす処理
-			item->BlowAway({ 30.0f, -15.0f });
+			item->BlowAway({ 30.0f, -10.0f });
 		}
 	}
 }
