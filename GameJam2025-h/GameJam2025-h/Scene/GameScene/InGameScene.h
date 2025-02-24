@@ -10,6 +10,7 @@ private:
 	int create_span_item; // ƒAƒCƒeƒ€‚ğ¶¬‚·‚éŠÔŠu
 	int create_span_enemy;  // “G‚ğ¶¬‚·‚éŠÔŠu
 
+	int in_game_image;
 public:
 	InGameScene();
 	~InGameScene();

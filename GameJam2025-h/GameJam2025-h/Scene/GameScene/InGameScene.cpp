@@ -14,7 +14,8 @@
 InGameScene::InGameScene()//この関数の後ろに定義した変数を連ねて書く（例 : InGameScene() : a()）
 	:time_count(),
 	create_span_item(),
-	create_span_enemy()
+	create_span_enemy(),
+	in_game_image()
 {
 }
 
@@ -24,7 +25,7 @@ InGameScene::~InGameScene()
 
 void InGameScene::Initialize()
 {
-	CreateObject<Player>(Vector2D(290.0f, 520.0f), Vector2D(115.0f,115.0f));
+	CreateObject<Player>(Vector2D(290.0f, 520.0f), Vector2D(115.0f, 115.0f));
 
 	//CreateObject<WeekEnemy>(Vector2D(1000.0f, 640.0f), Vector2D(64.0f));
 
@@ -39,12 +40,14 @@ void InGameScene::Initialize()
 	create_enemy = true;
 	create_boss = true;
 	is_boss = true;
+
+	in_game_image = LoadGraph("Resource/Images/GameMain02.png");
 }
 
 eSceneType InGameScene::Update()
 {
 	//更新処理
-	
+
 	// 制限時間更新
 	time_count++;
 	if (time_count > (int)FRAMERATE)
@@ -61,24 +64,9 @@ eSceneType InGameScene::Update()
 			create_span_enemy++;
 			if (create_span_enemy >= 30)
 			{
-				if (create_enemy_max >= 3)
-				{
-					CreateObject<WeekEnemy>(Vector2D(1000.0f, 640.0f), Vector2D(64.0f));
-					create_enemy = false;
-					create_span_enemy = 0;
-				}
-				else if (create_enemy_max >= 2)
-				{
-					CreateObject<NomalEnemy>(Vector2D(1000.0f, 640.0f), Vector2D(64.0f));
-					create_enemy = false;
-					create_span_enemy = 0;
-				}
-				else if (create_enemy_max >= 1)
-				{
-					CreateObject<HardEnemy>(Vector2D(1000.0f, 640.0f), Vector2D(64.0f));
-					create_enemy = false;
-					create_span_enemy = 0;
-				}
+				CreateObject<WeekEnemy>(Vector2D(1000.0f, 640.0f), Vector2D(64.0f));
+				create_enemy = false;
+				create_span_enemy = 0;
 			}
 		}
 		else
@@ -134,7 +122,12 @@ eSceneType InGameScene::Update()
 
 void InGameScene::Draw() const
 {
+
+	DrawGraph(0, 0, in_game_image, TRUE);
+
 	__super::Draw();
+
+
 	//描画処理
 	DrawString(0, 24, "GameMain", GetColor(255, 255, 255));
 	DrawFormatString(620, 24, GetColor(255, 255, 255), "%d", limit_time);
