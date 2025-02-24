@@ -6,7 +6,6 @@ class InGameScene :
 {
 private:
 	//ゲームシーンに必要な変数を定義
-	int time_limit;  // 制限時間
 	int time_count;  // 制限時間を減らすためのカウント  60count = 1秒
 	int create_span_item; // アイテムを生成する間隔
 	int create_span_enemy;  // 敵を生成する間隔
@@ -23,4 +22,5 @@ public:
 	eSceneType GetNowSceneType()const override;
 public:
 	void DecTime(int dectime);
+	void WriteData();
 };
