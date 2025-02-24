@@ -5,7 +5,6 @@ class ResultScene :
 {
 private:
 	//シーンに必要な変数を定義		
-	// int remain_time[6];
 	int result_time;
 
 public:

@@ -5,7 +5,6 @@
 
 ResultScene::ResultScene()//この関数の後ろに定義した変数を連ねて書く（例 : ResultScene() : a()）
 	:result_time()
-	/*remain_time()*/
 {
 }
 
@@ -15,12 +14,6 @@ ResultScene::~ResultScene()
 
 void ResultScene::Initialize()
 {
-	//ここで変数の初期化して（例：a = 0;）
-	/*for (int i = 0; i <= 5; i++)
-	{
-		remain_time[i] = 0;
-	}*/
-
 	LoadData();
 }
 
@@ -30,6 +23,10 @@ eSceneType ResultScene::Update()
 
 	//入力管理クラスのインスタンスを取得
 	InputControl* input = InputControl::GetInstance();
+
+	if (input->GetButtonDown(XINPUT_BUTTON_B)) {
+		return eSceneType::eRanking;
+	}
 
 	//Zキーが押されたらTitleシーンへ遷移
 	if (input->GetKeyDown(KEY_INPUT_Z))
@@ -97,23 +94,4 @@ void ResultScene::LoadData()
 	{
 		result_time = 0;
 	}
-
-	//// ファイルオープン
-	//FILE* fp = nullptr;
-	//errno_t result = fopen_s(&fp, "Resource/Data/TimeData.csv", "r");
-
-	//// エラーチェック
-	//if (result != 0)
-	//{
-	//	throw("Resource/Data/TimeData.csvが開けませんでした。");
-	//}
-
-	//// 今までの記録を取得
-	//for (int i = 0; i < 5; i++)
-	//{
-	//	fscanf_s(fp, "%d,\n", &remain_time[i]);
-	//}
-
-	//// ファイルクローズ
-	//fclose(fp);
 }
