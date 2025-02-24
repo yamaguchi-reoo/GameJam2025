@@ -2,7 +2,8 @@
 #include <DxLib.h>
 #include "../../Utility/InputControl.h"
 #include "../Item/ItemBase.h"
-
+#include "../../Scene/GameScene/InGameScene.h"
+#include "../../Scene/SceneManager.h"
 #include <algorithm>
 #include <iostream>
 
@@ -102,8 +103,17 @@ void Player::OnHitCollision(ObjectBase* hit_object)
 		if (item_location.x >= my_location.x && item_size.x <= my_size.x &&
 			item_location.y >= my_location.y && item_size.y <= my_size.y)
 		{
-			// Item‚ð”ò‚Î‚·ˆ—
-			item->BlowAway({ 60.0f, -10.0f });
+			if (item->GetItemType() == eBomb || item->GetItemType() == ePowerup)
+			{
+				SceneManager* manager = SceneManager::GetInstance();
+				//InGameScene * game = dynamic_cast<InGameScene*>(manager->)
+				hit_object->SetDeleteFlg();
+			}
+			else 
+			{
+				// Item‚ð”ò‚Î‚·ˆ—
+				item->BlowAway({ 60.0f, -10.0f });
+			}
 		}
 	}
 }
