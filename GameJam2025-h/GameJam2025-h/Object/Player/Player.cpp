@@ -37,8 +37,8 @@ void Player::Initialize(Vector2D _location, Vector2D _box_size)
 	player_pos = { _location.x - 130.0f,_location.y - 20.0f };
 	player_box = { _box_size.x + 15.0f,_box_size.y + 85.0f};
 
-	is_power = false;
-	power_time = 0;
+	is_power = false; 
+	image = LoadGraph("Resource/Images/image.png");
 }
 
 void Player::Update()
@@ -67,6 +67,7 @@ void Player::Draw() const
 {
 	//__super::Draw();
 	//DrawFormatString(location.x, location.y + 12, GetColor(255, 255, 255), "%d", is_attack ? "false","true"));
+	DrawGraph(player_pos.x, player_pos.y-15, image, TRUE);
 
 	//デバッグ表示
 	DrawFormatString((int)location.x, (int)location.y + 12 , GetColor(255, 255, 255), !is_attack ? "false" : "true");
@@ -76,13 +77,14 @@ void Player::Draw() const
 	DrawFormatString((int)location.x, (int)location.y + 60, GetColor(255, 255, 255), "%f", location.y + box_size.y);
 
 	//プレイヤー描画	
-	DrawBoxAA(player_pos.x, player_pos.y, player_pos.x + player_box.x, player_pos.y + player_box.y, GetColor(255, 255, 255), FALSE);
+	//DrawBoxAA(player_pos.x, player_pos.y, player_pos.x + player_box.x, player_pos.y + player_box.y, GetColor(255, 255, 255), FALSE);
 	DrawFormatString(player_pos.x, player_pos.y, GetColor(255, 255, 255), "%f", player_pos.x);
 	DrawFormatString(player_pos.x, player_pos.y + 12, GetColor(255, 255, 255), "%d", power_time);
 
 	int GrHandle;
 
 	//GrHandle = LoadGraph("")
+
 
 	//バットの攻撃範囲を描画
 
@@ -197,7 +199,8 @@ void Player::Attack()
 	if (input->GetButtonDown(XINPUT_BUTTON_B))
 	{
 		is_attack = true;
-		attack_timer = 3;
+		attack_timer = 30;
+		image = LoadGraph("Resource/Images/image(3).png");
 	}
 
 	//攻撃中ならタイマーを減少
@@ -207,6 +210,7 @@ void Player::Attack()
 		if (attack_timer <= 0)
 		{
 			is_attack = false;
+			image = LoadGraph("Resource/Images/image (4).png");
 		}
 	}
 
