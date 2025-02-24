@@ -4,7 +4,10 @@ class ResultScene :
     public SceneBase
 {
 private:
-	//シーンに必要な変数を定義			
+	//シーンに必要な変数を定義		
+	// int remain_time[6];
+	int result_time;
+
 public:
 	ResultScene();
 	~ResultScene();
@@ -18,5 +21,6 @@ public:
 
 public:
 	//必要に応じて追加する関数をここに定義
+	void LoadData();
 };
 

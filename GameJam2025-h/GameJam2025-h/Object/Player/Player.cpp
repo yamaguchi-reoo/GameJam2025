@@ -199,7 +199,7 @@ void Player::Attack()
 	if (input->GetButtonDown(XINPUT_BUTTON_B))
 	{
 		is_attack = true;
-		attack_timer = 30;
+		attack_timer = 25;
 		image = LoadGraph("Resource/Images/image(3).png");
 	}
 

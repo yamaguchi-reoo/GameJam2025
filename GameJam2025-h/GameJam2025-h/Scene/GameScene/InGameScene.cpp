@@ -12,10 +12,10 @@
 #define OBJECT_MAX 10
 
 InGameScene::InGameScene()//この関数の後ろに定義した変数を連ねて書く（例 : InGameScene() : a()）
-	:time_limit(),
-	time_count(),
+	:time_count(),
 	create_span_item(),
-	create_span_enemy()
+	create_span_enemy(),
+	in_game_image()
 {
 }
 
@@ -25,13 +25,13 @@ InGameScene::~InGameScene()
 
 void InGameScene::Initialize()
 {
-	CreateObject<Player>(Vector2D(290.0f, 520.0f), Vector2D(115.0f,115.0f));
+	CreateObject<Player>(Vector2D(290.0f, 520.0f), Vector2D(115.0f, 115.0f));
 
 	//CreateObject<WeekEnemy>(Vector2D(1000.0f, 640.0f), Vector2D(64.0f));
 
 	// 制限時間設定
 	time_count = 0;
-	time_limit = 60;
+	limit_time = 60;
 
 	// オブジェクト生成設定
 	create_span_item = 0;
@@ -40,17 +40,19 @@ void InGameScene::Initialize()
 	create_enemy = true;
 	create_boss = true;
 	is_boss = true;
+
+	in_game_image = LoadGraph("Resource/Images/GameMain02.png");
 }
 
 eSceneType InGameScene::Update()
 {
 	//更新処理
-	
+
 	// 制限時間更新
 	time_count++;
 	if (time_count > (int)FRAMERATE)
 	{
-		time_limit--;
+		limit_time--;
 		time_count = 0;
 	}
 
@@ -97,18 +99,21 @@ eSceneType InGameScene::Update()
 	InputControl* input = InputControl::GetInstance();
 
 	// 制限時間が０になったらリザルトに遷移
-	if (time_limit <= 0)
+	if (limit_time <= 0)
 	{
+		WriteData();
 		return eSceneType::eResult;
 	}
 	//Zキーが押されたらResultシーンへ遷移
 	if (input->GetKeyDown(KEY_INPUT_Z))
 	{
+		WriteData();
 		return eSceneType::eResult;
 	}
 	// ボスが倒されたらリザルトに遷移
-	if (is_boss = false)
+	if (is_boss == false)
 	{
+		WriteData();
 		return eSceneType::eResult;
 	}
 
@@ -117,10 +122,15 @@ eSceneType InGameScene::Update()
 
 void InGameScene::Draw() const
 {
+
+	DrawGraph(0, 0, in_game_image, TRUE);
+
 	__super::Draw();
+
+
 	//描画処理
 	DrawString(0, 24, "GameMain", GetColor(255, 255, 255));
-	DrawFormatString(620, 24, GetColor(255, 255, 255), "%d", time_limit);
+	DrawFormatString(620, 24, GetColor(255, 255, 255), "%d", limit_time);
 	DrawString(200, 24, "item", GetColor(255, 255, 255));
 	DrawFormatString(300, 24, GetColor(255, 255, 255), "%d", create_quantity_item);
 	DrawString(200, 34, "enemy", GetColor(255, 255, 255));
@@ -138,5 +148,20 @@ eSceneType InGameScene::GetNowSceneType() const
 
 void InGameScene::DecTime(int dectime)
 {
-	time_limit = time_limit - dectime;
+	limit_time = limit_time - dectime;
+}
+
+void InGameScene::WriteData()
+{
+	FILE* fp = nullptr;
+	errno_t result = fopen_s(&fp, "Resource/Data/Result.csv", "w");
+
+	if (result != 0)
+	{
+		throw("Resource/Data/Result.csvが開けません\n");
+	}
+
+	fprintf(fp, "%d,\n", limit_time);
+
+	fclose(fp);
 }

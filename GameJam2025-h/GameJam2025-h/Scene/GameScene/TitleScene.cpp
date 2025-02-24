@@ -76,12 +76,21 @@ void TitleScene::Draw() const
 		int color = (i == cursor) ? GetColor(255, 255, 0) : GetColor(255, 0, 0);
 
 		// 四角形の描画
-		//DrawBox((SCREEN_WIDTH / 2) - (box.x / 2), y, (SCREEN_WIDTH / 2) + (box.x / 2), y + box.y, color, FALSE);
 		DrawBox(box.x, y, box.x * 2, y + box.y, color, FALSE);
 
 		// テキスト描画
 		DrawFormatString(box.x + 10, y + 7, GetColor(255, 255, 255), menu_items[i]);
 	}
+
+	//Aボタン描画
+	DrawCircleAA(145.5f, 670, 12, 12, GetColor(255, 255, 255), FALSE);
+	DrawCircleAA(145.5f, 670, 11, 12, GetColor(255, 20, 20), TRUE);
+	SetFontSize(16);
+	DrawString(170, 665, "決定", 0xffffff);
+	DrawString(142, 662, "A", 0xffffff);
+
+	//DPad描画
+	DrawDPad();
 
 	// 元のフォントサイズに戻す
 	SetFontSize(old_font_size);
@@ -94,4 +103,30 @@ void TitleScene::Finalize()
 eSceneType TitleScene::GetNowSceneType() const
 {
 	return eSceneType::eTitle;
+}
+
+void TitleScene::DrawDPad() const
+{
+	// 十字キーの中心座標
+	int d_pad_x = 240;
+	int d_pad_y = 670;
+	int d_pad_size = 5;
+
+	// 縦・横のボタンの背景（黒枠）
+	DrawBox(d_pad_x - d_pad_size, d_pad_y - d_pad_size * 3, d_pad_x + d_pad_size, d_pad_y + d_pad_size * 3, GetColor(100, 100, 100), TRUE);
+	DrawBox(d_pad_x - d_pad_size * 3, d_pad_y - d_pad_size, d_pad_x + d_pad_size * 3, d_pad_y + d_pad_size, GetColor(100, 100, 100), TRUE);
+
+	// 上ボタン（↑）
+	DrawTriangle(d_pad_x, d_pad_y - d_pad_size * 2, d_pad_x - d_pad_size, d_pad_y - d_pad_size,  d_pad_x + d_pad_size, d_pad_y - d_pad_size,  GetColor(255, 255, 255), TRUE);
+
+	// 下ボタン（↓）
+	DrawTriangle(d_pad_x, d_pad_y + d_pad_size * 2,  d_pad_x - d_pad_size, d_pad_y + d_pad_size,  d_pad_x + d_pad_size, d_pad_y + d_pad_size,  GetColor(255, 255, 255), TRUE);
+
+	// 左ボタン（←）
+	DrawTriangle(d_pad_x - d_pad_size * 2, d_pad_y,  d_pad_x - d_pad_size, d_pad_y - d_pad_size,  d_pad_x - d_pad_size, d_pad_y + d_pad_size,  GetColor(255, 255, 255), TRUE);
+
+	// 右ボタン（→）
+	DrawTriangle(d_pad_x + d_pad_size * 2, d_pad_y,  d_pad_x + d_pad_size, d_pad_y - d_pad_size,  d_pad_x + d_pad_size, d_pad_y + d_pad_size,  GetColor(255, 255, 255), TRUE);
+
+	DrawString(265, 665, "移動", GetColor(255, 255, 255));
 }

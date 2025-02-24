@@ -20,6 +20,8 @@ class SceneBase
 {
 protected:
 	// 特定のメンバ変数が必要であれば、ここで定義する
+	int limit_time = 0;
+
 	int create_quantity_item = 0;  // 画面内にあるアイテムの数
 	int create_enemy_max = 0;  // 敵が生成された累計数
 	bool create_enemy = true;  // 敵が生成可能か
