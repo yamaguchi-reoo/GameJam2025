@@ -4,6 +4,7 @@ class TitleScene :
     public SceneBase
 {
 private:
+	int cursor;
 	//タイトルシーンに必要な変数を定義
 public:
 	TitleScene();
