@@ -41,7 +41,7 @@ void InGameScene::Initialize()
 	create_boss = true;
 	is_boss = true;
 
-	in_game_image = LoadGraph("Resource/Images/GameMain02.png");
+	in_game_image = LoadGraph("Resource/Images/GameMain04.png");
 }
 
 eSceneType InGameScene::Update()
