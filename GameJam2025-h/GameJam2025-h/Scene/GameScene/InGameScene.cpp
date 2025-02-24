@@ -117,3 +117,8 @@ eSceneType InGameScene::GetNowSceneType() const
 {
 	return eSceneType::eGameMain;
 }
+
+void InGameScene::DecTime(int dectime)
+{
+	time_limit = time_limit - dectime;
+}

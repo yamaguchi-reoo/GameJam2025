@@ -22,4 +22,5 @@ public:
 
 	eSceneType GetNowSceneType()const override;
 public:
+	void DecTime(int dectime);
 };
