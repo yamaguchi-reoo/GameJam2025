@@ -4,7 +4,10 @@
 enum eItemType
 {
     eApple,
-    eRock
+    eRock,
+    eBomb,
+    eHeal,
+    ePowerup
 };
 
 class ItemBase :
@@ -14,6 +17,8 @@ protected:
     eItemType item_type = {};
 
     bool is_blowing = false;
+
+    int color = 0;
 public:
     //コンストラクタ
     ItemBase();
@@ -43,6 +48,8 @@ public:
     void SetItemType(eItemType _type) { item_type = _type; }
 
     void BlowAway(Vector2D _force);
+
+    void DamageUp() { damage = damage * 2; }
 
 private:
     //アイテム生成

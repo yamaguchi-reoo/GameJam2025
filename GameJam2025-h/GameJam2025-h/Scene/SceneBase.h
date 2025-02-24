@@ -20,7 +20,11 @@ class SceneBase
 {
 protected:
 	// 特定のメンバ変数が必要であれば、ここで定義する
-	int create_quantity = 0;
+	int create_quantity_item = 0;  // 画面内にあるアイテムの数
+	int create_enemy_max = 0;  // 敵が生成された累計数
+	bool create_enemy = true;  // 敵が生成可能か
+	bool create_boss = false;  // ボスが生成可能か
+	bool is_boss;  // true = ボスが生きている。又は未生成
 
 	//オブジェクト管理変数
 	std::vector<ObjectBase*>objects;
@@ -61,7 +65,11 @@ protected:
 		objects.push_back(new_object);
 		if (new_object->GetObjectType() == eItem)
 		{
-			create_quantity++;
+			create_quantity_item++;
+		}
+		if (new_object->GetObjectType() == eEnemy)
+		{
+			create_enemy_max--;
 		}
 
 		//生成したインスタンスを返す

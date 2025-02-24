@@ -2,7 +2,8 @@
 #include <DxLib.h>
 #include "../../Utility/InputControl.h"
 #include "../Item/ItemBase.h"
-
+#include "../../Scene/GameScene/InGameScene.h"
+#include "../../Scene/SceneManager.h"
 #include <algorithm>
 #include <iostream>
 
@@ -12,7 +13,8 @@
 Player::Player():
 	move_count(),
 	is_attack(),
-	attack_timer()
+	attack_timer(),
+	is_power()
 {
 
 }
@@ -34,6 +36,9 @@ void Player::Initialize(Vector2D _location, Vector2D _box_size)
 
 	player_pos = { _location.x - 130.0f,_location.y - 20.0f };
 	player_box = { _box_size.x + 15.0f,_box_size.y + 85.0f};
+
+	is_power = false;
+	power_time = 0;
 }
 
 void Player::Update()
@@ -45,6 +50,16 @@ void Player::Update()
 
 	//攻撃処理
 	Attack();
+
+	if (is_power)
+	{
+		power_time++;
+		if (power_time > 60 * 10)
+		{
+			is_power = false;
+			power_time = 0;
+		}
+	}
 
 }
 
@@ -63,6 +78,7 @@ void Player::Draw() const
 	//プレイヤー描画	
 	DrawBoxAA(player_pos.x, player_pos.y, player_pos.x + player_box.x, player_pos.y + player_box.y, GetColor(255, 255, 255), FALSE);
 	DrawFormatString(player_pos.x, player_pos.y, GetColor(255, 255, 255), "%f", player_pos.x);
+	DrawFormatString(player_pos.x, player_pos.y + 12, GetColor(255, 255, 255), "%d", power_time);
 
 	int GrHandle;
 
@@ -107,8 +123,35 @@ void Player::OnHitCollision(ObjectBase* hit_object)
 		if (item_location.x >= my_location.x && item_size.x <= my_size.x &&
 			item_location.y >= my_location.y && item_size.y <= my_size.y)
 		{
-			// Itemを飛ばす処理
-			item->BlowAway({ 60.0f, -10.0f });
+			//爆弾を打つと
+			if (item->GetItemType() == eBomb && !is_power)
+			{
+				//GameMain取得
+				SceneManager* manager = SceneManager::GetInstance();
+				InGameScene* in_game = manager->GetGameMainScene();
+
+				//制限時間を減少
+				in_game->DecTime(5);
+				//Object削除
+				hit_object->SetDeleteFlg();
+			}
+			//強化アイテムを打つと
+			else if (item->GetItemType() == ePowerup)
+			{
+				is_power = true;
+				hit_object->SetDeleteFlg();
+			}
+			else 
+			{
+				// Itemを飛ばす処理
+				item->BlowAway({ 60.0f, -10.0f });
+				//強化状態のとき
+				if (is_power)
+				{
+					//アイテムのダメージアップ
+					item->DamageUp();
+				}
+			}
 		}
 	}
 }

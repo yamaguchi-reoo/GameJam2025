@@ -8,7 +8,8 @@ private:
 	//ゲームシーンに必要な変数を定義
 	int time_limit;  // 制限時間
 	int time_count;  // 制限時間を減らすためのカウント  60count = 1秒
-	int create_time; // オブジェクトを生成する間隔
+	int create_span_item; // アイテムを生成する間隔
+	int create_span_enemy;  // 敵を生成する間隔
 
 public:
 	InGameScene();
@@ -21,6 +22,5 @@ public:
 
 	eSceneType GetNowSceneType()const override;
 public:
-	//必要に応じて追加する関数をここに定義
-	void DecQuantity();
+	void DecTime(int dectime);
 };

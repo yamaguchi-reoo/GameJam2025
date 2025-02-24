@@ -1,23 +1,13 @@
 #pragma once
-#include "../ObjectBase.h"
-class Player :
-    public ObjectBase
+#include "EnemyBase.h"
+class HardEnemy :
+    public EnemyBase
 {
 private:
-    int move_count;
-    bool is_attack;
-    int attack_timer;
-
-    Vector2D player_pos = {};
-    Vector2D player_box = {};
-
-    bool is_power;
-    int power_time;
 public:
-   
-    Player();
+    HardEnemy();
 
-    ~Player();
+    ~HardEnemy();
 
     //‰Šú‰»ˆ—
     // _location ‰ŠúˆÊ’u
@@ -34,11 +24,5 @@ public:
     virtual void Finalize()override;
 
     virtual void OnHitCollision(ObjectBase* hit_object)override;
-
-public:
-    void Movement();
-
-    void Attack();
 };
-
 

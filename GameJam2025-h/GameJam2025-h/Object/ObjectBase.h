@@ -7,6 +7,7 @@ enum eObjectType
 {
     ePlayer,
     eEnemy,
+    eBoss,
     eItem,
 };
 

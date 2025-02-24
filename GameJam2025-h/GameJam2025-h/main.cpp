@@ -55,6 +55,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
             FPSC->All();
 
 #ifdef _DEBUG
+            SetFontSize(12);
             // デバッグモード時にFPS情報を表示
             FPSC->Disp();
 #endif
