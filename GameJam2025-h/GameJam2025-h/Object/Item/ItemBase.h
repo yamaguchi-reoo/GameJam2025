@@ -49,6 +49,8 @@ public:
 
     void BlowAway(Vector2D _force);
 
+    void DamageUp() { damage = damage * 2; }
+
 private:
     //ÉAÉCÉeÉÄê∂ê¨
     void ItemSpawn();

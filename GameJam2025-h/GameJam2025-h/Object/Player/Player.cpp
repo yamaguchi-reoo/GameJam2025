@@ -12,7 +12,8 @@
 Player::Player():
 	move_count(),
 	is_attack(),
-	attack_timer()
+	attack_timer(),
+	is_power()
 {
 
 }
@@ -34,6 +35,9 @@ void Player::Initialize(Vector2D _location, Vector2D _box_size)
 
 	player_pos = { _location.x - 130.0f,_location.y - 20.0f };
 	player_box = { _box_size.x + 15.0f,_box_size.y + 85.0f};
+
+	is_power = false;
+	power_time = 0;
 }
 
 void Player::Update()
@@ -45,6 +49,16 @@ void Player::Update()
 
 	//UŒ‚ˆ—
 	Attack();
+
+	if (is_power)
+	{
+		power_time++;
+		if (power_time > 60 * 10)
+		{
+			is_power = false;
+			power_time = 0;
+		}
+	}
 
 }
 
@@ -63,6 +77,7 @@ void Player::Draw() const
 	//ƒvƒŒƒCƒ„[•`‰æ	
 	DrawBoxAA(player_pos.x, player_pos.y, player_pos.x + player_box.x, player_pos.y + player_box.y, GetColor(255, 255, 255), FALSE);
 	DrawFormatString(player_pos.x, player_pos.y, GetColor(255, 255, 255), "%f", player_pos.x);
+	DrawFormatString(player_pos.x, player_pos.y + 12, GetColor(255, 255, 255), "%d", power_time);
 
 	//ƒoƒbƒg‚ÌUŒ‚”ÍˆÍ‚ğ•`‰æ
 
@@ -103,16 +118,29 @@ void Player::OnHitCollision(ObjectBase* hit_object)
 		if (item_location.x >= my_location.x && item_size.x <= my_size.x &&
 			item_location.y >= my_location.y && item_size.y <= my_size.y)
 		{
-			if (item->GetItemType() == eBomb || item->GetItemType() == ePowerup)
+			if (item->GetItemType() == eBomb && !is_power)
 			{
+				//”š’e‚ğ‘Å‚Â‚ÆŠÔŒ¸­
 				SceneManager* manager = SceneManager::GetInstance();
-				//InGameScene * game = dynamic_cast<InGameScene*>(manager->)
+				InGameScene* game = manager->GetGameMainScene();
+
+				game->DecTime(5);
+				hit_object->SetDeleteFlg();
+			}
+			else if (item->GetItemType() == ePowerup)
+			{
+				is_power = true;
 				hit_object->SetDeleteFlg();
 			}
 			else 
 			{
 				// Item‚ğ”ò‚Î‚·ˆ—
 				item->BlowAway({ 60.0f, -10.0f });
+				//‹­‰»ó‘Ô‚Ì‚Æ‚«
+				if (is_power)
+				{
+					item->DamageUp();
+				}
 			}
 		}
 	}

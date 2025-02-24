@@ -1,5 +1,6 @@
 #pragma once
 #include "SceneBase.h"
+#include "GameScene/InGameScene.h"
 
 class SceneManager
 {
@@ -34,6 +35,13 @@ public:
     void SetScore(int _score) { score = _score; }
     //スコアの取得
     int GetScore() const { return score; }
+
+
+    //ゲームメインの取得
+    InGameScene* GetGameMainScene()
+    {
+        return dynamic_cast<InGameScene*>(current_scene);
+    }
 
 private:
     void Draw() const;  //描画処理

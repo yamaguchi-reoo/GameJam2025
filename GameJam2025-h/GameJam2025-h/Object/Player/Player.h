@@ -10,6 +10,9 @@ private:
 
     Vector2D player_pos = {};
     Vector2D player_box = {};
+
+    bool is_power;
+    int power_time;
 public:
    
     Player();

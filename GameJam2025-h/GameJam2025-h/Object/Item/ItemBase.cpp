@@ -1,5 +1,6 @@
 #include "ItemBase.h"
 #include <DxLib.h>
+#include "../Player/Player.h"
 
 ItemBase::ItemBase()
 {
@@ -45,6 +46,7 @@ void ItemBase::Update()
 	{
 		is_blowing = false;
 	}
+	
 }
 
 void ItemBase::Draw() const
@@ -111,12 +113,12 @@ void ItemBase::ItemSpawn()
 		break;
 	case eBomb:
 		velocity.y = 2.0f;
-		damage = 2;
+		damage = 3;
 		color = GetColor(255, 255, 0);
 		break;
 	case eHeal:
 		velocity.y = 2.0f;
-		damage = -5;
+		damage = -3;
 		color = GetColor(0, 255, 0);
 		break;
 	case ePowerup:
