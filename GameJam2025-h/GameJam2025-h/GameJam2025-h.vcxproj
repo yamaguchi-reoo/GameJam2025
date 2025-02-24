@@ -139,6 +139,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Object\Enemy\HardEnemy.cpp" />
+    <ClCompile Include="Object\Enemy\BossEnemy.cpp" />
+    <ClCompile Include="Object\Enemy\NomalEnemy.cpp" />
     <ClCompile Include="Object\Enemy\EnemyBase.cpp" />
     <ClCompile Include="Object\Enemy\WeekEnemy.cpp" />
     <ClCompile Include="Object\Item\Apple.cpp" />
@@ -159,6 +162,9 @@
     <ClCompile Include="Utility\Vector2D.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Object\Enemy\HardEnemy.h" />
+    <ClInclude Include="Object\Enemy\BossEnemy.h" />
+    <ClInclude Include="Object\Enemy\NomalEnemy.h" />
     <ClInclude Include="Object\Enemy\EnemyBase.h" />
     <ClInclude Include="Object\Enemy\WeekEnemy.h" />
     <ClInclude Include="Object\Item\Apple.h" />
