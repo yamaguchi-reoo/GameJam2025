@@ -13,6 +13,7 @@ BossEnemy::~BossEnemy()
 void BossEnemy::Initialize(Vector2D _location, Vector2D _box_size)
 {
 	__super::Initialize(_location, _box_size);
+	object_type = eBoss;
 	location.x -= 500;
 
 	hp = 20;

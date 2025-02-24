@@ -7,7 +7,8 @@ SceneBase::SceneBase():
 	create_quantity_item(),
 	create_enemy_max(),
 	create_enemy(),
-	create_boss()
+	create_boss(),
+	is_boss()
 {
 }
 
@@ -102,6 +103,10 @@ void SceneBase::DeleteObject(ObjectBase* obj)
 	if ((*it)->GetObjectType() == eEnemy)
 	{
 		create_enemy = true;
+	}
+	if ((*it)->GetObjectType() == eBoss)
+	{
+		is_boss = false;
 	}
 	if (it != objects.end()) {
 		//見つかった場合、オブジェクトを削除

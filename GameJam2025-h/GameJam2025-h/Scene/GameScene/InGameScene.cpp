@@ -3,6 +3,9 @@
 #include "../../Object/Item/Apple.h"
 #include "../../Object/Item/ItemBase.h"
 #include "../../Object/Enemy/WeekEnemy.h"
+#include "../../Object/Enemy/NomalEnemy.h"
+#include "../../Object/Enemy/HardEnemy.h"
+#include "../../Object/Enemy/BossEnemy.h"
 #include "../../Object/Player/Player.h"
 #include "../../common.h"
 
@@ -33,9 +36,10 @@ void InGameScene::Initialize()
 	// オブジェクト生成設定
 	create_span_item = 0;
 	create_span_enemy = 0;
-	create_enemy_max = 10;
+	create_enemy_max = 3;
 	create_enemy = true;
-	create_boss = false;
+	create_boss = true;
+	is_boss = true;
 }
 
 eSceneType InGameScene::Update()
@@ -65,7 +69,16 @@ eSceneType InGameScene::Update()
 		}
 		else
 		{
-			create_boss = true;
+			create_span_enemy++;
+			if (create_span_enemy >= 30)
+			{
+				if (create_boss == true)
+				{
+					CreateObject<BossEnemy>(Vector2D(1000.0f, 640.0f), Vector2D(128.0f));
+					create_boss = false;
+					create_span_enemy = 0;
+				}
+			}
 		}
 	}
 
@@ -91,7 +104,12 @@ eSceneType InGameScene::Update()
 	//Zキーが押されたらResultシーンへ遷移
 	if (input->GetKeyDown(KEY_INPUT_Z))
 	{
-		return eSceneType::eGameMain;
+		return eSceneType::eResult;
+	}
+	// ボスが倒されたらリザルトに遷移
+	if (is_boss = false)
+	{
+		return eSceneType::eResult;
 	}
 
 	return __super::Update();
