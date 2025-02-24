@@ -47,6 +47,23 @@ void ResultScene::Draw() const
 	DrawString(0, 24, "Result", GetColor(255, 255, 255));
 
 	DrawFormatString(100, 100, GetColor(255, 255, 255), "%d", result_time);
+
+	if (result_time > 30)
+	{
+		DrawString(100, 120,"☆PERFECT☆", GetColor(255, 255, 255));
+	}
+	else if (result_time > 15)
+	{
+		DrawString(100, 120, "GOOD!!", GetColor(255, 255, 255));
+	}
+	else if (result_time >= 1)
+	{
+		DrawString(100, 120, "NICE", GetColor(255, 255, 255));
+	}
+	else if (result_time == 0)
+	{
+		DrawString(100, 120, "DEFEAT", GetColor(255, 255, 255));
+	}
 }
 
 void ResultScene::Finalize()
@@ -75,6 +92,11 @@ void ResultScene::LoadData()
 
 	// ファイルクローズ
 	fclose(fp);
+
+	if (result_time < 0)
+	{
+		result_time = 0;
+	}
 
 	//// ファイルオープン
 	//FILE* fp = nullptr;
