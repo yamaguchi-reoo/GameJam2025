@@ -133,7 +133,7 @@ void ItemBase::ItemSpawn()
 
 int ItemBase::ItemRand()
 {
-	//ランダムな値（0 ～ 9）を入れる
+	//ランダムな値（0 ～ 99）を入れる
 	//int rand = GetRand(9);
 	int rand = GetRand(99);
 

@@ -118,15 +118,19 @@ void Player::OnHitCollision(ObjectBase* hit_object)
 		if (item_location.x >= my_location.x && item_size.x <= my_size.x &&
 			item_location.y >= my_location.y && item_size.y <= my_size.y)
 		{
+			//”š’e‚ð‘Å‚Â‚Æ
 			if (item->GetItemType() == eBomb && !is_power)
 			{
-				//”š’e‚ð‘Å‚Â‚ÆŽžŠÔŒ¸­
+				//GameMainŽæ“¾
 				SceneManager* manager = SceneManager::GetInstance();
-				InGameScene* game = manager->GetGameMainScene();
+				InGameScene* in_game = manager->GetGameMainScene();
 
-				game->DecTime(5);
+				//§ŒÀŽžŠÔ‚ðŒ¸­
+				in_game->DecTime(5);
+				//Objectíœ
 				hit_object->SetDeleteFlg();
 			}
+			//‹­‰»ƒAƒCƒeƒ€‚ð‘Å‚Â‚Æ
 			else if (item->GetItemType() == ePowerup)
 			{
 				is_power = true;
