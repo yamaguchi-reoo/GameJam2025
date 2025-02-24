@@ -4,7 +4,10 @@
 enum eItemType
 {
     eApple,
-    eRock
+    eRock,
+    eBomb,
+    eHeal,
+    ePowerup
 };
 
 class ItemBase :
@@ -14,6 +17,8 @@ protected:
     eItemType item_type = {};
 
     bool is_blowing = false;
+
+    int color = 0;
 public:
     //コンストラクタ
     ItemBase();

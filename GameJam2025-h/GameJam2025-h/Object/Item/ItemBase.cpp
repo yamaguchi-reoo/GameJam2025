@@ -53,13 +53,24 @@ void ItemBase::Draw() const
 	switch (item_type)
 	{
 	case eApple:
-		DrawFormatString(location.x, location.y + 12, GetColor(255, 255, 255), "type: apple");
-		DrawFormatString(location.x, location.y + 24, GetColor(255, 255, 255), "damage: %d", damage);
+		DrawFormatString(location.x, location.y + 12, color, "type: apple");
+		DrawFormatString(location.x, location.y + 24, color, "damage: %d", damage);
 		break;
 	case eRock:
-		DrawFormatString(location.x, location.y + 12, GetColor(255, 255, 255), "type: rock");
-		DrawFormatString(location.x, location.y + 24, GetColor(255, 255, 255), "damage: %d", damage);
-
+		DrawFormatString(location.x, location.y + 12, color, "type: rock");
+		DrawFormatString(location.x, location.y + 24, color, "damage: %d", damage);
+		break;
+	case eBomb:
+		DrawFormatString(location.x, location.y + 12, color, "type: bomb");
+		DrawFormatString(location.x, location.y + 24, color, "damage: %d", damage);
+		break;
+	case eHeal:
+		DrawFormatString(location.x, location.y + 12, color, "type: heal");
+		DrawFormatString(location.x, location.y + 24, color, "damage: %d", damage);
+		break;
+	case ePowerup:
+		DrawFormatString(location.x, location.y + 12, color, "type: power");
+		DrawFormatString(location.x, location.y + 24, color, "damage: %d", damage);
 		break;
 	default:
 		break;
@@ -89,12 +100,29 @@ void ItemBase::ItemSpawn()
 	switch (ItemRand())
 	{
 	case eApple:
-		velocity.y = 1.0f;
+		velocity.y = 1.5f;
 		damage = 1;
+		color = GetColor(255, 0, 0);
 		break;
 	case eRock:
+		velocity.y = 2.5f;
+		damage = 2;
+		color = GetColor(0, 0, 255);
+		break;
+	case eBomb:
 		velocity.y = 2.0f;
 		damage = 2;
+		color = GetColor(255, 255, 0);
+		break;
+	case eHeal:
+		velocity.y = 2.0f;
+		damage = -5;
+		color = GetColor(0, 255, 0);
+		break;
+	case ePowerup:
+		velocity.y = 3.5f;
+		damage = 0;
+		color = GetColor(255, 0, 255);
 		break;
 	default:
 		break;
@@ -104,18 +132,37 @@ void ItemBase::ItemSpawn()
 int ItemBase::ItemRand()
 {
 	//ランダムな値（0 ～ 9）を入れる
-	int rand = GetRand(9);
+	//int rand = GetRand(9);
+	int rand = GetRand(99);
 
-	//りんご
-	if (rand >= 0 && rand <= 5)
+	// りんご (40%)
+	if (rand >= 0 && rand <= 39)
 	{
 		SetItemType(eApple);
 		return GetItemType();
 	}
-	//岩
-	else if (rand > 5 && rand <= 10)
+	// 岩 (30%)
+	else if (rand > 39 && rand <= 69)
 	{
 		SetItemType(eRock);
+		return GetItemType();
+	}
+	// 爆弾 (15%)
+	else if (rand > 69 && rand <= 84)
+	{
+		SetItemType(eBomb);
+		return GetItemType();
+	}
+	// 回復アイテム (7%)
+	else if (rand > 84 && rand <= 91)
+	{
+		SetItemType(eHeal);
+		return GetItemType();
+	}
+	// パワーアップ (7%)
+	else
+	{
+		SetItemType(ePowerup);
 		return GetItemType();
 	}
 
