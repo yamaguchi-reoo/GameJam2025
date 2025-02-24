@@ -143,6 +143,7 @@ void Player::OnHitCollision(ObjectBase* hit_object)
 				//強化状態のとき
 				if (is_power)
 				{
+					//アイテムのダメージアップ
 					item->DamageUp();
 				}
 			}
