@@ -31,7 +31,7 @@ eSceneType TitleScene::Update()
 	if (input->GetButtonDown(XINPUT_BUTTON_DPAD_DOWN))cursor = (cursor + 1) % 4;
 
 	//Œˆ’è
-	if (input->GetButtonDown(XINPUT_BUTTON_A)) {
+	if (input->GetButtonDown(XINPUT_BUTTON_B)) {
 		if (cursor == 0)
 		{
 			return eSceneType::eGameMain;

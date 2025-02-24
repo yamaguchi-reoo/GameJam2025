@@ -87,7 +87,7 @@ void ItemBase::Finalize()
 
 void ItemBase::OnHitCollision(ObjectBase* hit_object)
 {
-	if (hit_object->GetObjectType() == eEnemy)
+	if (hit_object->GetObjectType() == eEnemy || hit_object->GetObjectType() == eBoss)
 	{
 		//Objectíœ
 		this->SetDeleteFlg();
