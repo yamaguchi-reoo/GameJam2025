@@ -8,6 +8,7 @@
 
 #define MOVEMENT 92.0f + 47.5f
 
+
 Player::Player():
 	move_count(),
 	is_attack(),
@@ -62,6 +63,10 @@ void Player::Draw() const
 	//プレイヤー描画	
 	DrawBoxAA(player_pos.x, player_pos.y, player_pos.x + player_box.x, player_pos.y + player_box.y, GetColor(255, 255, 255), FALSE);
 	DrawFormatString(player_pos.x, player_pos.y, GetColor(255, 255, 255), "%f", player_pos.x);
+
+	int GrHandle;
+
+	//GrHandle = LoadGraph("")
 
 	//バットの攻撃範囲を描画
 
