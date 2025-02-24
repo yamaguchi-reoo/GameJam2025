@@ -15,7 +15,7 @@ void HardEnemy::Initialize(Vector2D _location, Vector2D _box_size)
 	__super::Initialize(_location, _box_size);
 	location.x -= 500;
 
-	hp = 9;
+	hp = 8;
 }
 
 void HardEnemy::Update()
@@ -33,7 +33,7 @@ void HardEnemy::Update()
 void HardEnemy::Draw() const
 {
 	__super::Draw();
-	DrawBox(location.x + 90, location.y + 30, location.x + 90 + hp * 20, location.y + 50, GetColor(255, 255, 255), true);
+	DrawBox(location.x + 90, location.y + 30, location.x + 90 + hp * 5, location.y + 50, GetColor(255, 255, 255), true);
 	DrawFormatString(location.x, location.y + 20, GetColor(255, 255, 255), "%d", hp);
 }
 

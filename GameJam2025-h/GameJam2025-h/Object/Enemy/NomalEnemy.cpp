@@ -33,7 +33,7 @@ void NomalEnemy::Update()
 void NomalEnemy::Draw() const
 {
 	__super::Draw();
-	DrawBox(location.x + 90, location.y + 30, location.x + 90 + hp * 20, location.y + 50, GetColor(255, 255, 255), true);
+	DrawBox(location.x + 90, location.y + 30, location.x + 90 + hp * 8, location.y + 50, GetColor(255, 255, 255), true);
 	DrawFormatString(location.x, location.y + 20, GetColor(255, 255, 255), "%d", hp);
 }
 

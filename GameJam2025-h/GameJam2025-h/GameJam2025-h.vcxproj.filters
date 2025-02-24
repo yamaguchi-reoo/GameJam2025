@@ -150,4 +150,18 @@
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resource\Images\image.png">
+      <Filter>リソース ファイル</Filter>
+    </Image>
+    <Image Include="Resource\Images\image (1).png">
+      <Filter>リソース ファイル</Filter>
+    </Image>
+    <Image Include="Resource\Images\slime_purple_re.png">
+      <Filter>リソース ファイル</Filter>
+    </Image>
+    <Image Include="Resource\Images\monster_mao.png">
+      <Filter>リソース ファイル</Filter>
+    </Image>
+  </ItemGroup>
 </Project>

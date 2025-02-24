@@ -62,7 +62,7 @@ eSceneType InGameScene::Update()
 			create_span_enemy++;
 			if (create_span_enemy >= 30)
 			{
-				CreateObject<WeekEnemy>(Vector2D(1000.0f, 640.0f), Vector2D(64.0f));
+				CreateObject<WeekEnemy>(Vector2D(1000.0f, 640.0f), Vector2D(200.0f,150.0f));
 				create_enemy = false;
 				create_span_enemy = 0;
 			}
@@ -74,7 +74,7 @@ eSceneType InGameScene::Update()
 			{
 				if (create_boss == true)
 				{
-					CreateObject<BossEnemy>(Vector2D(1000.0f, 640.0f), Vector2D(128.0f));
+					CreateObject<BossEnemy>(Vector2D(1000.0f, 450.0f), Vector2D(200.f,319.f));
 					create_boss = false;
 					create_span_enemy = 0;
 				}

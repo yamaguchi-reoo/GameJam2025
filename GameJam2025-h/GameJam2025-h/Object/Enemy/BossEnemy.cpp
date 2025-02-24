@@ -14,7 +14,8 @@ void BossEnemy::Initialize(Vector2D _location, Vector2D _box_size)
 {
 	__super::Initialize(_location, _box_size);
 	object_type = eBoss;
-	location.x -= 500;
+	image = LoadGraph("Resource/Images/monster_mao.png");
+	location.y -= 100;
 
 	hp = 20;
 }
@@ -33,8 +34,9 @@ void BossEnemy::Update()
 
 void BossEnemy::Draw() const
 {
+	DrawGraph(location.x, location.y, image, TRUE);
 	__super::Draw();
-	DrawBox(location.x + 90, location.y + 30, location.x + 90 + hp * 20, location.y + 50, GetColor(255, 255, 255), true);
+	DrawBox(location.x + 90, location.y + 30, location.x + 90 + hp * 2, location.y + 50, GetColor(255, 255, 255), true);
 	DrawFormatString(location.x, location.y + 20, GetColor(255, 255, 255), "%d", hp);
 }
 
