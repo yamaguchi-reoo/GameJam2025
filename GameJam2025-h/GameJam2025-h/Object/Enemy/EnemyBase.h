@@ -4,6 +4,8 @@
 enum ItemKinds
 {
     eWeekEnemy,
+    eNomalEnemy,
+    eHardEnemy,
     eBossEnemy
 };
 
