@@ -19,5 +19,6 @@ public:
 
 public:
 	//•K—v‚É‰‚¶‚Ä’Ç‰Á‚·‚éŠÖ”‚ğ‚±‚±‚É’è‹`
+	void DrawDPad()const;
 };
 

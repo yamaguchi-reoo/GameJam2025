@@ -8,7 +8,7 @@
 int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPSTR lpCmdLine, _In_ int nShowCmd)
 {
     // 文字コードをUTF-8に設定
-    SetUseCharCodeFormat(DX_CHARCODEFORMAT_UTF8);
+    //SetUseCharCodeFormat(DX_CHARCODEFORMAT_UTF8);
 
     // ウィンドウの解像度と色深度を設定
     SetGraphMode(SCREEN_WIDTH, SCREEN_HEIGHT, 32);
