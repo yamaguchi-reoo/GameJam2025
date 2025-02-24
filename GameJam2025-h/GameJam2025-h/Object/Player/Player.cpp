@@ -14,7 +14,9 @@ Player::Player():
 	move_count(),
 	is_attack(),
 	attack_timer(),
-	is_power()
+	is_power(),
+	power_time(),
+	cool_time()
 {
 
 }
@@ -30,6 +32,7 @@ void Player::Initialize(Vector2D _location, Vector2D _box_size)
 	move_count = 0;
 	is_attack = false;
 	attack_timer = 0;
+	cool_time = 0;
 
 	/*player_pos = { 160.0f,500.0f };
 	player_box = { 130.0f,200.0f };*/
@@ -80,14 +83,10 @@ void Player::Draw() const
 	//DrawBoxAA(player_pos.x, player_pos.y, player_pos.x + player_box.x, player_pos.y + player_box.y, GetColor(255, 255, 255), FALSE);
 	DrawFormatString(player_pos.x, player_pos.y, GetColor(255, 255, 255), "%f", player_pos.x);
 	DrawFormatString(player_pos.x, player_pos.y + 12, GetColor(255, 255, 255), "%d", power_time);
-
-	int GrHandle;
-
-	//GrHandle = LoadGraph("")
+	DrawFormatString(player_pos.x, player_pos.y + 24, GetColor(255, 255, 255), "%d", cool_time);
 
 
 	//バットの攻撃範囲を描画
-
 	DrawCircleAA(location.x + (box_size.x / 2), location.y + (box_size.y / 2), 60, 50, GetColor(0, 0, 255), FALSE);
 	DrawCircleAA(location.x + (box_size.x / 2), location.y + (box_size.y / 2), 55, 50, GetColor(0, 0, 255), FALSE);
 
@@ -133,7 +132,7 @@ void Player::OnHitCollision(ObjectBase* hit_object)
 				InGameScene* in_game = manager->GetGameMainScene();
 
 				//制限時間を減少
-				in_game->DecTime(5);
+				in_game->DecTime(15);
 				//Object削除
 				hit_object->SetDeleteFlg();
 			}
@@ -195,11 +194,17 @@ void Player::Attack()
 {
 	InputControl* input = InputControl::GetInstance();
 
+	if (cool_time > 0)
+	{
+		cool_time--;
+		return;
+	}
+
 	//攻撃ボタン（Bボタン）が押されたら攻撃開始
 	if (input->GetButtonDown(XINPUT_BUTTON_B))
 	{
 		is_attack = true;
-		attack_timer = 25;
+		attack_timer = 15;
 		image = LoadGraph("Resource/Images/image(3).png");
 	}
 
@@ -211,6 +216,7 @@ void Player::Attack()
 		{
 			is_attack = false;
 			image = LoadGraph("Resource/Images/image (4).png");
+			cool_time = 20;
 		}
 	}
 

@@ -13,6 +13,7 @@ private:
 
     bool is_power;
     int power_time;
+    int cool_time;
 public:
    
     Player();
