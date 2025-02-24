@@ -11,7 +11,8 @@
 InGameScene::InGameScene()//この関数の後ろに定義した変数を連ねて書く（例 : InGameScene() : a()）
 	:time_limit(),
 	time_count(),
-	create_time()
+	create_span_item(),
+	create_span_enemy()
 {
 }
 
@@ -23,14 +24,18 @@ void InGameScene::Initialize()
 {
 	CreateObject<Player>(Vector2D(290.0f, 520.0f), Vector2D(115.0f,115.0f));
 
-	CreateObject<WeekEnemy>(Vector2D(1000.0f, 640.0f), Vector2D(64.0f));
+	//CreateObject<WeekEnemy>(Vector2D(1000.0f, 640.0f), Vector2D(64.0f));
 
 	// 制限時間設定
 	time_count = 0;
 	time_limit = 60;
 
 	// オブジェクト生成設定
-	create_time = 0;
+	create_span_item = 0;
+	create_span_enemy = 0;
+	create_enemy_max = 10;
+	create_enemy = true;
+	create_boss = false;
 }
 
 eSceneType InGameScene::Update()
@@ -45,15 +50,34 @@ eSceneType InGameScene::Update()
 		time_count = 0;
 	}
 
-	// オブジェクトを生成する
-	create_time++;
-	if (create_time >= 30)
+	// 敵を生成する
+	if (create_enemy == true)
 	{
-		if (create_quantity < OBJECT_MAX)
+		if (create_enemy_max > 0)
+		{
+			create_span_enemy++;
+			if (create_span_enemy >= 30)
+			{
+				CreateObject<WeekEnemy>(Vector2D(1000.0f, 640.0f), Vector2D(64.0f));
+				create_enemy = false;
+				create_span_enemy = 0;
+			}
+		}
+		else
+		{
+			create_boss = true;
+		}
+	}
+
+	// アイテムを生成する
+	create_span_item++;
+	if (create_span_item >= 30)
+	{
+		if (create_quantity_item < OBJECT_MAX)
 		{
 			CreateObject<ItemBase>(Vector2D(140 * (rand() % 5) + 300, 80), Vector2D(95.0f));
-			create_time = 0;
 		}
+		create_span_item = 0;
 	}
 
 	//入力管理クラスのインスタンスを取得
@@ -79,7 +103,10 @@ void InGameScene::Draw() const
 	//描画処理
 	DrawString(0, 24, "GameMain", GetColor(255, 255, 255));
 	DrawFormatString(620, 24, GetColor(255, 255, 255), "%d", time_limit);
-	DrawFormatString(300, 24, GetColor(255, 255, 255), "%d", create_quantity);
+	DrawString(200, 24, "item", GetColor(255, 255, 255));
+	DrawFormatString(300, 24, GetColor(255, 255, 255), "%d", create_quantity_item);
+	DrawString(200, 34, "enemy", GetColor(255, 255, 255));
+	DrawFormatString(300, 34, GetColor(255, 255, 255), "%d", create_enemy_max);
 }
 
 void InGameScene::Finalize()
@@ -89,9 +116,4 @@ void InGameScene::Finalize()
 eSceneType InGameScene::GetNowSceneType() const
 {
 	return eSceneType::eGameMain;
-}
-
-void InGameScene::DecQuantity()
-{
-	create_quantity--;
 }
