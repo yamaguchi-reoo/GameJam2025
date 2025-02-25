@@ -46,6 +46,16 @@ void ItemBase::Update()
 	{
 		is_blowing = false;
 	}
+
+	if (animation_time > 0)
+	{
+		animation_time--;
+		image = LoadGraph("Resource/Images/BombAfter.png");
+		if (animation_time < 0)
+		{
+			animation_time = 0;
+		}
+	}
 	
 }
 
@@ -78,6 +88,8 @@ void ItemBase::Draw() const
 		break;
 	}
 
+	DrawGraph(location.x + offset.x, location.y + offset.y, image, TRUE);
+
 	//DrawCircleAA(location.x + (box_size.x / 2), location.y + (box_size.y / 2), 50.0f, 50, GetColor(0, 255, 0), TRUE);
 }
 
@@ -95,6 +107,11 @@ void ItemBase::OnHitCollision(ObjectBase* hit_object)
 		//“–‚½‚Á‚½Object‚Éƒ_ƒ[ƒW‚ð—^‚¦‚é
 		hit_object->ApplyDamage(damage);
 	}
+
+	if (hit_object->GetObjectType() == ePlayer && this->GetItemType() == eBomb)
+	{
+
+	}
 }
 
 void ItemBase::ItemSpawn()
@@ -105,6 +122,8 @@ void ItemBase::ItemSpawn()
 		velocity.y = 1.5f;
 		damage = 1;
 		color = GetColor(255, 0, 0);
+		offset = { 5.0f, -5.0f };
+		image = LoadGraph("Resource/Images/Apple.png");
 		break;
 	case eRock:
 		velocity.y = 2.5f;
@@ -115,6 +134,8 @@ void ItemBase::ItemSpawn()
 		velocity.y = 2.0f;
 		damage = 3;
 		color = GetColor(255, 255, 0);
+		offset.x = 7.0f;
+		image = LoadGraph("Resource/Images/Bomb.png");
 		break;
 	case eHeal:
 		velocity.y = 2.0f;

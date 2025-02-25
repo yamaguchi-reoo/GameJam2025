@@ -133,8 +133,11 @@ void Player::OnHitCollision(ObjectBase* hit_object)
 
 				//§ŒÀŽžŠÔ‚ðŒ¸­
 				in_game->DecTime(10);
+
 				//Objectíœ
 				hit_object->SetDeleteFlg();
+
+
 			}
 			//‹­‰»ƒAƒCƒeƒ€‚ð‘Å‚Â‚Æ
 			else if (item->GetItemType() == ePowerup)
@@ -145,7 +148,7 @@ void Player::OnHitCollision(ObjectBase* hit_object)
 			else 
 			{
 				// Item‚ð”ò‚Î‚·ˆ—
-				item->BlowAway({ 60.0f, -10.0f });
+				item->BlowAway({ 30.0f, -10.0f });
 				//‹­‰»ó‘Ô‚Ì‚Æ‚«
 				if (is_power)
 				{
