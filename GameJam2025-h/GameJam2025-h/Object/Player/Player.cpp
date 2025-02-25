@@ -16,7 +16,10 @@ Player::Player():
 	attack_timer(),
 	is_power(),
 	power_time(),
-	cool_time()
+	cool_time(), 
+	hit_se(),
+	miss_se(),
+	is_hit()
 {
 
 }
@@ -34,6 +37,8 @@ void Player::Initialize(Vector2D _location, Vector2D _box_size)
 	attack_timer = 0;
 	cool_time = 0;
 
+	is_hit = false;
+
 	/*player_pos = { 160.0f,500.0f };
 	player_box = { 130.0f,200.0f };*/
 
@@ -43,7 +48,8 @@ void Player::Initialize(Vector2D _location, Vector2D _box_size)
 	is_power = false; 
 	image = LoadGraph("Resource/Images/image.png");
 
-	sound = LoadSoundMem("Resource/Sounds/Hit08-1.mp3");
+	hit_se = LoadSoundMem("Resource/Sounds/木製バットで打つ1.mp3");
+	miss_se = LoadSoundMem("Resource/Sounds/se_swing13-1.mp3");
 }
 
 void Player::Update()
@@ -77,6 +83,9 @@ void Player::Update()
 		image = LoadGraph("Resource/Images/image(3).png");
 	}
 
+
+	//音量調節
+	ChangeVolumeSoundMem(150, hit_se);
 }
 
 void Player::Draw() const
@@ -137,6 +146,8 @@ void Player::OnHitCollision(ObjectBase* hit_object)
 		if (item_location.x >= my_location.x && item_size.x <= my_size.x &&
 			item_location.y >= my_location.y && item_size.y <= my_size.y)
 		{
+			is_hit = true;
+			PlaySoundMem(hit_se, DX_PLAYTYPE_BACK);
 			//爆弾を打つと
 			if (item->GetItemType() == eBomb && !is_power)
 			{
@@ -225,8 +236,7 @@ void Player::Attack()
 	{
 		is_attack = true;
 		attack_timer = 5;
-		// 攻撃SEを再生
-		PlaySoundMem(sound, DX_PLAYTYPE_BACK);
+
 	}
 
 	//攻撃中ならタイマーを減少
@@ -235,7 +245,13 @@ void Player::Attack()
 		attack_timer--;
 		if (attack_timer <= 0)
 		{
+			if (!is_hit)
+			{
+				PlaySoundMem(miss_se, DX_PLAYTYPE_BACK);
+
+			}
 			is_attack = false;
+			is_hit = false;
 			cool_time = 20;
 		}
 	}
