@@ -42,6 +42,8 @@ void Player::Initialize(Vector2D _location, Vector2D _box_size)
 
 	is_power = false; 
 	image = LoadGraph("Resource/Images/image.png");
+
+	sound = LoadSoundMem("Resource/Sounds/Hit08-1.mp3");
 }
 
 void Player::Update()
@@ -223,6 +225,8 @@ void Player::Attack()
 	{
 		is_attack = true;
 		attack_timer = 5;
+		// 攻撃SEを再生
+		PlaySoundMem(sound, DX_PLAYTYPE_BACK);
 	}
 
 	//攻撃中ならタイマーを減少
