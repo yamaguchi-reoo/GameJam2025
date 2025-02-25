@@ -58,6 +58,11 @@ void ObjectBase::SetLocation(Vector2D _location)
 	this->location = _location;
 }
 
+void ObjectBase::SetVelocity(Vector2D _velocity)
+{
+	velocity = _velocity;
+}
+
 Vector2D ObjectBase::GetLocation() const
 {
 	return this->location;

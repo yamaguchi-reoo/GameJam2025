@@ -37,7 +37,7 @@ void ItemBase::Update()
 	location.x += velocity.x;
 
 	// 空気抵抗的な減速処理
-	if (is_blowing)
+	if (is_blowing && !is_animation)
 	{
 		velocity.x *= 0.98f;
 		velocity.y += 0.5f; // 重力で落下
@@ -49,13 +49,12 @@ void ItemBase::Update()
 		is_blowing = false;
 	}
 
-	if (animation_time > 0)
+	if (is_animation)
 	{
-		animation_time--;
-		image = LoadGraph("Resource/Images/BombAfter.png");
-		if (animation_time < 0)
+		animation_time++;
+		if (animation_time > 2)
 		{
-			animation_time = 0;
+			is_animation = 0;
 		}
 	}
 	
@@ -103,8 +102,24 @@ void ItemBase::OnHitCollision(ObjectBase* hit_object)
 {
 	if (hit_object->GetObjectType() == eEnemy || hit_object->GetObjectType() == eBoss)
 	{
-		//Object削除
-		this->SetDeleteFlg();
+		if (this->GetItemType() == eBomb || !is_animation)
+		{
+			is_animation = true;
+			image = LoadGraph("Resource/Images/BombAfter.png");
+			velocity = 0.0f;
+
+			if (animation_time > 2)
+			{
+				this->SetDeleteFlg();
+			}
+		}
+		else 
+		{
+
+			//Object削除
+			this->SetDeleteFlg();
+
+		}
 
 		//当たったObjectにダメージを与える
 		hit_object->ApplyDamage(damage);
