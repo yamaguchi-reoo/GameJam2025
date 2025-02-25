@@ -14,6 +14,8 @@ class EnemyBase :
 {
 public:
     int DamageSound;
+    int ExplosionSound;
+    int HealSound;
     //コンストラクタ
     EnemyBase();
     //デストラクタ
