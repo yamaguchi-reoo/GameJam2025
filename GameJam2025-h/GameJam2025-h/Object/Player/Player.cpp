@@ -224,8 +224,6 @@ void Player::Movement()
 			move_count = 0;
 			//ˆÚ“®‚Å‚«‚È‚¢‚æ‚¤‚ÉˆÚ“®—Ê0.0f‚É
 			velocity = 0.0f;
-
-			PlaySound("Resource/Sounds/Hit08-1.mp3", DX_PLAYTYPE_NORMAL);
 		}
 	}
 
