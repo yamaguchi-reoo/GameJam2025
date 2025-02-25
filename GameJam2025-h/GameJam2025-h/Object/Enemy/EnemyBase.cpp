@@ -1,7 +1,8 @@
 #include "EnemyBase.h"
 #include "DxLib.h"
+#include "../Item/ItemBase.h"
 
-EnemyBase::EnemyBase() :DamageSound(0)
+EnemyBase::EnemyBase() :DamageSound(),ExplosionSound(),HealSound()
 {
 }
 
@@ -41,5 +42,25 @@ void EnemyBase::Finalize()
 
 void EnemyBase::OnHitCollision(ObjectBase* hit_object)
 {
-	PlaySoundMem(DamageSound, DX_PLAYTYPE_BACK);
+	if (hit_object->GetObjectType() == eItem)
+	{
+		ItemBase* item = dynamic_cast<ItemBase*>(hit_object);
+
+		//爆弾なら
+		if (item->GetItemType() == eBomb)
+		{
+			PlaySoundMem(ExplosionSound, DX_PLAYTYPE_BACK);
+		}
+		//回復アイテムなら
+		else if (item->GetItemType() == eHeal)
+		{
+			PlaySoundMem(HealSound, DX_PLAYTYPE_BACK);
+		}
+		//それ以外なら
+		else
+		{
+			PlaySoundMem(DamageSound, DX_PLAYTYPE_BACK);
+		}
+	}
+
 }
