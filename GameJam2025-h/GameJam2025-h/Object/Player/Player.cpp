@@ -95,7 +95,8 @@ void Player::Draw() const
 	DrawGraph(player_pos.x, player_pos.y-15, image, TRUE);
 
 	//デバッグ表示
-	DrawFormatString((int)location.x, (int)location.y + 12 , GetColor(255, 255, 255), !is_attack ? "false" : "true");
+#ifdef _DEBUG
+	DrawFormatString((int)location.x, (int)location.y + 12, GetColor(255, 255, 255), !is_attack ? "false" : "true");
 	DrawFormatString((int)location.x, (int)location.y + 24, GetColor(255, 255, 255), "%f", location.x);
 	DrawFormatString((int)location.x, (int)location.y + 36, GetColor(255, 255, 255), "%f", location.y);
 	DrawFormatString((int)location.x, (int)location.y + 48, GetColor(255, 255, 255), "%f", location.x + box_size.x);
@@ -107,17 +108,19 @@ void Player::Draw() const
 	DrawFormatString(player_pos.x, player_pos.y + 12, GetColor(255, 255, 255), "%d", power_time);
 	DrawFormatString(player_pos.x, player_pos.y + 24, GetColor(255, 255, 255), "%d", cool_time);
 
-
-	//バットの攻撃範囲を描画
-	DrawCircleAA(location.x + (box_size.x / 2), location.y + (box_size.y / 2), 60, 50, GetColor(0, 0, 255), FALSE);
-	DrawCircleAA(location.x + (box_size.x / 2), location.y + (box_size.y / 2), 55, 50, GetColor(0, 0, 255), FALSE);
-
 	//衝突範囲の設定
 	float left = location.x;
 	float right = location.x + box_size.x;
 	float top = location.y;
 	float bottom = location.y + box_size.y;
 	DrawBoxAA(left, top, right, bottom, GetColor(0, 255, 255), FALSE);
+#endif // 
+
+	
+	//バットの攻撃範囲を描画
+	DrawCircleAA(location.x + (box_size.x / 2), location.y + (box_size.y / 2), 60, 50, GetColor(0, 0, 255), FALSE);
+	DrawCircleAA(location.x + (box_size.x / 2), location.y + (box_size.y / 2), 55, 50, GetColor(0, 0, 255), FALSE);
+
 }
 
 void Player::Finalize()

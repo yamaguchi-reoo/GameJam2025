@@ -62,6 +62,7 @@ void ItemBase::Update()
 
 void ItemBase::Draw() const
 {
+#ifdef _DEBUG
 	__super::Draw();
 	switch (item_type)
 	{
@@ -88,6 +89,9 @@ void ItemBase::Draw() const
 	default:
 		break;
 	}
+#endif // _DEBUG
+
+	
 
 	DrawGraph(location.x + offset.x, location.y + offset.y, image, TRUE);
 
