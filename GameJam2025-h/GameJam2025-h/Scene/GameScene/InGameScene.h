@@ -11,6 +11,9 @@ private:
 	int create_span_enemy;  // “G‚ğ¶¬‚·‚éŠÔŠu
 
 	int in_game_image;
+
+	int shake_timer;  // j‚ª—h‚ê‚éŠÔ
+	float shake_amount;  // j‚Ì—h‚ê•
 public:
 	InGameScene();
 	~InGameScene();

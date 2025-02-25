@@ -17,7 +17,9 @@ InGameScene::InGameScene()//この関数の後ろに定義した変数を連ねて書く（例 : InGam
 	:time_count(),
 	create_span_item(),
 	create_span_enemy(),
-	in_game_image()
+	in_game_image(),
+	shake_timer(),
+	shake_amount()
 {
 }
 
@@ -44,6 +46,9 @@ void InGameScene::Initialize()
 	is_boss = true;
 
 	in_game_image = LoadGraph("Resource/Images/GameMain04.png");
+
+	shake_timer = 0;
+	shake_amount = 0.0f;
 }
 
 eSceneType InGameScene::Update()
@@ -56,6 +61,13 @@ eSceneType InGameScene::Update()
 	{
 		limit_time--;
 		time_count = 0;
+	}
+
+	//時計の針の揺れを計算**
+	if (shake_timer > 0)
+	{
+		shake_timer--;
+		shake_amount *= 0.9f;  // 徐々に揺れを小さくする
 	}
 
 	// 敵を生成する
@@ -171,6 +183,10 @@ eSceneType InGameScene::GetNowSceneType() const
 void InGameScene::DecTime(int dectime)
 {
 	limit_time = limit_time - dectime;
+
+	//針を揺らすための値をセット
+	shake_timer = 60;
+	shake_amount = 10.0f;  //最初は10度くらい大きく揺れる
 }
 
 void InGameScene::WriteData()
@@ -199,8 +215,12 @@ void InGameScene::DrawTimer() const
 	DrawCircle(clock_center_x, clock_center_y, clock_radius, GetColor(0, 0, 0), TRUE);
 	DrawCircle(clock_center_x, clock_center_y, clock_radius + 1, GetColor(255, 255, 255), FALSE);
 
+
 	//秒針の計算
 	float angle = ((float)limit_time / 60.0f) * 360.0f + 90;  // 60秒で一周（360度）
+	angle += (shake_timer > 0) ? ((rand() % 5 - 2) * shake_amount) : 0.0f;  // ランダムにブレる
+
+	//角度をラジアンに変換
 	float rad = angle * (3.1415926535f / 180.0f);  // 角度をラジアンに変換
 
 	//秒針の座標を計算
