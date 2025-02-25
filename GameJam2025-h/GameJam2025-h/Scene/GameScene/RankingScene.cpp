@@ -115,7 +115,8 @@ void RankingScene::Draw() const
 
 	for (int i = 0; i < 5; i++)
 	{
-		DrawFormatString(100, GetFontSize() * i + 100, GetColor(255, 255, 255), "%d", remain_time[i]);
+		DrawFormatString(100, (GetFontSize() + 30) * i + 100, GetColor(255, 255, 255), "%d 位　　残り時間　%d 秒", i + 1, remain_time[i]);
+		DrawLine(100, (GetFontSize() + 30) * i + 100 + GetFontSize(), 600, (GetFontSize() + 30) * i + 100 + GetFontSize(), GetColor(255, 255, 255));
 	}
 
 	// シーン遷移ボタン描画
