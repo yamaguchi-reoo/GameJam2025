@@ -2,7 +2,8 @@
 
 RankingScene::RankingScene()//この関数の後ろに定義した変数を連ねて書く（例 : ResultScene() : a()）
 	:remain_time(),
-	result_time()
+	result_time(),
+	cursor()
 {
 }
 
@@ -13,6 +14,8 @@ RankingScene::~RankingScene()
 void RankingScene::Initialize()
 {
 	//ここで変数の初期化して（例：a = 0;）
+	cursor = 0;
+
 	for (int i = 0; i < 5; i++)
 	{
 		remain_time[i] = 0;
@@ -62,10 +65,30 @@ eSceneType RankingScene::Update()
 	//入力管理クラスのインスタンスを取得
 	InputControl* input = InputControl::GetInstance();
 
+	if (input->GetButtonDown(XINPUT_BUTTON_DPAD_LEFT))
+	{
+		cursor = 0;
+	}
+	if (input->GetButtonDown(XINPUT_BUTTON_DPAD_RIGHT))
+	{
+		cursor = 1;
+	}
+
 	//Zキーが押されたらTitleシーンへ遷移
 	if (input->GetKeyDown(KEY_INPUT_Z))
 	{
 		return eSceneType::eTitle;
+	}
+	if (input->GetButtonDown(XINPUT_BUTTON_B))
+	{
+		if (cursor == 0)
+		{
+			return eSceneType::eGameMain;
+		}
+		if (cursor == 1)
+		{
+			return eSceneType::eTitle;
+		}
 	}
 
 	//シーンの変更がない場合は現在のシーンを返す
@@ -74,13 +97,45 @@ eSceneType RankingScene::Update()
 
 void RankingScene::Draw() const
 {
+	// フォントサイズの変更
+	int init_font_size = GetFontSize();
+	SetFontSize(36);
+
+	// 遷移リスト
+	const char* menu_items[] = { "RESTART","TITLE" };
+
+	// 四角・テキストの描画位置、サイズの設定
+	Vector2D box = Vector2D(160.0f, 80.0f);
+	int start_x = (SCREEN_WIDTH / 4);
+	int y = (SCREEN_HEIGHT - (int)box.y * 2);
+	int box_spacing = 20;
+
 	//描画処理
 	DrawString(0, 24, "Ranking", GetColor(255, 255, 255));
 
 	for (int i = 0; i < 5; i++)
 	{
-		DrawFormatString(100, 25 * i + 100, GetColor(255, 255, 255), "%d", remain_time[i]);
+		DrawFormatString(100, GetFontSize() * i + 100, GetColor(255, 255, 255), "%d", remain_time[i]);
 	}
+
+	// シーン遷移ボタン描画
+	for (int i = 0; i < 2; i++)
+	{
+		// 描画位置決定
+		int x = start_x + i * (box.x + box_spacing);
+
+		// カラー指定
+		int color = (i == cursor) ? GetColor(255, 225, 0) : GetColor(255, 0, 0);
+
+		// 四角の描画
+		DrawBox(x, y, x + box.x, y + box.y, color, FALSE);
+
+		// テキスト表示
+		DrawFormatString(x + 10, y + 10, GetColor(255, 255, 255), menu_items[i]);
+	}
+
+	// フォントサイズを元に戻す
+	SetFontSize(init_font_size);
 }
 
 void RankingScene::Finalize()
