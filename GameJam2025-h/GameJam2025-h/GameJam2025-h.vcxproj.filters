@@ -178,5 +178,17 @@
     <Image Include="Resource\Images\skeleton.png">
       <Filter>リソース ファイル</Filter>
     </Image>
+    <Image Include="Resource\Images\uranaishi.png">
+      <Filter>リソース ファイル</Filter>
+    </Image>
+    <Image Include="Resource\Images\mummy.png">
+      <Filter>リソース ファイル</Filter>
+    </Image>
+    <Image Include="Resource\Images\devil.png">
+      <Filter>リソース ファイル</Filter>
+    </Image>
+    <Image Include="Resource\Images\shinigami.png">
+      <Filter>リソース ファイル</Filter>
+    </Image>
   </ItemGroup>
 </Project>
