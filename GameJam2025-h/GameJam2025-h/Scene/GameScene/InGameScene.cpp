@@ -24,7 +24,7 @@ InGameScene::InGameScene()//‚±‚ÌŠÖ”‚ÌŒã‚ë‚É’è‹`‚µ‚½•Ï”‚ğ˜A‚Ë‚Ä‘‚­i—á : InGam
 }
 
 InGameScene::~InGameScene()
-{
+{ 
 }
 
 void InGameScene::Initialize()

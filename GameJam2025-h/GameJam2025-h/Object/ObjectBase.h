@@ -56,6 +56,8 @@ public:
     //_location İ’è‚·‚éÀ•W
     void SetLocation(Vector2D _location);
 
+    void SetVelocity(Vector2D _velocity);
+
     //À•W‚ğæ“¾
     //Œ»İ‚ÌÀ•W
     Vector2D GetLocation() const;

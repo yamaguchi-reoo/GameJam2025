@@ -190,14 +190,21 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resource\Images\akuma.png" />
+    <Image Include="Resource\Images\devil.png" />
     <Image Include="Resource\Images\elf_man.png" />
     <Image Include="Resource\Images\image (1).png" />
     <Image Include="Resource\Images\image.png" />
     <Image Include="Resource\Images\monster_mao.png" />
+    <Image Include="Resource\Images\mummy.png" />
+    <Image Include="Resource\Images\shinigami.png" />
     <Image Include="Resource\Images\skeleton.png" />
     <Image Include="Resource\Images\slime_purple_re.png" />
     <Image Include="Resource\Images\teki.png" />
+    <Image Include="Resource\Images\uranaishi.png" />
     <Image Include="Resource\Images\zombi.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="Resource\Images\maou_bgm_acoustic10.mp3アコースティック.mp3" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

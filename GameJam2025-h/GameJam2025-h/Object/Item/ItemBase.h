@@ -1,5 +1,6 @@
 #pragma once
 #include "../ObjectBase.h"
+#include <DxLib.h>
 
 enum eItemType
 {
@@ -23,6 +24,7 @@ protected:
     Vector2D offset = {}; //画像ずらしよう
 
     int animation_time = 0;
+    bool is_animation = false;
 public:
     //コンストラクタ
     ItemBase();
@@ -56,6 +58,8 @@ public:
     void DamageUp() { damage = damage * 2; }
 
     int GetAnimationTime() { return animation_time; }
+
+    void SetImage(const char* fp) { image = LoadGraph(fp), offset = { -3.0f,0.0f }; }
 
 private:
     //アイテム生成

@@ -3,7 +3,8 @@
 
 HardEnemy::HardEnemy()
 {
-
+	//‰Šú’l‚Í1
+	EnemyChange = 1;
 }
 
 HardEnemy::~HardEnemy()
@@ -13,7 +14,20 @@ HardEnemy::~HardEnemy()
 void HardEnemy::Initialize(Vector2D _location, Vector2D _box_size)
 {
 	__super::Initialize(_location, _box_size);
-	image = LoadGraph("Resource/Images/akuma.png");
+
+	//ƒ‰ƒ“ƒ_ƒ€‚É“G‚ÌŒ©‚½–Ú‚ğ•Ï‚¦‚é
+	EnemyChange = GetRand(1);
+
+	if (EnemyChange == 0)
+	{
+		image = LoadGraph("Resource/Images/akuma.png");
+	}
+	else if (EnemyChange == 1)
+	{
+		image = LoadGraph("Resource/Images/shinigami.png");
+		box_size.x = 212.0f;
+		box_size.y = 200.0f;
+	}
 	location.y -= 100;
 
 	hp = 8;

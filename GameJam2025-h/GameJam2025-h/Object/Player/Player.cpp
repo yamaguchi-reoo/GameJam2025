@@ -131,13 +131,17 @@ void Player::OnHitCollision(ObjectBase* hit_object)
 				SceneManager* manager = SceneManager::GetInstance();
 				InGameScene* in_game = manager->GetGameMainScene();
 
-				//制限時間を減少
-				in_game->DecTime(10);
-
+				
+				//爆発！！！！！
+				item->SetImage("Resource/Images/BombAfter.png");
+				item->SetVelocity({ 0.0f, 0.0f });
 				//Object削除
-				hit_object->SetDeleteFlg();
+				if (attack_timer <= 1) {
+					//制限時間を減少
+					in_game->DecTime(10);
 
-
+					hit_object->SetDeleteFlg();
+				}
 			}
 			//強化アイテムを打つと
 			else if (item->GetItemType() == ePowerup)
@@ -200,6 +204,7 @@ void Player::Attack()
 	if (cool_time > 0)
 	{
 		cool_time--;
+		image = LoadGraph("Resource/Images/image (4).png");
 		return;
 	}
 
@@ -207,7 +212,7 @@ void Player::Attack()
 	if (input->GetButtonDown(XINPUT_BUTTON_B))
 	{
 		is_attack = true;
-		attack_timer = 10;
+		attack_timer = 5;
 		image = LoadGraph("Resource/Images/image(3).png");
 	}
 
@@ -218,7 +223,6 @@ void Player::Attack()
 		if (attack_timer <= 0)
 		{
 			is_attack = false;
-			image = LoadGraph("Resource/Images/image (4).png");
 			cool_time = 20;
 		}
 	}
