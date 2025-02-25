@@ -87,7 +87,7 @@ void TitleScene::Draw() const
 	DrawCircleAA(145.5f, 670, 11, 12, GetColor(255, 20, 20), TRUE);
 	SetFontSize(16);
 	DrawString(170, 665, "Œˆ’è", 0xffffff);
-	DrawString(142, 662, "A", 0xffffff);
+	DrawString(142, 662, "B", 0xffffff);
 
 	//DPad•`‰æ
 	DrawDPad();
