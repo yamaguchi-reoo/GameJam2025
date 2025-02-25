@@ -5,7 +5,7 @@ class RankingInput:
 {
 private:
 	int backgrouond_image;   // 背景画像
-	int remain_time;         // 残り時間
+	int remain_time[6];         // 残り時間
 	char name[15];           // 名前
 	int name_num;            // 名前入力数
 	int cursor_x;            // カーソルx座標

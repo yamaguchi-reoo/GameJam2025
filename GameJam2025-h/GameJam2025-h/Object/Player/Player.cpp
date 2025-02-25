@@ -54,6 +54,7 @@ void Player::Update()
 	//攻撃処理
 	Attack();
 
+	//強化状態
 	if (is_power)
 	{
 		power_time++;
@@ -62,6 +63,16 @@ void Player::Update()
 			is_power = false;
 			power_time = 0;
 		}
+	}
+
+	//クールタイム中は画像変更
+	if (cool_time <= 0)
+	{
+		image = LoadGraph("Resource/Images/image.png");
+	}
+	else
+	{
+		image = LoadGraph("Resource/Images/image(3).png");
 	}
 
 }
@@ -204,16 +215,14 @@ void Player::Attack()
 	if (cool_time > 0)
 	{
 		cool_time--;
-		image = LoadGraph("Resource/Images/image (4).png");
 		return;
 	}
 
 	//攻撃ボタン（Bボタン）が押されたら攻撃開始
-	if (input->GetButtonDown(XINPUT_BUTTON_B))
+	if (input->GetButtonDown(XINPUT_BUTTON_B) && !is_attack)
 	{
 		is_attack = true;
 		attack_timer = 5;
-		image = LoadGraph("Resource/Images/image(3).png");
 	}
 
 	//攻撃中ならタイマーを減少
