@@ -196,6 +196,8 @@ void Player::Movement()
 	if (input->GetButtonDown(XINPUT_BUTTON_DPAD_RIGHT))
 	{
 		move_count++;
+		PlaySoundFile("Resource/Sounds/Hit08-1.mp3", DX_PLAYTYPE_BACK);
+	}
 		if (move_count > 4)
 		{
 			move_count = 4;
@@ -208,11 +210,15 @@ void Player::Movement()
 	else if (input->GetButtonDown(XINPUT_BUTTON_DPAD_LEFT))
 	{
 		move_count--;
+		PlaySound("Resource/Sounds/Hit08-1.mp3", DX_PLAYTYPE_NORMAL);
+	}
 		if (move_count < 0)
 		{
 			move_count = 0;
 			//ˆÚ“®‚Å‚«‚È‚¢‚æ‚¤‚ÉˆÚ“®—Ê0.0f‚É
 			velocity = 0.0f;
+
+			PlaySound("Resource/Sounds/Hit08-1.mp3", DX_PLAYTYPE_NORMAL);
 		}
 	}
 
