@@ -10,16 +10,18 @@
 #define MOVEMENT 92.0f + 47.5f
 
 
-Player::Player():
+Player::Player() :
 	move_count(),
 	is_attack(),
 	attack_timer(),
 	is_power(),
 	power_time(),
-	cool_time(), 
+	cool_time(),
 	hit_se(),
 	miss_se(),
-	is_hit()
+	is_hit(),
+	explosion_se(),
+	power_se()
 {
 
 }
@@ -50,6 +52,8 @@ void Player::Initialize(Vector2D _location, Vector2D _box_size)
 
 	hit_se = LoadSoundMem("Resource/Sounds/木製バットで打つ1.mp3");
 	miss_se = LoadSoundMem("Resource/Sounds/se_swing13-1.mp3");
+
+	explosion_se = LoadSoundMem("Resource/Sounds/se_explode_zun.mp3");
 }
 
 void Player::Update()
@@ -86,6 +90,7 @@ void Player::Update()
 
 	//音量調節
 	ChangeVolumeSoundMem(150, hit_se);
+	ChangeVolumeSoundMem(150, explosion_se);
 }
 
 void Player::Draw() const
@@ -150,7 +155,6 @@ void Player::OnHitCollision(ObjectBase* hit_object)
 			item_location.y >= my_location.y && item_size.y <= my_size.y)
 		{
 			is_hit = true;
-			PlaySoundMem(hit_se, DX_PLAYTYPE_BACK);
 			//爆弾を打つと
 			if (item->GetItemType() == eBomb && !is_power)
 			{
@@ -162,6 +166,7 @@ void Player::OnHitCollision(ObjectBase* hit_object)
 				//爆発！！！！！
 				item->SetImage("Resource/Images/BombAfter.png");
 				item->SetVelocity({ 0.0f, 0.0f });
+				PlaySoundMem(explosion_se, DX_PLAYTYPE_BACK);
 				//Object削除
 				if (attack_timer <= 1) {
 					//制限時間を減少
@@ -178,6 +183,7 @@ void Player::OnHitCollision(ObjectBase* hit_object)
 			}
 			else 
 			{
+				PlaySoundMem(hit_se, DX_PLAYTYPE_BACK);
 				// Itemを飛ばす処理
 				item->BlowAway({ 30.0f, -10.0f });
 				//強化状態のとき
