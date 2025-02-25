@@ -31,7 +31,7 @@ void RankingInput::Initialize()
     }
 
     //結果を読み込む
-    fscanf_s(fp, "%6d,%[^,],\n", &result_time,result_name,15);
+    fscanf_s(fp, "%3d,%14s\n", &result_time, result_name[0], (unsigned int)sizeof(result_name));
 
     //ファイルクローズ
     fclose(fp);
@@ -110,7 +110,7 @@ void RankingInput::Finalize()
     //ranking->SetRankingData(remain_time, name);
 
     //読み込んだ画像を削除
-    DeleteGraph(backgrouond_image);
+    //DeleteGraph(backgrouond_image);
 
     //動的メモリの解放
     //delete ranking;
