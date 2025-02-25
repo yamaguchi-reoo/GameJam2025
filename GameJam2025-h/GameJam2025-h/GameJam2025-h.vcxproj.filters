@@ -169,5 +169,14 @@
     <Image Include="Resource\Images\akuma.png">
       <Filter>リソース ファイル</Filter>
     </Image>
+    <Image Include="Resource\Images\teki.png">
+      <Filter>リソース ファイル</Filter>
+    </Image>
+    <Image Include="Resource\Images\zombi.png">
+      <Filter>リソース ファイル</Filter>
+    </Image>
+    <Image Include="Resource\Images\skeleton.png">
+      <Filter>リソース ファイル</Filter>
+    </Image>
   </ItemGroup>
 </Project>
