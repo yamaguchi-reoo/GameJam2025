@@ -192,6 +192,9 @@
     <Image Include="Resource\Images\monster_mao.png" />
     <Image Include="Resource\Images\slime_purple_re.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Media Include="Resource\Images\maou_bgm_acoustic10.mp3アコースティック.mp3" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
