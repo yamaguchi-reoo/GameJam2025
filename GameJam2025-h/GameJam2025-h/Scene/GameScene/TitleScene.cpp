@@ -14,7 +14,8 @@ TitleScene::~TitleScene()
 
 void TitleScene::Initialize()
 {
-	PlaySoundFile("Resource/Sounds/maou_bgm_acoustic10.mp3アコースティック.mp3", DX_PLAYTYPE_LOOP);
+	PlaySoundFile("Resource/Sounds/maou_bgm_acoustic10.mp3アコースティック.mp3", DX_PLAYTYPE_NORMAL);
+
 
 	//ここで変数の初期化して（例：a = 0;）
 	cursor = 0;
