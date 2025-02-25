@@ -2,7 +2,9 @@
 
 RankingScene::RankingScene()//この関数の後ろに定義した変数を連ねて書く（例 : ResultScene() : a()）
 	:remain_time(),
+	player_name(),
 	result_time(),
+	result_name(),
 	cursor()
 {
 }
@@ -16,10 +18,15 @@ void RankingScene::Initialize()
 	//ここで変数の初期化して（例：a = 0;）
 	cursor = 0;
 
-	for (int i = 0; i < 5; i++)
+	for (int i = 0; i < 6; i++)
 	{
-		remain_time[i] = 0;
+		remain_time[i] = NULL;
+		for (int j = 0; j < 15; j++)
+		{
+			player_name[i][j] = '\0';
+		}
 	}
+
 
 	//ランキングデータの読み込み
 	FILE* fp = nullptr;
@@ -34,26 +41,28 @@ void RankingScene::Initialize()
 	}
 
 	//対象ファイルから読み込む
-	for (int i = 0; i < 5; i++)
+	for (int i = 0; i < 6; i++)
 	{
-		fscanf_s(fp, "%6d,\n", &remain_time[i]);
+		fscanf_s(fp, "%d,%14s\n", &remain_time[i], player_name[i], (unsigned int)sizeof(player_name[i]));
 	}
 
 	//ファイルクローズ
 	fclose(fp);
 
+	FILE* fp_r = nullptr;
+
 	//ファイルオープン
-	result = fopen_s(&fp, "Resource/Data/Result.csv", "r");
+	errno_t result_r = fopen_s(&fp_r, "Resource/Data/Result.csv", "r");
 
 	//エラーチェック
-	if (result != 0)
+	if (result_r != 0)
 	{
 		throw("Resource/Data/Result.scvが開けませんでした\n");
 	}
-	fscanf_s(fp, "%6d,\n", &result_time);
+	fscanf_s(fp_r, "%3d,%14s\n", &result_time,result_name[0], (unsigned int)sizeof(result_name));
 
 	//ファイルクローズ
-	fclose(fp);
+	fclose(fp_r);
 
 	SortData();
 }
@@ -115,7 +124,7 @@ void RankingScene::Draw() const
 
 	for (int i = 0; i < 5; i++)
 	{
-		DrawFormatString(100, (GetFontSize() + 30) * i + 100, GetColor(255, 255, 255), "%d 位　　残り時間　%d 秒", i + 1, remain_time[i]);
+		DrawFormatString(100, (GetFontSize() + 30) * i + 100, GetColor(255, 255, 255), "%d 位　%-15s　残り時間　%d 秒", i + 1,player_name[i], remain_time[i]);
 		DrawLine(100, (GetFontSize() + 30) * i + 100 + GetFontSize(), 600, (GetFontSize() + 30) * i + 100 + GetFontSize(), GetColor(255, 255, 255));
 	}
 
@@ -151,6 +160,7 @@ eSceneType RankingScene::GetNowSceneType() const
 void RankingScene::SortData()
 {
 	remain_time[5] = result_time;
+	strncpy_s(player_name[5], result_name[0], 14);
 	//選択法ソートを使用し、降順で入れ替える
 	for (int i = 0; i < 6; i++)
 	{
@@ -161,6 +171,17 @@ void RankingScene::SortData()
 				int tmp = remain_time[i];
 				remain_time[i] = remain_time[j];
 				remain_time[j] = tmp;
+
+				char name[15];
+				memset(name, 0, sizeof(name)); // 確実に初期化
+				strncpy_s(name, player_name[i], 14); // 最大14文字までコピー
+				name[14] = '\0'; // 念のためNULL終端
+
+				strncpy_s(player_name[i], player_name[j], 14);
+				player_name[i][14] = '\0';
+
+				strncpy_s(player_name[j], name, 14);
+				player_name[j][14] = '\0';
 			}
 		}
 	}
@@ -177,9 +198,9 @@ void RankingScene::SortData()
 	}
 
 	//対象ファイルに書き込み
-	for (int i = 0; i < 5; i++)
+	for (int i = 0; i < 6; i++)
 	{
-		fprintf(fp, "%d,\n", remain_time[i]);
+		fprintf(fp, "%d,%s\n", remain_time[i],player_name[i]);
 	}
 
 	//ファイルクローズ

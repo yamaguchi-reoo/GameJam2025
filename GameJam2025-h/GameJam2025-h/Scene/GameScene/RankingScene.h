@@ -5,10 +5,10 @@ class RankingScene :
 {
 private:
 	//シーンに必要な変数を定義
-	int remain_time[6];  // 今までの残り時間をまとめる
-	int player_name[6];  // 今までの名前をまとめる
+	int remain_time[6];  // タイムデータ
+	char player_name[6][15];  // 名前データ
 	int result_time;     // 前回の記録を入れる
-	int result_name;     // 今回の入力される名前
+	char result_name[1][15];     // 今回の入力される名前
 
 	int cursor;   // 選択されているボタンの位置
 
