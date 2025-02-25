@@ -49,7 +49,7 @@ void HardEnemy::Draw() const
 {
 	DrawGraph(location.x, location.y, image, TRUE);
 	__super::Draw();
-	DrawBox(location.x + 90, location.y + 30, location.x + 90 + hp * 5, location.y + 50, GetColor(255, 255, 255), true);
+	DrawBox(location.x + 90, location.y -20, location.x + 90 + hp * 10, location.y -40, GetColor(255, 255, 255), true);
 	DrawFormatString(location.x, location.y + 20, GetColor(255, 255, 255), "%d", hp);
 }
 
@@ -60,4 +60,5 @@ void HardEnemy::Finalize()
 void HardEnemy::OnHitCollision(ObjectBase* hit_object)
 {
 	//エネミーにダメージを与える処理はItem側やっておきます
+	__super::OnHitCollision(hit_object);
 }

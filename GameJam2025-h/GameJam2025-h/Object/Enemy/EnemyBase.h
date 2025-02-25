@@ -13,6 +13,7 @@ class EnemyBase :
     public ObjectBase
 {
 public:
+    int DamageSound;
     //コンストラクタ
     EnemyBase();
     //デストラクタ
