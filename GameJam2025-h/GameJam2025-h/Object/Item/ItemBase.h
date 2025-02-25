@@ -16,14 +16,12 @@ class ItemBase :
 {
 protected:
     eItemType item_type = {};
-
     bool is_blowing = false;
-
     int color = 0;
 
-    Vector2D offset = {}; //画像ずらしよう
+    Vector2D offset = {}; //画像ずらし用
 
-    int animation_time = 0;
+    int animation_time = 0; 
     bool is_animation = false;
 public:
     //コンストラクタ

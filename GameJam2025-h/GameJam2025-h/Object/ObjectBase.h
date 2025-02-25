@@ -24,7 +24,9 @@ protected:
 
     std::vector<int> animation_data = {}; ///< アニメーションデータ（フレーム情報など）
 
+
     int image = NULL;          //描画する画像データのハンドル
+    int sound = NULL;
     bool flip_flg = false;     //画像を左右反転するフラグ
     bool delete_flg = false;   //削除フラグ（true の場合オブジェクトは削除される）
 

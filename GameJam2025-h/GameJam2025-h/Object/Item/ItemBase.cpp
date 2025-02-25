@@ -110,25 +110,22 @@ void ItemBase::OnHitCollision(ObjectBase* hit_object)
 
 			if (animation_time > 2)
 			{
+				//当たったObjectにダメージを与える
+				hit_object->ApplyDamage(damage);
 				this->SetDeleteFlg();
 			}
 		}
 		else 
 		{
-
+			//当たったObjectにダメージを与える
+			hit_object->ApplyDamage(damage);
 			//Object削除
 			this->SetDeleteFlg();
-
 		}
 
-		//当たったObjectにダメージを与える
-		hit_object->ApplyDamage(damage);
-	}
-
-	if (hit_object->GetObjectType() == ePlayer && this->GetItemType() == eBomb)
-	{
 
 	}
+
 }
 
 void ItemBase::ItemSpawn()
