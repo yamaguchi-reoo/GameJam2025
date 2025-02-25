@@ -37,14 +37,17 @@ eSceneType TitleScene::Update()
 	if (input->GetButtonDown(XINPUT_BUTTON_B)) {
 		if (cursor == 0)
 		{
+			StopMusic();
 			return eSceneType::eGameMain;
 		}
 		else if (cursor == 1)
 		{
+			StopMusic();
 			return eSceneType::eRanking;
 		}
 		else if (cursor == 2)
 		{
+			StopMusic();
 			return eSceneType::eHelp;
 		}
 	}

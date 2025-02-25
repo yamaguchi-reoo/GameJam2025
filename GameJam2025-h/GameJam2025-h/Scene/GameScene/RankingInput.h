@@ -5,8 +5,8 @@ class RankingInput:
 {
 private:
 	int backgrouond_image;   // 背景画像
-	int remain_time[6];         // 残り時間
-	char name[15];           // 名前
+	int result_time;         // 残り時間
+	char result_name[15];           // 名前
 	int name_num;            // 名前入力数
 	int cursor_x;            // カーソルx座標
 	int cursor_y;            // カーソルy座標
@@ -16,8 +16,8 @@ public:
 	virtual ~RankingInput();
 
 	virtual void Initialize() override;
-	virtual eSceneType Update() override;
 	virtual void Draw() const override;
+	virtual eSceneType Update() override;
 	virtual void Finalize() override;
 
 	virtual eSceneType GetNowSceneType() const override;

@@ -14,6 +14,13 @@ private:
     bool is_power;
     int power_time;
     int cool_time;
+
+    int hit_se;
+    int miss_se;
+    bool is_hit;
+
+    int explosion_se;
+    int power_se;
 public:
    
     Player();
