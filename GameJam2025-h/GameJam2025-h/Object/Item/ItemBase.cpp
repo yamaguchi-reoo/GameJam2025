@@ -8,6 +8,8 @@ ItemBase::ItemBase()
 
 ItemBase::~ItemBase()
 {
+	// image‚ªİ’è‚³‚ê‚Ä‚¢‚éê‡‚Ì‚İ‰ğ•ú‚·‚é
+	DeleteGraph(image);
 }
 
 void ItemBase::Initialize(Vector2D _location, Vector2D _box_size)
