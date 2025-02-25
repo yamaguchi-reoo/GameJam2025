@@ -14,15 +14,15 @@ void EnemyBase::Initialize(Vector2D _location, Vector2D _box_size)
 {
 	__super::Initialize(location, _box_size);
 
-	/*DamageSound = LoadSoundMem("Resource/Sounds/Hit08-1.mp3");
+	DamageSound = LoadSoundMem("Resource/Sounds/Hit08-1.mp3");
 
 	if (LoadSoundMem("Resource/Sounds/Hit08-1.mp3") == -1)
 	{
 		throw ("音声ファイルが開けません");
-	}*/
+	}
 
 
-	//ChangeVolumeSoundMem(250, DamageSound);
+	ChangeVolumeSoundMem(250, DamageSound);
 	object_type = eEnemy;
 }
 
