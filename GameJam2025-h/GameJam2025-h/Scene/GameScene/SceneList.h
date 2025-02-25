@@ -6,3 +6,4 @@
 #include "ResultScene.h"
 #include "HelpScene.h"
 #include "RankingScene.h"
+#include "RankingInput.h"

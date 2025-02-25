@@ -13,6 +13,7 @@ enum class eSceneType
 	eResult,
 	eHelp,
 	eRanking,
+	eInput,
 	eEnd
 };
 
