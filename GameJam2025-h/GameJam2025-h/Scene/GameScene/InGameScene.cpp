@@ -80,19 +80,19 @@ eSceneType InGameScene::Update()
 			{
 				if (create_enemy_max >= 3)
 				{
-					CreateObject<WeekEnemy>(Vector2D(1000.0f, 640.0f), Vector2D(64.0f));
+					CreateObject<WeekEnemy>(Vector2D(1000.0f, 640.0f), Vector2D(200.0f,142.0f));
 					create_enemy = false;
 					create_span_enemy = 0;
 				}
 				else if (create_enemy_max >= 2)
 				{
-					CreateObject<NomalEnemy>(Vector2D(1000.0f, 640.0f), Vector2D(64.0f));
+					CreateObject<NomalEnemy>(Vector2D(1000.0f, 540.0f), Vector2D(200.0f,223.0f));
 					create_enemy = false;
 					create_span_enemy = 0;
 				}
 				else if (create_enemy_max >= 1)
 				{
-					CreateObject<HardEnemy>(Vector2D(1000.0f, 640.0f), Vector2D(64.0f));
+					CreateObject<HardEnemy>(Vector2D(1000.0f, 540.0f), Vector2D(200.0f,200.0f));
 					create_enemy = false;
 					create_span_enemy = 0;
 				}

@@ -13,7 +13,8 @@ NomalEnemy::~NomalEnemy()
 void NomalEnemy::Initialize(Vector2D _location, Vector2D _box_size)
 {
 	__super::Initialize(_location, _box_size);
-	location.x -= 500;
+	image = LoadGraph("Resource/Images/elf_man.png");
+	location.y -= 100;
 
 	hp = 5;
 }
@@ -32,6 +33,7 @@ void NomalEnemy::Update()
 
 void NomalEnemy::Draw() const
 {
+	DrawGraph(location.x, location.y, image, TRUE);
 	__super::Draw();
 	DrawBox(location.x + 90, location.y + 30, location.x + 90 + hp * 8, location.y + 50, GetColor(255, 255, 255), true);
 	DrawFormatString(location.x, location.y + 20, GetColor(255, 255, 255), "%d", hp);
