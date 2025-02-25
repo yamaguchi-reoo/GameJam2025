@@ -5,8 +5,10 @@ class RankingScene :
 {
 private:
 	//シーンに必要な変数を定義
-	int remain_time[6];
-	int result_time;
+	int remain_time[6];  // 今までの記録をまとめる
+	int result_time;     // 前回の記録を入れる
+
+	int cursor;   // 選択されているボタンの位置
 
 public:
 	RankingScene();

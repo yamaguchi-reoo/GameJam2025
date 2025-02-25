@@ -132,9 +132,12 @@ void Player::OnHitCollision(ObjectBase* hit_object)
 				InGameScene* in_game = manager->GetGameMainScene();
 
 				//§ŒÀŽžŠÔ‚ðŒ¸­
-				in_game->DecTime(15);
+				in_game->DecTime(10);
+
 				//Objectíœ
 				hit_object->SetDeleteFlg();
+
+
 			}
 			//‹­‰»ƒAƒCƒeƒ€‚ð‘Å‚Â‚Æ
 			else if (item->GetItemType() == ePowerup)
@@ -145,7 +148,7 @@ void Player::OnHitCollision(ObjectBase* hit_object)
 			else 
 			{
 				// Item‚ð”ò‚Î‚·ˆ—
-				item->BlowAway({ 60.0f, -10.0f });
+				item->BlowAway({ 30.0f, -10.0f });
 				//‹­‰»ó‘Ô‚Ì‚Æ‚«
 				if (is_power)
 				{
@@ -204,7 +207,7 @@ void Player::Attack()
 	if (input->GetButtonDown(XINPUT_BUTTON_B))
 	{
 		is_attack = true;
-		attack_timer = 15;
+		attack_timer = 10;
 		image = LoadGraph("Resource/Images/image(3).png");
 	}
 

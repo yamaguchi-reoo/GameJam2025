@@ -3,7 +3,8 @@
 
 WeekEnemy::WeekEnemy()
 {
-
+	//‰Šú’l‚Í1
+	EnemyChange = 1;
 }
 
 WeekEnemy::~WeekEnemy()
@@ -13,7 +14,35 @@ WeekEnemy::~WeekEnemy()
 void WeekEnemy::Initialize(Vector2D _location, Vector2D _box_size)
 {
 	__super::Initialize(_location, _box_size);
-	image = LoadGraph("Resource/Images/slime_purple_re.png");
+
+	//ƒ‰ƒ“ƒ_ƒ€‚É“G‚ÌŒ©‚½–Ú‚ğ•Ï‚¦‚é
+	EnemyChange = GetRand(3);
+
+	if (EnemyChange == 0)
+	{
+		image = LoadGraph("Resource/Images/slime_purple_re.png");
+	}
+	else if (EnemyChange == 1)
+	{
+		image = LoadGraph("Resource/Images/teki.png");
+		box_size.x = 200.0f;
+		box_size.y = 246.0f;
+		location.y -= 100;
+	}
+	else if (EnemyChange == 2)
+	{
+		image = LoadGraph("Resource/Images/zombi.png");
+		box_size.x = 150.0f;
+		box_size.y = 184.0f;
+		location.y -= 100;
+	}
+	else if (EnemyChange == 3)
+	{
+		image = LoadGraph("Resource/Images/skeleton.png");
+		box_size.x = 200.0f;
+		box_size.y = 210.0f;
+		location.y -= 100;
+	}
 	location.y -= 100;
 
 	hp = 2;

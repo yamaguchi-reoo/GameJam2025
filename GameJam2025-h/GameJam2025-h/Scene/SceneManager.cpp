@@ -115,6 +115,9 @@ SceneBase* SceneManager::CreateScene(eSceneType type)
 	case eSceneType::eRanking:
 		//HelpScene¶¬
 		return dynamic_cast<SceneBase*>(new RankingScene());
+	case eSceneType::eInput:
+		//RankingInput¶¬
+		return dynamic_cast<SceneBase*>(new RankingInput());
 	default:
 		//ŠY“–‚·‚éƒV[ƒ“‚ª‚È‚¢ê‡‚Ínullptr‚ğ•Ô‚·
 		return nullptr;

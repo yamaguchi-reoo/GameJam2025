@@ -40,6 +40,8 @@ public:
     void Movement();
 
     void Attack();
+
+    bool GetIsAttack() { return is_attack; }
 };
 
 

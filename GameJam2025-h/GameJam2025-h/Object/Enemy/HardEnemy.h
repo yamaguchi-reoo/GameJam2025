@@ -4,6 +4,8 @@ class HardEnemy :
     public EnemyBase
 {
 private:
+    //“G‚ÌŒ©‚½–Ú‚ğ•Ï‚¦‚é•Ï”
+    int EnemyChange;
 public:
     HardEnemy();
 

@@ -19,6 +19,10 @@ protected:
     bool is_blowing = false;
 
     int color = 0;
+
+    Vector2D offset = {}; //画像ずらしよう
+
+    int animation_time = 0;
 public:
     //コンストラクタ
     ItemBase();
@@ -51,12 +55,15 @@ public:
 
     void DamageUp() { damage = damage * 2; }
 
+    int GetAnimationTime() { return animation_time; }
+
 private:
     //アイテム生成
     void ItemSpawn();
 
     //アイテム抽選
     int ItemRand();
+
 
 
 };

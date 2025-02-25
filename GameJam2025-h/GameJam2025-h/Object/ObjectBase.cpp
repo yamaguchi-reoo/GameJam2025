@@ -7,6 +7,8 @@ ObjectBase::ObjectBase()
 
 ObjectBase::~ObjectBase()
 {
+	// image‚ªİ’è‚³‚ê‚Ä‚¢‚éê‡‚Ì‚İ‰ğ•ú‚·‚é
+	DeleteGraph(image);
 }
 
 void ObjectBase::Initialize(Vector2D _location, Vector2D _box_size)
@@ -48,6 +50,7 @@ void ObjectBase::Draw() const
 
 void ObjectBase::Finalize()
 {
+
 }
 
 void ObjectBase::SetLocation(Vector2D _location)
