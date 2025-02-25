@@ -132,7 +132,7 @@ void Player::OnHitCollision(ObjectBase* hit_object)
 				InGameScene* in_game = manager->GetGameMainScene();
 
 				//§ŒÀŽžŠÔ‚ðŒ¸­
-				in_game->DecTime(15);
+				in_game->DecTime(10);
 				//Objectíœ
 				hit_object->SetDeleteFlg();
 			}
@@ -204,7 +204,7 @@ void Player::Attack()
 	if (input->GetButtonDown(XINPUT_BUTTON_B))
 	{
 		is_attack = true;
-		attack_timer = 15;
+		attack_timer = 10;
 		image = LoadGraph("Resource/Images/image(3).png");
 	}
 

@@ -9,6 +9,8 @@
 #include "../../Object/Player/Player.h"
 #include "../../common.h"
 
+#include <cmath>
+
 #define OBJECT_MAX 10
 
 InGameScene::InGameScene()//この関数の後ろに定義した変数を連ねて書く（例 : InGameScene() : a()）
@@ -116,6 +118,7 @@ eSceneType InGameScene::Update()
 	// 制限時間が０になったらリザルトに遷移
 	if (limit_time <= 0)
 	{
+		limit_time = 0;
 		WriteData();
 		return eSceneType::eResult;
 	}
@@ -142,7 +145,11 @@ void InGameScene::Draw() const
 
 	__super::Draw();
 
+	//時計の描画
+	SetFontSize(30);
+	DrawTimer();
 
+	SetFontSize(12);
 	//描画処理
 	DrawString(0, 24, "GameMain", GetColor(255, 255, 255));
 	DrawFormatString(620, 24, GetColor(255, 255, 255), "%d", limit_time);
@@ -179,4 +186,35 @@ void InGameScene::WriteData()
 	fprintf(fp, "%d,\n", limit_time);
 
 	fclose(fp);
+}
+
+void InGameScene::DrawTimer() const
+{
+	//時計の位置とサイズ
+	int clock_center_x = 1200;  // 時計の中心 X
+	int clock_center_y = 60;  // 時計の中心 Y
+	int clock_radius = 50;     // 時計の半径
+
+	//時計の円を描画
+	DrawCircle(clock_center_x, clock_center_y, clock_radius, GetColor(0, 0, 0), TRUE);
+	DrawCircle(clock_center_x, clock_center_y, clock_radius + 1, GetColor(255, 255, 255), FALSE);
+
+	//秒針の計算
+	float angle = ((float)limit_time / 60.0f) * 360.0f + 90;  // 60秒で一周（360度）
+	float rad = angle * (3.1415926535f / 180.0f);  // 角度をラジアンに変換
+
+	//秒針の座標を計算
+	int hand_x = clock_center_x + cos(rad) * (clock_radius - 5);
+	int hand_y = clock_center_y - sin(rad) * (clock_radius - 5);  // Y軸は逆方向
+
+	//秒針を描画
+	DrawLine(clock_center_x, clock_center_y, hand_x, hand_y, GetColor(255, 0, 0), 3);
+
+	//デジタル時計（アナログ時計の下に表示
+	int minutes = limit_time / 60;  // 分
+	int seconds = limit_time % 60;  // 秒
+
+	//デジタル時計をアナログ時計の下に描画
+	DrawFormatString(clock_center_x - 40, clock_center_y + clock_radius + 10, GetColor(255, 255, 255), "%02d:%02d", minutes, seconds);
+
 }

@@ -24,4 +24,6 @@ public:
 public:
 	void DecTime(int dectime);
 	void WriteData();
+
+	void DrawTimer()const;
 };
