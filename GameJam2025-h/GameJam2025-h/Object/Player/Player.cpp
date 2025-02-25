@@ -197,7 +197,6 @@ void Player::Movement()
 	{
 		move_count++;
 		PlaySoundFile("Resource/Sounds/Hit08-1.mp3", DX_PLAYTYPE_BACK);
-	}
 		if (move_count > 4)
 		{
 			move_count = 4;
@@ -211,7 +210,6 @@ void Player::Movement()
 	{
 		move_count--;
 		PlaySound("Resource/Sounds/Hit08-1.mp3", DX_PLAYTYPE_NORMAL);
-	}
 		if (move_count < 0)
 		{
 			move_count = 0;
