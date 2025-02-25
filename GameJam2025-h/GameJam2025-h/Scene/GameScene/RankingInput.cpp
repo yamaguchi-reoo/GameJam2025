@@ -3,10 +3,10 @@
 #include "DxLib.h"
 
 RankingInput::RankingInput() :backgrouond_image(NULL),
-remain_time(),name_num(0),
+result_time(),name_num(0),
 cursor_x(0),cursor_y(0)
 {
-    memset(name, NULL, (sizeof(char) * 15));
+    memset(result_name, NULL, (sizeof(char) * 15));
 }
 
 
@@ -19,28 +19,19 @@ RankingInput::~RankingInput()
 //初期化処理
 void RankingInput::Initialize()
 {
-    //画像の読み込み
-    backgrouond_image = LoadGraph("Resource/images/Ranking.bmp");
-
-    //エラーチェック
-    if (backgrouond_image == -1)
-    {
-        throw("Resource/images/Ranking.bmpがありません\n");
-    }
-
     //リザルトデータを取得する
     FILE* fp = nullptr;
     //ファイルオープン
-    errno_t result = fopen_s(&fp, "Resource/dat/result_data.csv", "r");
+    errno_t result = fopen_s(&fp, "Resource/Data/Result.csv", "r");
 
     //エラーチェック
     if (result != 0)
     {
-        throw("Resource/dat/result_data.csvが読み込めません\n");
+        throw("Resource/Data/Result.csvが読み込めません\n");
     }
 
     //結果を読み込む
-    fscanf_s(fp, "%6d,\n", &remain_time);
+    fscanf_s(fp, "%6d,%[^,],\n", &result_time,result_name,15);
 
     //ファイルクローズ
     fclose(fp);
@@ -76,7 +67,7 @@ void RankingInput::Draw()const
 
     //名前入力指示文字列の描画
     DrawString(150, 100, "ランキングに登録します", 0xffffff);
-    DrawFormatString(100, 220, GetColor(255, 255, 255), ">%s", name);
+    DrawFormatString(100, 220, GetColor(255, 255, 255), ">%s", result_name);
 
     //選択用文字を描画
     const int font_size = 25;
@@ -209,7 +200,7 @@ bool RankingInput::InputName()
     {
         if (cursor_y < 2)
         {
-            name[name_num++] = 'a' + cursor_x + (cursor_y * 13);
+            result_name[name_num++] = 'a' + cursor_x + (cursor_y * 13);
             if (name_num == 14)
             {
                 cursor_x = 0;
@@ -218,7 +209,7 @@ bool RankingInput::InputName()
         }
         else if (cursor_y < 4)
         {
-            name[name_num++] = 'A' + cursor_x + ((cursor_y - 2) * 13);
+            result_name[name_num++] = 'A' + cursor_x + ((cursor_y - 2) * 13);
             if (name_num == 14)
             {
                 cursor_x = 0;
@@ -229,12 +220,12 @@ bool RankingInput::InputName()
         {
             if (cursor_x == 0)
             {
-                name[name_num] = '\0';
+                result_name[name_num] = '\0';
                 return true;
             }
             else
             {
-                name[--name_num] = NULL;
+                result_name[--name_num] = NULL;
             }
         }
     }
