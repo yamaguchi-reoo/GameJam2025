@@ -48,13 +48,6 @@ void NomalEnemy::Initialize(Vector2D _location, Vector2D _box_size)
 void NomalEnemy::Update()
 {
 	__super::Update();
-
-	//hp‚ª0‚É‚È‚Á‚½‚ç
-	if (hp <= 0)
-	{
-		//íœ
-		this->SetDeleteFlg();
-	}
 }
 
 void NomalEnemy::Draw() const

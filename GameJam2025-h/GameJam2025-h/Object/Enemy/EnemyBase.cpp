@@ -2,7 +2,7 @@
 #include "DxLib.h"
 #include "../Item/ItemBase.h"
 
-EnemyBase::EnemyBase() :DamageSound(),ExplosionSound(),HealSound()
+EnemyBase::EnemyBase() :DamageSound(),ExplosionSound(),HealSound(),DethSound()
 {
 }
 
@@ -15,6 +15,7 @@ void EnemyBase::Initialize(Vector2D _location, Vector2D _box_size)
 	__super::Initialize(location, _box_size);
 
 	DamageSound = LoadSoundMem("Resource/Sounds/Hit08-1.mp3");
+	DethSound = LoadSoundMem("Resource/Sounds/se_duwaiwaiwai (1).mp3");
 
 	if (LoadSoundMem("Resource/Sounds/Hit08-1.mp3") == -1)
 	{
@@ -29,6 +30,14 @@ void EnemyBase::Initialize(Vector2D _location, Vector2D _box_size)
 void EnemyBase::Update()
 {
 	__super::Update();
+
+	//hp‚ª0‚É‚È‚Á‚½‚ç
+	if (hp <= 0)
+	{
+		PlaySoundMem(DethSound, DX_PLAYTYPE_BACK);
+		//íœ
+		this->SetDeleteFlg();
+	}
 }
 
 void EnemyBase::Draw() const

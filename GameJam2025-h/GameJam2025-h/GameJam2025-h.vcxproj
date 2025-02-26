@@ -206,6 +206,7 @@
   <ItemGroup>
     <Media Include="Resource\Images\maou_bgm_acoustic10.mp3アコースティック.mp3" />
     <Media Include="Resource\Sounds\Hit08-1.mp3" />
+    <Media Include="Resource\Sounds\se_duwaiwaiwai (1).mp3" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

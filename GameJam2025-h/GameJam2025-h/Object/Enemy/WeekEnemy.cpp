@@ -27,23 +27,20 @@ void WeekEnemy::Initialize(Vector2D _location, Vector2D _box_size)
 		image = LoadGraph("Resource/Images/teki.png");
 		box_size.x = 200.0f;
 		box_size.y = 246.0f;
-		location.y -= 100;
 	}
 	else if (EnemyChange == 2)
 	{
 		image = LoadGraph("Resource/Images/zombi.png");
 		box_size.x = 150.0f;
 		box_size.y = 184.0f;
-		location.y -= 100;
 	}
 	else if (EnemyChange == 3)
 	{
 		image = LoadGraph("Resource/Images/skeleton.png");
 		box_size.x = 200.0f;
 		box_size.y = 210.0f;
-		location.y -= 100;
 	}
-	location.y -= 100;
+	location.y -= 200;
 
 	hp = 2;
 }
@@ -51,13 +48,6 @@ void WeekEnemy::Initialize(Vector2D _location, Vector2D _box_size)
 void WeekEnemy::Update()
 {
 	__super::Update();
-
-	//hp‚ª0‚É‚È‚Á‚½‚ç
-	if (hp <= 0)
-	{
-		//íœ
-		this->SetDeleteFlg();
-	}
 }
 
 void WeekEnemy::Draw() const

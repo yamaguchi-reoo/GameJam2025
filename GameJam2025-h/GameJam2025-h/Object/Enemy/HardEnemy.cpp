@@ -36,13 +36,6 @@ void HardEnemy::Initialize(Vector2D _location, Vector2D _box_size)
 void HardEnemy::Update()
 {
 	__super::Update();
-
-	//hp‚ª0‚É‚È‚Á‚½‚ç
-	if (hp <= 0)
-	{
-		//íœ
-		this->SetDeleteFlg();
-	}
 }
 
 void HardEnemy::Draw() const

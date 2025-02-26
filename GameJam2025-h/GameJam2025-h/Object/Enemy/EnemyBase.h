@@ -16,6 +16,7 @@ public:
     int DamageSound;
     int ExplosionSound;
     int HealSound;
+    int DethSound;
     //コンストラクタ
     EnemyBase();
     //デストラクタ
