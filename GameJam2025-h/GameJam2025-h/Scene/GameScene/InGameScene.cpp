@@ -174,12 +174,12 @@ void InGameScene::Draw() const
 
 	SetFontSize(12);
 	//ï`âÊèàóù
-	DrawString(0, 24, "GameMain", GetColor(255, 255, 255));
-	DrawFormatString(620, 24, GetColor(255, 255, 255), "%d", limit_time);
-	DrawString(200, 24, "item", GetColor(255, 255, 255));
-	DrawFormatString(300, 24, GetColor(255, 255, 255), "%d", create_quantity_item);
-	DrawString(200, 34, "enemy", GetColor(255, 255, 255));
-	DrawFormatString(300, 34, GetColor(255, 255, 255), "%d", create_enemy_max);
+	//DrawString(0, 24, "GameMain", GetColor(255, 255, 255));
+	//DrawFormatString(620, 24, GetColor(255, 255, 255), "%d", limit_time);
+	//DrawString(200, 24, "item", GetColor(255, 255, 255));
+	//DrawFormatString(300, 24, GetColor(255, 255, 255), "%d", create_quantity_item);
+	//DrawString(200, 34, "enemy", GetColor(255, 255, 255));
+	//DrawFormatString(300, 34, GetColor(255, 255, 255), "%d", create_enemy_max);
 }
 
 void InGameScene::Finalize()
