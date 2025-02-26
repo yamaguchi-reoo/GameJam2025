@@ -15,6 +15,7 @@ RankingScene::~RankingScene()
 
 void RankingScene::Initialize()
 {
+	PlaySoundFile("Resource/Sounds/MusMus-BGM-087.mp3君に.mp3", DX_PLAYTYPE_BACK);
 	//ここで変数の初期化して（例：a = 0;）
 	cursor = 0;
 
@@ -86,21 +87,25 @@ eSceneType RankingScene::Update()
 	//Zキーが押されたらTitleシーンへ遷移
 	if (input->GetKeyDown(KEY_INPUT_Z))
 	{
+		StopSoundFile();
 		return eSceneType::eTitle;
 	}
 	if (input->GetButtonDown(XINPUT_BUTTON_B))
 	{
 		if (cursor == 0)
 		{
+			StopSoundFile();
 			return eSceneType::eGameMain;
 		}
 		if (cursor == 1)
 		{
+			StopSoundFile();
 			return eSceneType::eTitle;
 		}
 	}
 
 	//シーンの変更がない場合は現在のシーンを返す
+	StopSoundFile();
 	return GetNowSceneType();
 }
 

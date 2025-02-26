@@ -14,7 +14,7 @@ TitleScene::~TitleScene()
 
 void TitleScene::Initialize()
 {
-	//PlaySoundFile("Resource/Sounds/maou_bgm_acoustic10.mp3アコースティック.mp3", DX_PLAYTYPE_LOOP);
+	PlaySoundFile("Resource/Sounds/maou_bgm_acoustic10.mp3アコースティック.mp3", DX_PLAYTYPE_BACK);
 
 	//ここで変数の初期化して（例：a = 0;）
 	cursor = 0;
@@ -37,19 +37,24 @@ eSceneType TitleScene::Update()
 	if (input->GetButtonDown(XINPUT_BUTTON_B)) {
 		if (cursor == 0)
 		{
-			StopMusic();
+			StopSoundFile();
 			return eSceneType::eGameMain;
 		}
 		else if (cursor == 1)
 		{
-			StopMusic();
+			StopSoundFile();
 			return eSceneType::eRanking;
 		}
 		else if (cursor == 2)
 		{
-			StopMusic();
+			StopSoundFile();
 			return eSceneType::eHelp;
 		}
+	}
+	if (input->GetKeyDown(KEY_INPUT_R))
+	{
+		StopSoundFile();
+		return eSceneType::eRanking;
 	}
 	//シーンの変更がない場合は現在のシーンを返す
 	return GetNowSceneType();

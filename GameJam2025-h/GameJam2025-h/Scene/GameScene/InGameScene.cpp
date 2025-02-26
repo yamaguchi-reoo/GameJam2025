@@ -31,8 +31,6 @@ void InGameScene::Initialize()
 {
 	CreateObject<Player>(Vector2D(290.0f, 520.0f), Vector2D(115.0f, 115.0f));
 
-	//CreateObject<WeekEnemy>(Vector2D(1000.0f, 640.0f), Vector2D(64.0f));
-
 	// êßå¿éûä‘ê›íË
 	time_count = 0;
 	limit_time = 60;
