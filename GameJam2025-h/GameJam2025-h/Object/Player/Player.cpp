@@ -90,8 +90,8 @@ void Player::Update()
 
 
 	//âπó í≤êﬂ
-	ChangeVolumeSoundMem(150, hit_se);
-	ChangeVolumeSoundMem(150, explosion_se);
+	ChangeVolumeSoundMem(200, hit_se);
+	ChangeVolumeSoundMem(200, explosion_se);
 }
 
 void Player::Draw() const

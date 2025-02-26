@@ -5,6 +5,7 @@ class TitleScene :
 {
 private:
 	int cursor;
+	int in_title_image;
 	//タイトルシーンに必要な変数を定義
 public:
 	TitleScene();

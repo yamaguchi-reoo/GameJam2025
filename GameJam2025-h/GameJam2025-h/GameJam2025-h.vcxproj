@@ -189,6 +189,7 @@
     <ClInclude Include="Utility\Vector2D.h" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="Resource\Images\1178422.jpg" />
     <Image Include="Resource\Images\akuma.png" />
     <Image Include="Resource\Images\devil.png" />
     <Image Include="Resource\Images\elf_man.png" />

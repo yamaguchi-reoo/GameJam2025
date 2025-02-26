@@ -3,7 +3,8 @@
 #include "../../common.h"
 
 TitleScene::TitleScene()://この関数の後ろに定義した変数を連ねて書く（例 : TitleScene() : a()）
-	cursor()
+	cursor(),
+	in_title_image()
 {
 }
 
@@ -18,6 +19,8 @@ void TitleScene::Initialize()
 
 	//ここで変数の初期化して（例：a = 0;）
 	cursor = 0;
+
+	in_title_image = LoadGraph("Resource/Images/grassland-dot1.jpg");
 }
 
 eSceneType TitleScene::Update()
@@ -62,6 +65,7 @@ eSceneType TitleScene::Update()
 
 void TitleScene::Draw() const
 {
+	DrawGraph(0, 0, in_title_image, TRUE);
 	// 描画処理
 	SetFontSize(60);
 	DrawString((SCREEN_WIDTH / 2) - 190, 150, "Butting Apple", GetColor(255, 255, 255));
