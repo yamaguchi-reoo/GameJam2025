@@ -87,10 +87,12 @@ void TitleScene::Draw() const
 		int color = (i == cursor) ? GetColor(255, 255, 0) : GetColor(255, 0, 0);
 
 		// 四角形の描画
-		DrawBox(box.x, y, box.x * 2, y + box.y, color, FALSE);
+		DrawBox(box.x, y, box.x * 2, y + box.y, color, TRUE);
 
+		ChangeFontType(DX_FONTTYPE_EDGE);
 		// テキスト描画
 		DrawFormatString(box.x + 10, y + 7, GetColor(255, 255, 255), menu_items[i]);
+		ChangeFontType(DX_FONTTYPE_NORMAL);
 	}
 
 	//Aボタン描画
