@@ -5,6 +5,18 @@ class HelpScene :
 {
 private:
 	//シーンに必要な変数を定義
+	int page; //現在のページ (1 or 2)
+	int cursor;
+
+	//アイテム画像
+	int apple_image;
+	int	rock_image;
+	int bomb_image;
+	int	heal_image;
+	int	power_image;
+
+	int help_image;
+
 public:
 	HelpScene();
 	~HelpScene();
@@ -18,5 +30,6 @@ public:
 
 public:
 	//必要に応じて追加する関数をここに定義
+	void DrawDPad()const;
 };
 
