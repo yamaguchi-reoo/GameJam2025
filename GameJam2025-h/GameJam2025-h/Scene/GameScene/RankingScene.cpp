@@ -194,7 +194,7 @@ void RankingScene::SortData()
 	FILE* fp = nullptr;
 
 	//ファイルオープン
-	errno_t result = fopen_s(&fp, "Resource/Data/TimaData.csv", "w");
+	errno_t result = fopen_s(&fp, "Resource/Data/TimeData.csv", "w");
 
 	//エラーチェック
 	if (result != 0)
