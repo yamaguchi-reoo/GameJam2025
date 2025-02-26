@@ -29,6 +29,7 @@ void ObjectBase::Update()
 
 void ObjectBase::Draw() const
 {
+#ifdef _DEBUG
 	//デバッグ用
 	DrawBoxAA(location.x, location.y, location.x + box_size.x, location.y + box_size.y, GetColor(255, 0, 0), FALSE);
 
@@ -46,6 +47,10 @@ void ObjectBase::Draw() const
 	default:
 		break;
 	}
+
+#endif // !_DEBUG
+
+	
 }
 
 void ObjectBase::Finalize()
