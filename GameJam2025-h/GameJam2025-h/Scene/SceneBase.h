@@ -14,6 +14,7 @@ enum class eSceneType
 	eHelp,
 	eRanking,
 	eInput,
+	eCredit,
 	eEnd
 };
 

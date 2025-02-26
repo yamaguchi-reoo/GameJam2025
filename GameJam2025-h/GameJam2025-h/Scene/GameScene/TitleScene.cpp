@@ -32,9 +32,9 @@ eSceneType TitleScene::Update()
 
 	//負の値にならないように
 	//上キーで移動
-	if (input->GetButtonDown(XINPUT_BUTTON_DPAD_UP))cursor = (cursor - 1 + 4) % 4;
+	if (input->GetButtonDown(XINPUT_BUTTON_DPAD_UP))cursor = (cursor - 1 + 5) % 5;
 	//下キーで移動
-	if (input->GetButtonDown(XINPUT_BUTTON_DPAD_DOWN))cursor = (cursor + 1) % 4;
+	if (input->GetButtonDown(XINPUT_BUTTON_DPAD_DOWN))cursor = (cursor + 1) % 5;
 
 	//決定
 	if (input->GetButtonDown(XINPUT_BUTTON_B)) {
@@ -52,6 +52,11 @@ eSceneType TitleScene::Update()
 		{
 			StopSoundFile();
 			return eSceneType::eHelp;
+		}
+		else if (cursor == 3)
+		{
+			StopSoundFile();
+			return eSceneType::eCredit;
 		}
 	}
 
@@ -72,14 +77,14 @@ void TitleScene::Draw() const
 	SetFontSize(24);
 
 	// メニュー項目のリスト
-	const char* menu_items[] = { "START", "RANKING", "HELP", "END" };
+	const char* menu_items[] = { "START", "RANKING", "HELP","CREDIT", "END"};
 
 	// 四角形のサイズと間隔の定義
 	Vector2D box = { 160.0f,80.0f };
 	int box_spacing = 3;
-	int start_y = (SCREEN_HEIGHT / 2) + 50;
+	int start_y = (SCREEN_HEIGHT / 3) + 50;
 
-	for (int i = 0; i < 4; i++)
+	for (int i = 0; i < 5; i++)
 	{
 		int y = start_y + i * (box.y + box_spacing) - 100;
 

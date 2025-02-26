@@ -7,3 +7,4 @@
 #include "HelpScene.h"
 #include "RankingScene.h"
 #include "RankingInput.h"
+#include "CreditScene.h"

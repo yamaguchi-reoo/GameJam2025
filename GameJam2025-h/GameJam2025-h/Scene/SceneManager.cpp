@@ -39,7 +39,6 @@ SceneManager::~SceneManager()
 void SceneManager::Initialize()
 {
 	// 最初に表示するシーンをタイトルシーンに設定
-	//ChangeScene(eSceneType::eGameMain);	//GameScene
 	ChangeScene(eSceneType::eTitle);		//TitlrScene
 }
 
@@ -118,6 +117,9 @@ SceneBase* SceneManager::CreateScene(eSceneType type)
 	case eSceneType::eInput:
 		//RankingInput生成
 		return dynamic_cast<SceneBase*>(new RankingInput());
+	case eSceneType::eCredit:
+		//CreditScene生成
+		return dynamic_cast<CreditScene*>(new CreditScene());
 	default:
 		//該当するシーンがない場合はnullptrを返す
 		return nullptr;
