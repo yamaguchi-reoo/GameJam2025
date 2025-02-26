@@ -19,7 +19,8 @@ InGameScene::InGameScene()//この関数の後ろに定義した変数を連ねて書く（例 : InGam
 	create_span_enemy(),
 	in_game_image(),
 	shake_timer(),
-	shake_amount()
+	shake_amount(),
+	Fight_BGM()
 {
 }
 
@@ -38,7 +39,7 @@ void InGameScene::Initialize()
 	// オブジェクト生成設定
 	create_span_item = 0;
 	create_span_enemy = 0;
-	create_enemy_max = 3;
+	create_enemy_max = 10;
 	create_enemy = true;
 	create_boss = true;
 	is_boss = true;
@@ -47,6 +48,13 @@ void InGameScene::Initialize()
 
 	shake_timer = 0;
 	shake_amount = 0.0f;
+
+	Fight_BGM = LoadSoundMem("Resource/Sounds/MusMus-BGM-172.mp3");
+
+	// 音量の設定
+	ChangeVolumeSoundMem(255 * 60 / 100, Fight_BGM);
+
+	PlaySoundMem(Fight_BGM, DX_PLAYTYPE_BACK);
 }
 
 eSceneType InGameScene::Update()
@@ -76,13 +84,13 @@ eSceneType InGameScene::Update()
 			create_span_enemy++;
 			if (create_span_enemy >= 30)
 			{
-				if (create_enemy_max >= 3)
+				if (create_enemy_max >= 7)
 				{
 					CreateObject<WeekEnemy>(Vector2D(1000.0f, 640.0f), Vector2D(200.0f,142.0f));
 					create_enemy = false;
 					create_span_enemy = 0;
 				}
-				else if (create_enemy_max >= 2)
+				else if (create_enemy_max >= 3)
 				{
 					CreateObject<NomalEnemy>(Vector2D(1000.0f, 540.0f), Vector2D(200.0f,223.0f));
 					create_enemy = false;
@@ -103,6 +111,8 @@ eSceneType InGameScene::Update()
 			{
 				if (create_boss == true)
 				{
+					// 再生を止めます
+					StopSoundMem(Fight_BGM);
 					CreateObject<BossEnemy>(Vector2D(1000.0f, 450.0f), Vector2D(200.f,319.f));
 					create_boss = false;
 					create_span_enemy = 0;

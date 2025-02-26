@@ -42,7 +42,7 @@ void WeekEnemy::Initialize(Vector2D _location, Vector2D _box_size)
 	}
 	location.y -= 200;
 
-	hp = 2;
+	hp = 1;
 }
 
 void WeekEnemy::Update()
@@ -54,7 +54,7 @@ void WeekEnemy::Draw() const
 {
 	DrawGraph(location.x, location.y, image,TRUE);
 	__super::Draw();
-	DrawBox(location.x + 90, location.y -20, location.x + 90 + hp * 40, location.y - 40, GetColor(255, 255, 255), true);
+	DrawBox(location.x + 90, location.y -20, location.x + 90 + hp * 80, location.y - 40, GetColor(255, 255, 255), true);
 	DrawFormatString(location.x, location.y + 20, GetColor(255, 255, 255), "%d", hp);
 }
 

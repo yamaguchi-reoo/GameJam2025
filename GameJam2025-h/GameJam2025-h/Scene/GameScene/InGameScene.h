@@ -14,6 +14,7 @@ private:
 
 	int shake_timer;  // j‚ª—h‚ê‚éŠÔ
 	float shake_amount;  // j‚Ì—h‚ê•
+	int Fight_BGM;
 public:
 	InGameScene();
 	~InGameScene();
