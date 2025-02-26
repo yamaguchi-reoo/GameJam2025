@@ -3,10 +3,10 @@
 #include "DxLib.h"
 
 RankingInput::RankingInput() :backgrouond_image(NULL),
-result_time(),name_num(0),
-cursor_x(0),cursor_y(0)
+result_time(),result_name(),
+name_num(),
+cursor_x(),cursor_y()
 {
-    memset(result_name, NULL, (sizeof(char) * 15));
 }
 
 
@@ -19,6 +19,8 @@ RankingInput::~RankingInput()
 //初期化処理
 void RankingInput::Initialize()
 {
+    memset(result_name, NULL, (sizeof(char) * 15));
+
     //リザルトデータを取得する
     FILE* fp = nullptr;
     //ファイルオープン
@@ -31,7 +33,7 @@ void RankingInput::Initialize()
     }
 
     //結果を読み込む
-    fscanf_s(fp, "%3d,%14s\n", &result_time, result_name[0], (unsigned int)sizeof(result_name));
+    fscanf_s(fp, "%d,%14s\n", &result_time, result_name[0], (unsigned int)sizeof(result_name));
 
     //ファイルクローズ
     fclose(fp);
@@ -62,58 +64,57 @@ eSceneType RankingInput::Update()
 //描画処理
 void RankingInput::Draw()const
 {
+    int init_font_size = GetFontSize();
+    SetFontSize(36);
+
     //背景画像の描画
     DrawGraph(0, 0, backgrouond_image, TRUE);
 
     //名前入力指示文字列の描画
-    DrawString(150, 100, "ランキングに登録します", 0xffffff);
-    DrawFormatString(100, 220, GetColor(255, 255, 255), ">%s", result_name);
+    DrawString(350, 100, "ランキングに登録します", 0xffffff);
+    DrawFormatString(350, 220, GetColor(255, 255, 255), ">%s", result_name);
 
     //選択用文字を描画
-    const int font_size = 25;
+    const int font_size = GetFontSize();
     for (int i = 0; i < 26; i++)
     {
-        int x = (i % 13) * font_size + 15;
+        int x = (i % 13) * font_size + 300;
         int y = (i / 13) * font_size + 300;
         DrawFormatString(x, y, GetColor(255, 255, 255), "%-3c", 'a' + i);
         y = ((i / 13) + 2) * font_size + 300;
         DrawFormatString(x, y, GetColor(255, 255, 255), "%-3c", 'A' + i);
     }
-    DrawString(40, 405, "決定", GetColor(255, 255, 255));
-    DrawString(40 + font_size * 2, 405, "消す", GetColor(255, 255, 255));
+    DrawString(300, 600, "決定", GetColor(255, 255, 255));
+    DrawString(500 + font_size * 2, 600, "消す", GetColor(255, 255, 255));
 
     //選択文字をフォーカスする
     if (cursor_y < 4)
     {
-        int x = cursor_x * font_size + 10;
-        int y = cursor_y * font_size + 295;
+        int x = cursor_x * font_size + 293;
+        int y = cursor_y * font_size + 303;
         DrawBox(x, y, x + font_size, y + font_size, GetColor(255, 255, 255), FALSE);
     }
     else
     {
         if (cursor_x == 0)
         {
-            DrawBox(35, 400, 35 + font_size * 2, 400 + font_size, GetColor(255, 255, 255), FALSE);
+            DrawBox(300, 600, 35 + font_size * 2, 400 + font_size, GetColor(255, 255, 255), FALSE);
         }
         else
         {
-            DrawBox(80, 400, 80 + font_size * 2, 400 + font_size, GetColor(255, 255, 255), FALSE);
+            DrawBox(500, 400, 500 + font_size * 2, 400 + font_size, GetColor(255, 255, 255), FALSE);
         }
     }
+
+    SetFontSize(init_font_size);
 }
 
 
 //終了時処理
 void RankingInput::Finalize()
 {
-    //ランキングにデータを格納
-    //ranking->SetRankingData(remain_time, name);
-
     //読み込んだ画像を削除
-    //DeleteGraph(backgrouond_image);
-
-    //動的メモリの解放
-    //delete ranking;
+    DeleteGraph(backgrouond_image);
 }
 
 
@@ -200,7 +201,7 @@ bool RankingInput::InputName()
     {
         if (cursor_y < 2)
         {
-            result_name[name_num++] = 'a' + cursor_x + (cursor_y * 13);
+            result_name[0][name_num++] = 'a' + cursor_x + (cursor_y * 13);
             if (name_num == 14)
             {
                 cursor_x = 0;
@@ -209,7 +210,7 @@ bool RankingInput::InputName()
         }
         else if (cursor_y < 4)
         {
-            result_name[name_num++] = 'A' + cursor_x + ((cursor_y - 2) * 13);
+            result_name[0][name_num++] = 'A' + cursor_x + ((cursor_y - 2) * 13);
             if (name_num == 14)
             {
                 cursor_x = 0;
@@ -220,12 +221,12 @@ bool RankingInput::InputName()
         {
             if (cursor_x == 0)
             {
-                result_name[name_num] = '\0';
+                result_name[0][name_num] = '\0';
                 return true;
             }
             else
             {
-                result_name[--name_num] = NULL;
+                result_name[0][--name_num] = NULL;
             }
         }
     }

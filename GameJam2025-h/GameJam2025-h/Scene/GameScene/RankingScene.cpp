@@ -205,7 +205,7 @@ void RankingScene::SortData()
 	//対象ファイルに書き込み
 	for (int i = 0; i < 6; i++)
 	{
-		fprintf(fp, "%d,%s\n", remain_time[i],player_name[i]);
+		fprintf(fp, "%d,%14s\n", remain_time[i],player_name[i]);
 	}
 
 	//ファイルクローズ
