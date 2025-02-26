@@ -123,10 +123,25 @@ void Player::Draw() const
 	DrawBoxAA(left, top, right, bottom, GetColor(0, 255, 255), FALSE);
 #endif // 
 
-	
-	//バットの攻撃範囲を描画
-	DrawCircleAA(location.x + (box_size.x / 2), location.y + (box_size.y / 2), 60, 50, GetColor(0, 0, 255), FALSE);
-	DrawCircleAA(location.x + (box_size.x / 2), location.y + (box_size.y / 2), 55, 50, GetColor(0, 0, 255), FALSE);
+
+	SetDrawBlendMode(DX_BLENDMODE_ALPHA, 100);
+	if (is_attack)
+	{
+		//バットの攻撃範囲を描画
+		DrawCircleAA(location.x + (box_size.x / 2), location.y + (box_size.y / 2), 55, 50, GetColor(255, 255, 0), TRUE);
+		DrawCircleAA(location.x + (box_size.x / 2), location.y + (box_size.y / 2), 50, 50, GetColor(125, 125, 0), TRUE);
+	}
+	else
+	{
+		//バットの攻撃範囲を描画
+		DrawCircleAA(location.x + (box_size.x / 2), location.y + (box_size.y / 2), 55, 50, GetColor(0, 0, 125), TRUE);
+		DrawCircleAA(location.x + (box_size.x / 2), location.y + (box_size.y / 2), 50, 50, GetColor(0, 0, 255), TRUE);
+	}
+
+	DrawCircleAA(location.x + (box_size.x / 2), location.y + (box_size.y / 2), 56, 50, GetColor(255, 255, 255), FALSE);
+	DrawCircleAA(location.x + (box_size.x / 2), location.y + (box_size.y / 2), 51, 50, GetColor(255, 255, 255), FALSE);
+	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
+
 
 }
 
