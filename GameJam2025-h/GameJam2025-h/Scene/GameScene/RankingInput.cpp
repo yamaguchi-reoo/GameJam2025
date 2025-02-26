@@ -51,6 +51,24 @@ eSceneType RankingInput::Update()
     //シーン変更は可能か?
     if (is_change)
     {
+
+        //リザルトデータを取得する
+        FILE* fp = nullptr;
+        //ファイルオープン
+        errno_t result = fopen_s(&fp, "Resource/Data/Result.csv", "w");
+
+        //エラーチェック
+        if (result != 0)
+        {
+            throw("Resource/Data/Result.csvが読み込めません\n");
+        }
+
+        //結果を読み込む
+        fprintf(fp, "%d,%14s\n", result_time, result_name[0]);
+
+        //ファイルクローズ
+        fclose(fp);
+
         //ランキング表示に遷移
         return eSceneType::eRanking;
     }

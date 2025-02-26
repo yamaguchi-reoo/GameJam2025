@@ -25,7 +25,7 @@ eSceneType ResultScene::Update()
 	InputControl* input = InputControl::GetInstance();
 
 	if (input->GetButtonDown(XINPUT_BUTTON_B)) {
-		return eSceneType::eRanking;
+		return eSceneType::eInput;
 	}
 
 	//Zキーが押されたらTitleシーンへ遷移
