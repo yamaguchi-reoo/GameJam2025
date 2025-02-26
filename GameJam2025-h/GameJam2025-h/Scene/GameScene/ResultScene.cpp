@@ -40,27 +40,42 @@ eSceneType ResultScene::Update()
 
 void ResultScene::Draw() const
 {
+	ChangeFontType(DX_FONTTYPE_EDGE);
+	int init_font_size = GetFontSize();
+
+	SetFontSize(50);
 	//•`‰æˆ—
-	DrawString(0, 24, "Result", GetColor(255, 255, 255));
+	DrawString(SCREEN_WIDTH / 2 - 100, 24, "Result", GetColor(255, 255, 255));
 
-	DrawFormatString(100, 100, GetColor(255, 255, 255), "%d", result_time);
+	SetFontSize(36);
+	DrawString(100, 100, "Žc‚èŽžŠÔ", 0xffffff);
 
+	SetFontSize(350);
+	DrawFormatString(200, 150, GetColor(255, 255, 255), "%d", result_time);
+
+	SetFontSize(36);
+	DrawString(600, 420, "•b", 0xffffff);
+
+	SetFontSize(80);
 	if (result_time > 30)
 	{
-		DrawString(100, 120,"™PERFECT™", GetColor(255, 255, 255));
+		DrawString(700, 550,"™PERFECT™", GetColor(255, 255, 0));
 	}
 	else if (result_time > 15)
 	{
-		DrawString(100, 120, "GOOD!!", GetColor(255, 255, 255));
+		DrawString(700, 550, "GOOD!!", GetColor(0, 255, 0));
 	}
 	else if (result_time >= 1)
 	{
-		DrawString(100, 120, "NICE", GetColor(255, 255, 255));
+		DrawString(700, 550, "NICE", GetColor(255, 0, 0));
 	}
 	else if (result_time == 0)
 	{
-		DrawString(100, 120, "DEFEAT", GetColor(255, 255, 255));
+		DrawString(700, 550, "DEFEAT", GetColor(0, 0, 255));
 	}
+
+	ChangeFontType(DX_FONTTYPE_NORMAL);
+	SetFontSize(init_font_size);
 }
 
 void ResultScene::Finalize()
