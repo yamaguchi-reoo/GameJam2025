@@ -153,6 +153,9 @@ void InGameScene::Draw() const
 
 	DrawGraph(0, 0, in_game_image, TRUE);
 
+	// アイテム生成レーンを描画 (レーンの位置にボックスを表示)
+	DrawItemGenerationLanes();
+
 	__super::Draw();
 
 	//時計の描画
@@ -234,5 +237,26 @@ void InGameScene::DrawTimer() const
 
 	//デジタル時計をアナログ時計の下に描画
 	DrawFormatString(clock_center_x - 40, clock_center_y + clock_radius + 10, GetColor(255, 255, 255), "%02d:%02d", minutes, seconds);
+
+}
+
+void InGameScene::DrawItemGenerationLanes() const
+{
+	// アイテム生成レーンを示すためにボックスを描画
+	int lane_y = 0;  // Y座標 (全てのレーンの高さをここで設定)
+	int lane_height = 450;  // 高さ
+	int lane_spacing = 140; // 各レーンの間隔
+
+	//黒い背景ボックスの描画（透明度を設定）
+	SetDrawBlendMode(DX_BLENDMODE_ALPHA, 100);
+	DrawBox(275, lane_y, 285 + (lane_spacing * 5), lane_height, GetColor(0, 0, 0), TRUE);
+
+	for (int i = 0; i < 6; ++i) 
+	{
+		int lane_x = 285 + i * lane_spacing; // X座標（各レーンの横位置をずらす）
+		DrawBox(lane_x - 10, lane_y, lane_x, lane_height, GetColor(255, 255, 255), TRUE); // ブレンド付きの青色
+	}
+
+	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);  // ブレンドモードを戻す
 
 }

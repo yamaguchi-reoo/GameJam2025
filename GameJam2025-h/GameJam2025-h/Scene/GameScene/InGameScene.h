@@ -28,5 +28,9 @@ public:
 	void DecTime(int dectime);
 	void WriteData();
 
+	//Œv•`‰æ
 	void DrawTimer()const;
+
+	//Item¶¬ƒŒ[ƒ“
+	void DrawItemGenerationLanes() const;
 };
