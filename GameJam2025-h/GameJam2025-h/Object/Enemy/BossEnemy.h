@@ -4,6 +4,7 @@ class BossEnemy :
     public EnemyBase
 {
 private:
+    int BossSound;
 public:
     BossEnemy();
 

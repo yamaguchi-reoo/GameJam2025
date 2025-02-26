@@ -211,6 +211,7 @@
   <ItemGroup>
     <Media Include="Resource\Images\maou_bgm_acoustic10.mp3アコースティック.mp3" />
     <Media Include="Resource\Sounds\Hit08-1.mp3" />
+    <Media Include="Resource\Sounds\MusMus-BGM-171.mp3ボス１.mp3" />
     <Media Include="Resource\Sounds\se_duwaiwaiwai (1).mp3" />
     <Media Include="Resource\Sounds\se_explode_zun.mp3" />
     <Media Include="Resource\Sounds\se_kaihuku01.mp3" />
