@@ -103,7 +103,7 @@ void RankingInput::Draw()const
         DrawFormatString(x, y, GetColor(255, 255, 255), "%-3c", 'A' + i);
     }
     DrawString(300, 600, "決定", GetColor(255, 255, 255));
-    DrawString(500 + font_size * 2, 600, "消す", GetColor(255, 255, 255));
+    DrawString(500, 600, "消す", GetColor(255, 255, 255));
 
     //選択文字をフォーカスする
     if (cursor_y < 4)
@@ -116,11 +116,11 @@ void RankingInput::Draw()const
     {
         if (cursor_x == 0)
         {
-            DrawBox(300, 600, 35 + font_size * 2, 400 + font_size, GetColor(255, 255, 255), FALSE);
+            DrawBox(300, 600, 300 + font_size * 2, 600 + font_size, GetColor(255, 255, 255), FALSE);
         }
         else
         {
-            DrawBox(500, 400, 500 + font_size * 2, 400 + font_size, GetColor(255, 255, 255), FALSE);
+            DrawBox(500, 600, 500 + font_size * 2, 600 + font_size, GetColor(255, 255, 255), FALSE);
         }
     }
 
