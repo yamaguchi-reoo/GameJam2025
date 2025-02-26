@@ -205,6 +205,9 @@
     <Image Include="Resource\Images\WHlnIPyRgZiwsIO1740547760_1740547770.png">
       <Filter>リソース ファイル</Filter>
     </Image>
+    <Image Include="Resource\Images\Result_bgi.png">
+      <Filter>リソース ファイル</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Media Include="Resource\Images\maou_bgm_acoustic10.mp3アコースティック.mp3" />

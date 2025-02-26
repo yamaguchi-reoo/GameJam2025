@@ -197,6 +197,7 @@
     <Image Include="Resource\Images\image.png" />
     <Image Include="Resource\Images\monster_mao.png" />
     <Image Include="Resource\Images\mummy.png" />
+    <Image Include="Resource\Images\Result_bgi.png" />
     <Image Include="Resource\Images\shinigami.png" />
     <Image Include="Resource\Images\skeleton.png" />
     <Image Include="Resource\Images\slime_purple_re.png" />
