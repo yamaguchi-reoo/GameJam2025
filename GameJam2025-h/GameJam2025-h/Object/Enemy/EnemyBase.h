@@ -17,6 +17,10 @@ public:
     int ExplosionSound;
     int HealSound;
     int DethSound;
+    int DamageEffect;
+    int DamageEffect_Image;
+    int HealEffect;
+    int Healffect_image;
     //コンストラクタ
     EnemyBase();
     //デストラクタ
