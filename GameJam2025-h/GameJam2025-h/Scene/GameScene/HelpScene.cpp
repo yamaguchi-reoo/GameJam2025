@@ -31,6 +31,8 @@ void HelpScene::Initialize()
 	power_image = LoadGraph("Resource/Images/PowerUp.png");
 
     help_image = LoadGraph("Resource/Images/GameMain04.png");
+
+    PlaySoundFile("Resource/Sounds/maou_bgm_acoustic10.mp3アコースティック.mp3", DX_PLAYTYPE_BACK);
 }
 
 eSceneType HelpScene::Update()
