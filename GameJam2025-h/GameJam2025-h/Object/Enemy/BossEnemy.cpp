@@ -1,7 +1,7 @@
 #include "BossEnemy.h"
 #include <DxLib.h>
 
-BossEnemy::BossEnemy()
+BossEnemy::BossEnemy():BossSound()
 {
 
 }
@@ -18,10 +18,24 @@ void BossEnemy::Initialize(Vector2D _location, Vector2D _box_size)
 	location.y -= 100;
 
 	hp = 20;
+
+	BossSound = LoadSoundMem("Resource/Sounds/MusMus-BGM-171.mp3ボス１.mp3");
+	// 読みこんだ音をバックグラウンド再生します(『PlaySoundMem』関数使用)
+
+	 // 音量の設定
+	ChangeVolumeSoundMem(255 * 60 / 100, BossSound);
+
+	PlaySoundMem(BossSound, DX_PLAYTYPE_BACK);
 }
 
 void BossEnemy::Update()
 {
+	//hpが0になったら
+	if (hp <= 0)
+	{
+		// 再生を止めます
+		StopSoundMem(BossSound);
+	}
 	__super::Update();
 }
 
