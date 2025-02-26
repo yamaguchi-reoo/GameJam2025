@@ -19,8 +19,6 @@ private:
     int miss_se;
     bool is_hit;
 
-    int step_se;
-
     int explosion_se;
     int power_se;
 public:

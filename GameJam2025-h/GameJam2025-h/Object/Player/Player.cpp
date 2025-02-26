@@ -92,7 +92,6 @@ void Player::Update()
 	//‰¹—Ê’²ß
 	ChangeVolumeSoundMem(150, hit_se);
 	ChangeVolumeSoundMem(150, explosion_se);
-	ChangeVolumeSoundMem(150, step_se);
 }
 
 void Player::Draw() const
@@ -223,7 +222,6 @@ void Player::Movement()
 	if (input->GetButtonDown(XINPUT_BUTTON_DPAD_RIGHT))
 	{
 		move_count++;
-		step_se = LoadSoundMem("Resource/Sounds/Hit08-1.mp3");
 		if (move_count > 4)
 		{
 			move_count = 4;
@@ -236,7 +234,6 @@ void Player::Movement()
 	else if (input->GetButtonDown(XINPUT_BUTTON_DPAD_LEFT))
 	{
 		move_count--;
-		step_se = LoadSoundMem("Resource/Sounds/Hit08-1.mp3");
 		if (move_count < 0)
 		{
 			move_count = 0;
