@@ -54,6 +54,7 @@ void Player::Initialize(Vector2D _location, Vector2D _box_size)
 	miss_se = LoadSoundMem("Resource/Sounds/se_swing13-1.mp3");
 
 	explosion_se = LoadSoundMem("Resource/Sounds/se_explode_zun.mp3");
+	power_se = LoadSoundMem("Resource/Sounds/パワーチャージ.mp3");
 }
 
 void Player::Update()
@@ -179,6 +180,7 @@ void Player::OnHitCollision(ObjectBase* hit_object)
 			else if (item->GetItemType() == ePowerup)
 			{
 				is_power = true;
+				PlaySoundMem(power_se, DX_PLAYTYPE_BACK);
 				hit_object->SetDeleteFlg();
 			}
 			else 
