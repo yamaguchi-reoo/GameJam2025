@@ -54,11 +54,7 @@ eSceneType TitleScene::Update()
 			return eSceneType::eHelp;
 		}
 	}
-	if (input->GetKeyDown(KEY_INPUT_R))
-	{
-		StopSoundFile();
-		return eSceneType::eGameMain;
-	}
+
 	//シーンの変更がない場合は現在のシーンを返す
 	return GetNowSceneType();
 }

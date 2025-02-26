@@ -4,7 +4,8 @@
 #include <fstream>
 
 ResultScene::ResultScene()//この関数の後ろに定義した変数を連ねて書く（例 : ResultScene() : a()）
-	:result_time()
+	:bgi(),
+	result_time()
 {
 }
 
@@ -15,6 +16,8 @@ ResultScene::~ResultScene()
 void ResultScene::Initialize()
 {
 	LoadData();
+
+	bgi = LoadGraph("Resource/Images/Result_bgi.png");
 }
 
 eSceneType ResultScene::Update()
@@ -40,27 +43,45 @@ eSceneType ResultScene::Update()
 
 void ResultScene::Draw() const
 {
+	DrawBox(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, GetColor(0, 210, 210), TRUE);
+	DrawExtendGraph(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, bgi, TRUE);
+
+	ChangeFontType(DX_FONTTYPE_EDGE);
+	int init_font_size = GetFontSize();
+
+	SetFontSize(50);
 	//描画処理
-	DrawString(0, 24, "Result", GetColor(255, 255, 255));
+	DrawString(SCREEN_WIDTH / 2 - 100, 24, "Result", GetColor(255, 255, 255));
 
-	DrawFormatString(100, 100, GetColor(255, 255, 255), "%d", result_time);
+	SetFontSize(36);
+	DrawString(100, 100, "残り時間", 0xffffff);
 
+	SetFontSize(350);
+	DrawFormatString(200, 150, GetColor(255, 255, 255), "%d", result_time);
+
+	SetFontSize(36);
+	DrawString(600, 420, "秒", 0xffffff);
+
+	SetFontSize(80);
 	if (result_time > 30)
 	{
-		DrawString(100, 120,"☆PERFECT☆", GetColor(255, 255, 255));
+		DrawString(700, 500,"☆PERFECT☆", GetColor(255, 255, 0));
 	}
 	else if (result_time > 15)
 	{
-		DrawString(100, 120, "GOOD!!", GetColor(255, 255, 255));
+		DrawString(700, 500, "GOOD!!", GetColor(0, 255, 0));
 	}
 	else if (result_time >= 1)
 	{
-		DrawString(100, 120, "NICE", GetColor(255, 255, 255));
+		DrawString(700, 500, "NICE", GetColor(255, 0, 0));
 	}
 	else if (result_time == 0)
 	{
-		DrawString(100, 120, "DEFEAT", GetColor(255, 255, 255));
+		DrawString(700, 500, "DEFEAT", GetColor(0, 0, 255));
 	}
+
+	ChangeFontType(DX_FONTTYPE_NORMAL);
+	SetFontSize(init_font_size);
 }
 
 void ResultScene::Finalize()

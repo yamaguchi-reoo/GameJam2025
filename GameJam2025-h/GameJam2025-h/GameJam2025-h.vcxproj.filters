@@ -196,10 +196,24 @@
     <Image Include="Resource\Images\shinigami.png">
       <Filter>リソース ファイル</Filter>
     </Image>
+    <Image Include="Resource\Images\1471006-removebg-preview.png">
+      <Filter>リソース ファイル</Filter>
+    </Image>
+    <Image Include="Resource\Images\uHOHwzyHImmzn0W1740545388_1740545551.png">
+      <Filter>リソース ファイル</Filter>
+    </Image>
+    <Image Include="Resource\Images\WHlnIPyRgZiwsIO1740547760_1740547770.png">
+      <Filter>リソース ファイル</Filter>
+    </Image>
+    <Image Include="Resource\Images\Result_bgi.png">
+      <Filter>リソース ファイル</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Media Include="Resource\Images\maou_bgm_acoustic10.mp3アコースティック.mp3" />
     <Media Include="Resource\Sounds\Hit08-1.mp3" />
     <Media Include="Resource\Sounds\se_duwaiwaiwai (1).mp3" />
+    <Media Include="Resource\Sounds\se_kaihuku01.mp3" />
+    <Media Include="Resource\Sounds\se_explode_zun.mp3" />
   </ItemGroup>
 </Project>

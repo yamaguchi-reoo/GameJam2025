@@ -5,6 +5,7 @@ class ResultScene :
 {
 private:
 	//シーンに必要な変数を定義		
+	int bgi;
 	int result_time;
 
 public:
