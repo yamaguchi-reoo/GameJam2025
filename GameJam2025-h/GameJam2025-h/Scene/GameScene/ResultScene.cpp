@@ -69,11 +69,11 @@ void ResultScene::Draw() const
 	}
 	else if (result_time > 15)
 	{
-		DrawString(700, 500, "GOOD!!", GetColor(0, 255, 0));
+		DrawString(700, 500, "GREAT!!", GetColor(0, 255, 0));
 	}
 	else if (result_time >= 1)
 	{
-		DrawString(700, 500, "NICE", GetColor(255, 0, 0));
+		DrawString(700, 500, "GOOD", GetColor(255, 0, 0));
 	}
 	else if (result_time == 0)
 	{
